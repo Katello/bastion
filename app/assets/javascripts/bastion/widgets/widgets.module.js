@@ -21,5 +21,4 @@
 angular.module('Bastion.widgets', [
     'Bastion',
     'Bastion.utils',
-    'Bastion.organizations'
 ]);

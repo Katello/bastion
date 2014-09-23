@@ -24,12 +24,6 @@
 //= require "bastion/angular-animate/angular-animate"
 //= require "bastion/alchemy/alchemy"
 
-//= require "katello/common/katello.global"
-//= require "katello/common/bastion-routes"
-//= require "katello/common/katello.common"
-//= require "katello/common/env_select_scroll"
-//= require "katello/widgets/path_selector"
-
 //= require "bastion/bastion.module"
 //= require "bastion/bastion-resource.factory"
 
@@ -54,59 +48,5 @@
 
 //= require "bastion/utils/utils.module"
 //= require_tree "./utils"
-
-//= require "bastion/host-collections/host-collections.module.js"
-//= require_tree "./host-collections"
-
-//= require "bastion/content-hosts/content-hosts.module.js"
-//= require_tree "./content-hosts"
-
-//= require "bastion/subscriptions/subscriptions.module.js"
-//= require_tree "./subscriptions"
-
-//= require "bastion/content-views/versions/content-view-versions.module.js"
-//= require_tree "./content-views/versions"
-
-//= require "bastion/content-views/content-views.module"
-//= require_tree "./content-views"
-
-//= require "bastion/errata/errata.module"
-//= require_tree "./errata"
-
-//= require "bastion/environments/environments.module"
-//= require_tree "./environments"
-
-//= require "bastion/capsules/capsules.module.js"
-//= require_tree "./capsules"
-
-//= require "bastion/organizations/organizations.module.js"
-//= require_tree "./organizations"
-
-//= require "bastion/packages/packages.module.js"
-//= require_tree "./packages"
-
-//= require "bastion/products/products.module.js"
-//= require_tree "./products"
-
-//= require "bastion/repositories/repositories.module.js"
-//= require_tree "./repositories"
-
-//= require "bastion/sync-plans/sync-plans.module.js"
-//= require_tree "./sync-plans"
-
-//= require "bastion/tasks/tasks.module.js"
-//= require_tree "./tasks"
-
-//= require "bastion/gpg-keys/gpg-keys.module.js"
-//= require_tree "./gpg-keys"
-
-//= require "bastion/tasks/tasks.module.js"
-//= require_tree "./tasks"
-
-//= require "bastion/custom-info/custom-info.module.js"
-//= require_tree "./custom-info"
-
-//= require "bastion/activation-keys/activation-keys.module.js"
-//= require_tree "./activation-keys"
 
 //= require "bastion/bastion-bootstrap"

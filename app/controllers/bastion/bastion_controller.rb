@@ -10,8 +10,7 @@
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
 module Bastion
-  class BastionController < Katello::ApplicationController
-
+  class BastionController < ::ApplicationController
     skip_before_filter :authorize
 
     def index
