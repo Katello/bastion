@@ -15,10 +15,10 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,lib,vendor,grunt}/**/*"] + 
                ["Rakefile", "README.md", "Gruntfile.js", "package.json", "bower.json", "bastion.js",
-                ".jshintrc"]
+                "LICENSE", ".jshintrc"]
 
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "less-rails", "~> 2.4.0"
+  s.add_dependency "less-rails", "~> 2.3.2"
   s.add_dependency "angular-rails-templates", "~> 0.0.4"
 end
