@@ -220,7 +220,9 @@ angular.module('Bastion.widgets').factory('Nutupane',
 
             // Must be overridden
             self.table.closeItem = function () {
-                throw "NotImplementedError";
+                if (!self.masterOnly) {
+                    throw "Nutupane closeItem not implemented. If you are using Nutupane functionality with master-detail please pass 'masterOnly' to your Nutupane declaration";
+                }
             };
 
             self.table.replaceRow = function (row) {
