@@ -9,9 +9,12 @@
   @import "mixins";
   @import "variables";
   @import "nutupane";
+  @import "systems";
+  @import "tasks";
   @import "overrides";
   @import "helpers";
   @import "./forms";
+  @import "gpg-keys";
   @import "animations";
   @import "path-selector";
   @import "typography";
@@ -150,8 +153,40 @@
       float: right;
     }
   }
+
+  .info-blocks {
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    .info-block-head {
+      font-size: 18px;
+      padding-left: 15px;
+      padding-top: 18px;
+      background: #F7F7F7;
+    }
+
+    .info-block {
+      text-align: center;
+    }
+  }
+
+  .details-page {
+    padding-top: 20px;
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .nav-tabs {
+      margin-bottom: 20px;
+    }
+  }
 }
 
 .modal.fade.in {
   display: block;
+}
+
+.bottom-padding{
+  padding-bottom: 15px;
 }

@@ -21,6 +21,7 @@
  */
 angular.module('Bastion', [
     'ui.router',
+    'ngResource',
     'Bastion.i18n',
     'Bastion.widgets'
 ]);
