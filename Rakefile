@@ -2,6 +2,21 @@ require File.expand_path("lib/bastion", File.dirname(__FILE__))
 
 namespace :bastion do
 
+  desc 'Compile assets for Bastion'
+  task 'assets:precompile' do
+    require 'uglifier'
+
+    SETTINGS = {
+      :bastion => {
+        :assets => {
+          :js_compressor => Uglifier.new(:mangle => false)
+        }
+      }
+    }
+
+    Rake::Task["plugin:assets:precompile"].invoke('bastion')
+  end
+
   desc 'Run linting and tests'
   task 'grunt', [:task] do |task, args|
     success = grunt(args[:task])
