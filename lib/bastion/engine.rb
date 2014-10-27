@@ -22,18 +22,20 @@ module Bastion
 
       app.middleware.use ::ActionDispatch::Static, "#{Bastion::Engine.root}/app/assets/javascripts/bastion"
 
-      SETTINGS[:bastion] = {
-        :assets => {
-          :precompile => [
-            'bastion/bastion.css',
-            'bastion/bastion.js'
-          ]
-        }
-      }
+      SETTINGS[:bastion] = {:assets => {}} if SETTINGS[:bastion].nil?
+
+      SETTINGS[:bastion][:assets][:precompile] = [
+        'bastion/bastion.css',
+        'bastion/bastion.js'
+      ]
     end
 
     initializer "angular_templates", :group => :all do |app|
       app.config.angular_templates.ignore_prefix = '[bastion]*\/+'
+    end
+
+    rake_tasks do
+      load "#{Bastion::Engine.root}/Rakefile"
     end
 
   end
