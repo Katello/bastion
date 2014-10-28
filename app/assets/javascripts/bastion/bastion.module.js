@@ -27,15 +27,6 @@ angular.module('Bastion', [
 ]);
 
 /**
- * @ngdoc constant
- * @name Bastion.constant:RootURL
- *
- * @description
- *   Provides a configurable URL root for all requests.
- */
-angular.module('Bastion').constant('RootURL', '/katello');
-
-/**
  * @ngdoc config
  * @name  Bastion.config
  *
@@ -44,15 +35,14 @@ angular.module('Bastion').constant('RootURL', '/katello');
  * @requires $locationProvider
  * @requires $provide
  * @requires BastionConfig
- * @requires RootURL
  *
  * @description
  *   Used for establishing application wide configuration such as adding the Rails CSRF token
  *   to every request and adding Xs to translated strings.
  */
 angular.module('Bastion').config(
-    ['$httpProvider', '$urlRouterProvider', '$locationProvider', '$provide', 'BastionConfig', 'RootURL',
-    function ($httpProvider, $urlRouterProvider, $locationProvider, $provide, BastionConfig, RootURL) {
+    ['$httpProvider', '$urlRouterProvider', '$locationProvider', '$provide', 'BastionConfig',
+    function ($httpProvider, $urlRouterProvider, $locationProvider, $provide, BastionConfig) {
         var oldBrowserBastionPath = '/bastion#';
 
         $httpProvider.defaults.headers.common = {
@@ -94,8 +84,6 @@ angular.module('Bastion').config(
                         if ($templateCache.get(config.url) === undefined) {
                             config.url = '/' + config.url;
                         }
-                    } else if (!config.url.match(/^\/foreman_tasks/)) {
-                        config.url = RootURL + config.url;
                     }
 
                     return config || $q.when(config);
@@ -133,19 +121,17 @@ angular.module('Bastion').config(
  * @requires $window
  * @requires PageTitle
  * @requires markActiveMenu
- * @requires RootURL
  *
  * @description
  *   Set up some common state related functionality and set the current language.
  */
-angular.module('Bastion').run(['$rootScope', '$state', '$stateParams', 'gettextCatalog', 'currentLocale', '$location', '$window', 'PageTitle', 'markActiveMenu', 'RootURL',
-    function ($rootScope, $state, $stateParams, gettextCatalog, currentLocale, $location, $window, PageTitle, markActiveMenu, RootURL) {
+angular.module('Bastion').run(['$rootScope', '$state', '$stateParams', 'gettextCatalog', 'currentLocale', '$location', '$window', 'PageTitle', 'markActiveMenu',
+    function ($rootScope, $state, $stateParams, gettextCatalog, currentLocale, $location, $window, PageTitle, markActiveMenu) {
         var fromState, fromParams, orgSwitcherRegex;
 
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
         $rootScope.transitionTo = $state.transitionTo;
-        $rootScope.RootURL = RootURL;
 
         $rootScope.isState = function (stateName) {
             return $state.is(stateName);
