@@ -1,4 +1,4 @@
-require File.expand_path("lib/bastion", File.dirname(__FILE__))
+require File.expand_path("lib/bastion/engine", File.dirname(__FILE__))
 
 namespace :bastion do
 
@@ -17,7 +17,13 @@ namespace :bastion do
     Rake::Task["plugin:assets:precompile"].invoke('bastion')
   end
 
-  desc 'Run linting and tests'
+  desc 'Run linting and tests for the plugin'
+  task 'ci' do
+    success = grunt('ci')
+    exit!(1) if !success
+  end
+
+  desc 'Run any grunt task by specifying the argument'
   task 'grunt', [:task] do |task, args|
     success = grunt(args[:task])
     exit!(1) if !success
