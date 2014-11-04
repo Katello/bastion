@@ -50,7 +50,9 @@ describe('Directive: bstContainerScroll', function() {
             tableWidth = table.width(),
             windowElement = angular.element(window);
 
-        windowElement.width('300px');
+        expect(table.width()).toNotEqual(windowElement.width());
+
+        table.width('300px');
         windowElement.trigger('resize');
 
         expect(table.width()).toEqual(windowElement.width());

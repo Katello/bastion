@@ -9,11 +9,12 @@
  *
  * @example
  */
-angular.module('Bastion.components').directive('nutupaneTable', ['$compile', function ($compile) {
+angular.module('Bastion.components').directive('nutupaneTable', ['$compile', '$window', function ($compile, $window) {
     return {
         restrict: 'A',
         link: function (scope, element) {
-            var originalTable, clonedTable, clonedThs;
+            var originalTable, clonedTable, clonedThs,
+                windowElement = angular.element($window);
 
             scope.$on("$stateChangeSuccess", function (event, newState, newParams, oldState) {
                 // Only clone the table if the collapsed value changed or it's the first time.
@@ -33,6 +34,7 @@ angular.module('Bastion.components').directive('nutupaneTable', ['$compile', fun
                 clonedTable.removeAttr("nutupane-table");
                 clonedTable.addClass("cloned-nutupane-table");
                 clonedTable.find('tbody').remove();
+                clonedTable.find('thead tr').append('<th class="table-header-spacer"></th>');
 
                 originalTable.find('thead').hide();
 
@@ -45,11 +47,25 @@ angular.module('Bastion.components').directive('nutupaneTable', ['$compile', fun
                     angular.element(rowSelect).remove();
                 }
 
+                windowElement.bind('resize', function () {
+                    if (element.find('[bst-container-scroll]').length > 0) {
+                        clonedTable.find('thead tr th:last-child').width(element.width() - element.find('[bst-container-scroll]')[0].scrollWidth);
+                    }
+                });
+
                 // Compile each cloned th individually with original th scope
                 // so sort will work.
                 clonedThs = element.find('.cloned-nutupane-table th');
                 angular.forEach(originalTable.find('th'), function (th, index) {
                     $compile(clonedThs[index])(angular.element(th).scope());
+                });
+
+                originalTable.bind("DOMNodeInserted", function () {
+                    windowElement.trigger('resize');
+                });
+
+                originalTable.bind("DOMNodeInsertedIntoDocument", function () {
+                    windowElement.trigger('resize');
                 });
             }
 
