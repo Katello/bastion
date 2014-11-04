@@ -31,13 +31,6 @@
     <div class="fr">
       <div class="nutupane-info fl" ng-if="table.rowSelect">
         <span translate>{{ table.numSelected }} Selected</span>
-        <span>|</span>
-        <a class="deselect-action"
-           translate
-           ng-class="{ 'disabled-link' : table.numSelected == 0 }"
-           ng-click="table.selectAllResults(false)">
-          Deselect All
-        </a>
       </div>
 
       <div class="fl">
