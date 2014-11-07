@@ -6,5 +6,8 @@ vendor/assets/dev-components
 coverage/
 .tmp/
 public/
+bower_components/
 
 *.swp
+*.swn
+*.swo

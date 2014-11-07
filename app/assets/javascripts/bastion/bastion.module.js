@@ -9,6 +9,7 @@
 angular.module('Bastion', [
     'ui.router',
     'ngResource',
+    'Bastion.auth',
     'Bastion.i18n',
     'Bastion.components'
 ]);
@@ -37,6 +38,10 @@ angular.module('Bastion').config(
             'X-CSRF-TOKEN': angular.element('meta[name=csrf-token]').attr('content')
         };
 
+        if (angular.element('meta[name=csrf-token]').length > 0) {
+            $httpProvider.defaults.headers.common['X-CSRF-TOKEN'] = angular.element('meta[name=csrf-token]').attr('content');
+        }
+
         $urlRouterProvider.rule(function ($injector, $location) {
             var $sniffer = $injector.get('$sniffer'),
                 $window = $injector.get('$window'),
@@ -59,7 +64,7 @@ angular.module('Bastion').config(
 
         $urlRouterProvider.otherwise(function ($injector, $location) {
             var $window = $injector.get('$window');
-            $window.location.href = $location.absUrl().replace(oldBrowserBastionPath, '');
+            //$window.location.href = $location.absUrl().replace(oldBrowserBastionPath, '');
         });
 
         $locationProvider.html5Mode(true);

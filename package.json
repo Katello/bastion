@@ -17,7 +17,17 @@
     "grunt-angular-gettext": "~0.2.15",
     "grunt-eslint": "~6.0.0",
     "eslint": "~0.14.1",
-    "eslint-plugin-angular": "0.0.3"
+    "eslint-plugin-angular": "0.0.3",
+    "connect-modrewrite": "~0.8.2",
+    "grunt-contrib-connect": "~0.11.2",
+    "grunt-contrib-less": "~1.0.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-contrib-concat": "~0.5.1",
+    "grunt-contrib-copy": "~0.8.1",
+    "grunt-connect-proxy": "~0.2.0",
+    "grunt-wiredep": "~2.0.0",
+    "grunt-angular-templates": "~0.5.7",
+    "grunt-express": "~1.4.1"
   },
   "engines": {
     "node": ">=0.8.0"
@@ -28,5 +38,8 @@
   },
   "scripts": {
     "postinstall": "bower install"
+  },
+  "devDependencies": {
+    "grunt-express-server": "~0.5.1"
   }
 }
