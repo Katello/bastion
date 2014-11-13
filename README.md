@@ -74,16 +74,14 @@ The module defines a namespace that contains all functionality related to this e
     angular
         .module('Bastion.content-hosts', [
           'ngResource',
-          'alchemy',
-          'alch-templates',
           'ui.router',
-          'Bastion.widgets'
+          'Bastion.components'
         ]);
 
 })();
 ```
 
-The module definition creates the 'Bastion.content-hosts' namespace and tells Angular to make available the libraries `ngResource`, `alchemy`, `alch-templates`, `ui.router` and `Bastion.widgets`. These libraries are other similarly defined Angular modules.
+The module definition creates the 'Bastion.content-hosts' namespace and tells Angular to make available the libraries `ngResource`, `ui.router` and `Bastion.components`. These libraries are other similarly defined Angular modules.
 
 #### Routing
 
@@ -221,8 +219,8 @@ Since Bower is based off the use of a git repository to define the package conte
 If needing to extract multiple asset types, one can do:
 
 ```javascript
-"alchemy": {
-  "javascripts/bastion": "alchemy.js",
+"bootstrap": {
+  "javascripts/bastion": "bootstrap.js",
   "stylesheets/bastion": "*.scss"
 }
 ```

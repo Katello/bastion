@@ -1,50 +1,50 @@
 msgid ""
 msgstr ""
 
-#: app/assets/bastion/incubator/views/alch-confirm-modal.html
-#: app/assets/bastion/incubator/views/alch-confirm.html
+#: app/assets/bastion/components/views/bst-confirm-modal.html
+#: app/assets/bastion/components/views/bst-confirm.html
 #: app/assets/bastion/systems/views/bulk-actions-list.html
 msgid "Yes"
 msgstr ""
 
-#: app/assets/bastion/incubator/views/alch-confirm-modal.html
-#: app/assets/bastion/incubator/views/alch-confirm.html
+#: app/assets/bastion/components/views/bst-confirm-modal.html
+#: app/assets/bastion/components/views/bst-confirm.html
 #: app/assets/bastion/systems/views/bulk-actions-list.html
 msgid "No"
 msgstr ""
 
-#: app/assets/bastion/incubator/views/alch-edit-add-item.html
+#: app/assets/bastion/components/views/bst-edit-add-item.html
 msgid "Add New Item"
 msgstr ""
 
-#: app/assets/bastion/incubator/views/alch-edit-add-item.html
-#: app/assets/bastion/incubator/views/alch-edit-add-remove-cancel.html
-#: app/assets/bastion/incubator/views/alch-edit-save-cancel.html
+#: app/assets/bastion/components/views/bst-edit-add-item.html
+#: app/assets/bastion/components/views/bst-edit-add-remove-cancel.html
+#: app/assets/bastion/components/views/bst-edit-save-cancel.html
 #: app/assets/bastion/systems/views/bulk-actions-list.html
 msgid "Working"
 msgstr ""
 
-#: app/assets/bastion/incubator/views/alch-edit-add-item.html
-#: app/assets/bastion/incubator/views/alch-edit-add-remove-cancel.html
+#: app/assets/bastion/components/views/bst-edit-add-item.html
+#: app/assets/bastion/components/views/bst-edit-add-remove-cancel.html
 msgid "Add"
 msgstr ""
 
-#: app/assets/bastion/incubator/views/alch-edit-add-item.html
+#: app/assets/bastion/components/views/bst-edit-add-item.html
 msgid "Key"
 msgstr ""
 
-#: app/assets/bastion/incubator/views/alch-edit-add-item.html
+#: app/assets/bastion/components/views/bst-edit-add-item.html
 msgid "Value"
 msgstr ""
 
-#: app/assets/bastion/incubator/views/alch-edit-add-remove-cancel.html
+#: app/assets/bastion/components/views/bst-edit-add-remove-cancel.html
 #: app/assets/bastion/systems/content/views/system-packages.html
 #: app/assets/bastion/systems/views/bulk-actions-list.html
 msgid "Remove"
 msgstr ""
 
-#: app/assets/bastion/incubator/views/alch-edit-add-remove-cancel.html
-#: app/assets/bastion/incubator/views/alch-edit-save-cancel.html
+#: app/assets/bastion/components/views/bst-edit-add-remove-cancel.html
+#: app/assets/bastion/components/views/bst-edit-save-cancel.html
 #: app/assets/bastion/products/views/discovery.html
 #: app/assets/bastion/products/views/new-form.html
 #: app/assets/bastion/providers/views/new.html
@@ -52,11 +52,11 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: app/assets/bastion/incubator/views/alch-edit-multiselect.html
+#: app/assets/bastion/components/views/bst-edit-multiselect.html
 msgid "Existing Items"
 msgstr ""
 
-#: app/assets/bastion/incubator/views/alch-edit-multiselect.html
+#: app/assets/bastion/components/views/bst-edit-multiselect.html
 #: app/assets/bastion/products/views/discovery.html
 #: app/assets/bastion/products/views/product-repositories.html
 #: app/assets/bastion/systems/content/views/system-errata.html
@@ -66,7 +66,7 @@ msgstr ""
 msgid "Filter"
 msgstr ""
 
-#: app/assets/bastion/incubator/views/alch-edit-save-cancel.html
+#: app/assets/bastion/components/views/bst-edit-save-cancel.html
 msgid "Save"
 msgstr ""
 

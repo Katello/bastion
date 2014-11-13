@@ -1,6 +1,6 @@
 <section>
 
-  <div data-block="messages" alch-alert error-messages="errorMessages" success-messages="successMessages"></div>
+  <div data-block="messages" bst-alert error-messages="errorMessages" success-messages="successMessages"></div>
 
   <div class="row nutupane-bar">
     <h2 class="col-sm-2">
@@ -17,7 +17,7 @@
                class="form-control"
                placeholder="{{ 'Search...' | translate }}"
                ng-model="table.searchTerm"
-               on-enter="table.search(table.searchTerm)"/>
+               bst-on-enter="table.search(table.searchTerm)"/>
         <span class="input-group-btn">
           <button ng-click="table.search(table.searchTerm)" class="btn btn-default" type="button"><i class="icon-search"></i></button>
         </span>
@@ -40,13 +40,13 @@
 
   </div>
 
-  <div class="row nutupane" alch-table="table" nutupane-table ng-class="{'table-reduced': $root.$state.current.collapsed}">
+  <div class="row nutupane" bst-table="table" nutupane-table ng-class="{'table-reduced': $root.$state.current.collapsed}">
     <div class="loading-mask" ng-show="table.working" ng-class="{ 'loading-mask-collapsed': $root.$state.current.collapsed }">
       <i class="icon-spinner icon-spin"></i>
       <span ng-hide="$root.$state.current.collapsed">{{ "Loading..." | translate }}</span>
     </div>
 
-    <div alch-container-scroll control-width="table" alch-infinite-scroll="table.nextPage()" data="table.rows">
+    <div bst-container-scroll control-width="table" bst-infinite-scroll="table.nextPage()" data="table.rows">
       <div ui-view="table"></div>
     </div>
   </div>
