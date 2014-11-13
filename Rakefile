@@ -1,4 +1,4 @@
-require File.expand_path("lib/bastion/engine", File.dirname(__FILE__))
+require 'bastion/engine'
 
 namespace :bastion do
 
