@@ -12,6 +12,7 @@ Bastion is designed to provide a set of common functionality and integration poi
 Bastion.register_plugin(
   :name => 'bastion_katello',
   :javascript => 'bastion_katello/bastion_katello',
+  :stylesheet => 'bastion_katello/bastion_katello',
   :pages => %w(
     content_hosts
     content_views

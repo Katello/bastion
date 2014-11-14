@@ -1,6 +1,10 @@
 <% content_for(:stylesheets) do %>
   <%= stylesheet_link_tag "bastion/bastion" %>
-  <%= yield :stylesheets %>
+  <% Bastion.plugins.each do |name, plugin| %>
+    <% if plugin[:stylesheet] %>
+      <%= stylesheet_link_tag(plugin[:stylesheet]) %>
+    <% end %>
+  <% end %>
 <% end %>
 
 <% content_for(:content) do %>
