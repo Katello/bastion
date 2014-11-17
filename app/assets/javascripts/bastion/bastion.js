@@ -22,16 +22,9 @@
 //= require "bastion/angular-blocks/angular-blocks"
 //= require_tree "../../../../vendor/assets/javascripts/bastion/angular-bootstrap"
 //= require "bastion/angular-animate/angular-animate"
-//= require "bastion/alchemy/alchemy"
 
 //= require "bastion/bastion.module"
 //= require "bastion/bastion-resource.factory"
-
-//= require_tree "./incubator"
-
-//= require "bastion/incubator/format/alch-format.module.js"
-//= require "bastion/incubator/format/array-to-string.filter.js"
-//= require "bastion/incubator/format/key-value-to-string.filter.js"
 
 //= require "bastion/i18n/i18n.module"
 //= require "bastion/i18n/translate.service.js"
@@ -43,8 +36,9 @@
 //= require "bastion/menu/menu.module"
 //= require_tree "./menu"
 
-//= require "bastion/widgets/widgets.module"
-//= require_tree "./widgets"
+//= require "bastion/components/components.module"
+//= require "bastion/components/formatters/components-formatters.module"
+//= require_tree "./components"
 
 //= require "bastion/utils/utils.module"
 //= require_tree "./utils"

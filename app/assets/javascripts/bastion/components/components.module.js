@@ -9,16 +9,19 @@
  * NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
  * have received a copy of GPLv2 along with this software; if not, see
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
- */
+ **/
 
-/**
- * @ngdoc module
- * @name  Bastion.menu
- *
- * @description
- *   Module for menu related functionality.
- */
-angular.module('Bastion.menu', [
-    'Bastion',
-    'Bastion.components'
-]);
+(function () {
+    'use strict';
+
+    /**
+     * @ngdoc module
+     * @name  Bastion.components
+     *
+     * @description
+     *   Cross application re-usable components
+     */
+    angular
+        .module('Bastion.components', []);
+
+})();

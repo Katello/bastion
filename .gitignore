@@ -6,3 +6,5 @@ vendor/assets/dev-components
 coverage/
 .tmp/
 public/
+
+*.swp

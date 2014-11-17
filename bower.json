@@ -14,7 +14,6 @@
     "angular-gettext": "=1.0.0",
     "angular-ui-router": "=0.2.10",
     "angular-blocks": "~>0.1.8",
-    "alchemy": ">=0.0.1",
     "underscore": "=1.5.2",
     "ngUpload": "~0.5.5",
     "bootstrap": "~3.0.1",
@@ -70,10 +69,6 @@
     },
     "angular-uuid4": {
       "javascripts/bastion": "angular-uuid4.js"
-    },
-    "alchemy": {
-      "javascripts/bastion": "alchemy.js",
-      "stylesheets/bastion": "*.scss"
     },
     "underscore": {
       "javascripts/bastion": "underscore.js"
