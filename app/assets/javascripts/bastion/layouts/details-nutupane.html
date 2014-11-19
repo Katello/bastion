@@ -20,7 +20,12 @@
                  class="form-control"
                  placeholder="{{ 'Search...' | translate }}"
                  ng-model="detailsTable.searchTerm"
-                 bst-on-enter="detailsTable.search(detailsTable.searchTerm)"/>
+                 bst-on-enter="detailsTable.search(detailsTable.searchTerm)"
+                 ng-trim="false"
+                 typeahead="item.label for item in detailsTable.autocomplete($viewValue)"
+                 typeahead-empty
+                 typeahead-template-url="widgets/views/autocomplete-scoped-search.html"/>
+
           <span class="input-group-btn">
             <button ng-click="detailsTable.search(detailsTable.searchTerm)" class="btn btn-default" type="button"><i class="icon-search"></i></button>
           </span>

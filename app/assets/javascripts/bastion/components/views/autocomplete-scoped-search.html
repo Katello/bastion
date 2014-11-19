@@ -1,0 +1,10 @@
+<i class='ui-autocomplete-category' ng-show="match.model.isCategory">
+  {{ match.model.category }}
+</i>
+
+<a ng-hide="match.model.isCategory">
+  <i class='ui-autocomplete-completed'>
+    {{ match.model.completed }}
+  </i>
+  {{ match.model.part }}
+</a>

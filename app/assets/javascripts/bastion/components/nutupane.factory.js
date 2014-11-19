@@ -115,6 +115,48 @@ angular.module('Bastion.components').factory('Nutupane',
                 return params;
             };
 
+            self.table.autocomplete = function (term) {
+                var data, promise, params;
+                if (resource.autocomplete) {
+                    params = self.getParams();
+                    params.search = term;
+                    data = resource.autocomplete(params);
+                } else {
+                    data = self.table.fetchAutocomplete(term);
+                }
+
+                promise = data.$promise;
+                if (promise) {
+                    return promise.then(function (data) {
+                        return self.table.transformScopedSearch(data);
+                    });
+                }
+                else {
+                    return data;
+                }
+            };
+
+            self.table.transformScopedSearch = function (results) {
+                var rows = [],
+                    categoriesFound = [];
+                angular.forEach(results, function (row) {
+                    if (row.category && row.category.length > 0) {
+                        if (categoriesFound.indexOf(row.category) === -1) {
+                            categoriesFound.push(row.category);
+                            rows.push({category: row.category, isCategory: true});
+                        }
+                    }
+                    rows.push(row);
+                });
+
+                return rows;
+            };
+
+            //Overridable by real controllers, but default to nothing
+            self.table.fetchAutocomplete = function () {
+                return [];
+            };
+
             self.enableSelectAllResults = function () {
                 self.table.selectAllResultsEnabled = true;
                 self.table.allResultsSelected = false;
