@@ -233,6 +233,39 @@ describe('Factory: Nutupane', function() {
             expect(results.included.search).toBe("FOO");
         });
 
+        it("provides a way to translate scoped search queries", function() {
+            var translated,
+                data = [{label: 'bar', category: 'foo'},
+                        {label: 'bar2', category: 'foo'}];
+
+            translated = nutupane.table.transformScopedSearch(data);
+            expect(translated.length).toBe(3);
+            expect(translated[0].isCategory).toBeTruthy();
+            expect(translated[0].category).toBe('foo');
+            expect(translated[1]).toBe(data[0]);
+            expect(translated[2]).toBe(data[1]);
+        });
+
+        it("autocompletes using the original resource if possible", function() {
+            var data;
+            Resource.autocomplete = function() {return ["foo"]};
+            spyOn(Resource, 'autocomplete').andCallThrough();
+
+            data = nutupane.table.autocomplete();
+            expect(Resource.autocomplete).toHaveBeenCalled();
+            expect(data[0]).toBe("foo");
+        });
+
+        it("autocompletes using fetchAutocomplete if resource doesn't support autocomplete", function() {
+            var data;
+            nutupane.table.fetchAutocomplete = function() {return ['bar']};
+            spyOn(nutupane.table, 'fetchAutocomplete').andCallThrough();
+
+            data = nutupane.table.autocomplete();
+            expect(nutupane.table.fetchAutocomplete).toHaveBeenCalled();
+            expect(data[0]).toBe("bar");
+        });
+
         describe("provides a way to sort the table", function() {
             it ("defaults the sort to ascending if the previous sort does not match the new sort.", function() {
                 var expectedParams = {sort_by: 'name', sort_order: 'ASC', search: '', page: 1};
