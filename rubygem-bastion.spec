@@ -80,8 +80,18 @@ mkdir -p %{buildroot}%{gem_dir}
 cp -a .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
 
-%foreman_bundlerd_file
+mkdir -p %{buildroot}%{foreman_bundlerd_dir}
+
+cat <<GEMFILE > %{buildroot}%{foreman_bundlerd_dir}/bastion.rb
+gem 'bastion'
+gem 'less-rails'
+GEMFILE
+
 %foreman_precompile_plugin -r bastion:assets:precompile
+
+cat <<GEMFILE > %{buildroot}%{foreman_bundlerd_dir}/bastion.rb
+gem 'bastion'
+GEMFILE
 
 mkdir -p %{buildroot}%{foreman_dir}/public/assets
 ln -s %{foreman_assets_plugin} %{buildroot}%{foreman_dir}/public/assets/bastion
