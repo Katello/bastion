@@ -14,12 +14,8 @@ module Bastion
       app.routes_reloader.paths.unshift("#{Bastion::Engine.root}/config/routes.rb")
     end
 
-    initializer "bastion.assets.paths", :group => :all do |app|
-      if defined? Less::Rails
-        app.config.less.paths << "#{Bastion::Engine.root}/app/assets/stylesheets/bastion"
-        app.config.less.paths << "#{Bastion::Engine.root}/vendor/assets/stylesheets/bastion"
-      end
-
+    initializer "bastion.plugin", :group => :all do |app|
+      app.config.assets.paths << "#{Bastion::Engine.root}/vendor/assets/stylesheets/bastion"
       app.middleware.use ::ActionDispatch::Static, "#{Bastion::Engine.root}/app/assets/javascripts/bastion"
 
       SETTINGS[:bastion] = {:assets => {}} if SETTINGS[:bastion].nil?

@@ -3,7 +3,7 @@ require 'rails'
 lib_foreman = File.expand_path('lib/foreman', Rails.root)
 require lib_foreman unless !Dir.exist?(lib_foreman)
 
-require 'less-rails' if !Rails.env.production? || Foreman.in_rake?
+require 'less-rails' unless Rails.env.production?
 require 'angular-rails-templates'
 
 require File.expand_path('bastion/engine', File.dirname(__FILE__))
