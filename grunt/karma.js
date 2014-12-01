@@ -30,7 +30,6 @@ module.exports = {
             basePath + 'vendor/assets/javascripts/bastion/ngUpload/ng-upload.js',
             basePath + '.tmp/bower_components/angular-mocks/angular-mocks.js',
 
-            basePath + 'app/assets/javascripts/bastion/bastion-bootstrap.js',
             basePath + 'app/assets/javascripts/bastion/bastion.module.js',
             basePath + 'app/assets/javascripts/bastion/bastion-resource.factory.js',
             basePath + 'app/assets/javascripts/bastion/i18n/i18n.module.js',
@@ -41,6 +40,8 @@ module.exports = {
             basePath + 'app/assets/javascripts/bastion/utils/*.js',
             basePath + 'app/assets/javascripts/bastion/menu/menu.module.js',
             basePath + 'app/assets/javascripts/bastion/menu/*.js',
+            basePath + 'app/assets/javascripts/bastion/features/features.module.js',
+            basePath + 'app/assets/javascripts/bastion/features/*.js',
             basePath + 'app/assets/javascripts/bastion/components/components.module.js',
             basePath + 'app/assets/javascripts/bastion/components/*.js',
             basePath + 'app/assets/javascripts/bastion/components/formatters/components-formatters.module.js',
@@ -53,6 +54,8 @@ module.exports = {
             'app/assets/javascripts/' + pluginName + '/**/*.module.js',
             'app/assets/javascripts/' + pluginName + '/**/*.js',
             'app/assets/javascripts/' + pluginName + '/**/*.html',
+
+            basePath + 'app/assets/javascripts/bastion/bastion-bootstrap.js',
 
             basePath + 'test/test-mocks.module.js',
             'test/**/*test.js'
