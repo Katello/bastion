@@ -15,7 +15,7 @@
 
 Summary:    UI plugin for Foreman providing AngularJS structure
 Name:       %{?scl_prefix}rubygem-%{gem_name}
-Version:    0.1.10
+Version:    0.1.11
 Release:    1%{?dist}
 Group:      Applications/System
 License:    GPLv2+
@@ -88,10 +88,7 @@ gem 'less-rails'
 GEMFILE
 
 %foreman_precompile_plugin -r bastion:assets:precompile
-
-cat <<GEMFILE > %{buildroot}%{foreman_bundlerd_dir}/bastion.rb
-gem 'bastion'
-GEMFILE
+%foreman_bundlerd_file
 
 mkdir -p %{buildroot}%{foreman_dir}/public/assets
 ln -s %{foreman_assets_plugin} %{buildroot}%{foreman_dir}/public/assets/bastion
