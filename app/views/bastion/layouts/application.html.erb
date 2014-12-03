@@ -16,6 +16,7 @@
 <% content_for(:javascripts) do %>
   <%= javascript_include_tag 'bastion/bastion' %>
   <script type="text/javascript">
+    angular.module('Bastion').value('Features', angular.fromJson(<%= SETTINGS[:features].nil? ? {} : SETTINGS[:features].to_json.html_safe %>));
     angular.module('Bastion').value('currentLocale', '<%= I18n.locale %>');
     angular.module('Bastion').value('CurrentOrganization', "<%= Organization.current.id if Organization.current %>");
     angular.module('Bastion').value('Permissions', angular.fromJson('<%= User.current.roles.collect { |role| role.permissions }.flatten.to_json.html_safe %>'));
