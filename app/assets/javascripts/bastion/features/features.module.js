@@ -9,21 +9,12 @@
  * NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
  * have received a copy of GPLv2 along with this software; if not, see
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
- */
+ **/
 
-angular.element(document).ready(function () {
-    angular.bootstrap(document, BASTION_MODULES);
-});
 
-BASTION_MODULES = [
-    'angular-blocks',
-    'ngAnimate',
-    'ngSanitize',
-    'templates',
-    'ui.bootstrap',
-    'ui.bootstrap.tpls',
-    'Bastion.auth',
-    'Bastion.menu',
-    'Bastion.i18n',
-    'Bastion.features'
-];
+(function () {
+
+    angular
+        .module('Bastion.features', []);
+
+})();
