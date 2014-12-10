@@ -12,13 +12,7 @@
  */
 
 module.exports = function (grunt) {
-    var bastion = require('./bastion.js'),
-        jshint;
+    var bastion = require('./bastion.js');
 
     bastion(grunt);
-
-    jshint = grunt.config('jshint.all');
-    jshint.push('!app/assets/javascripts/bastion/i18n/*.js');
-
-    grunt.config.set('jshint.all', jshint);
 };

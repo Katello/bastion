@@ -7,6 +7,7 @@ module.exports = function (grunt) {
     grunt.loadTasks(__dirname + '/node_modules/grunt-htmlhint/tasks');
     grunt.loadTasks(__dirname + '/node_modules/grunt-bower-task/tasks');
     grunt.loadTasks(__dirname + '/node_modules/grunt-karma/tasks');
+    grunt.loadTasks(__dirname + '/node_modules/grunt-angular-gettext/tasks');
 
     grunt.initConfig(configs);
 
@@ -18,6 +19,14 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test', [
         'karma:unit'
+    ]);
+
+    grunt.registerTask('i18n:extract', [
+        'nggettext_extract'
+    ]);
+
+    grunt.registerTask('i18n:compile', [
+        'nggettext_compile'
     ]);
 
     grunt.registerTask('default', [

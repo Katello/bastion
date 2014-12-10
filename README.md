@@ -279,6 +279,20 @@ version of a component has been bumped.
 - `grunt bower:dev`
 
 
+## i18n ##
+
+To extract strings into a .pot file for translation run:
+
+```bash
+grunt i18n:extract
+```
+
+To create an angular object from translated .po files run:
+
+```bash
+grunt i18n:compile
+```
+
 ## Contributing ##
 
 We welcome contributions, please see the Bastion [developer guide](https://github.com/Katello/katello.org/blob/master/docs/developer_guide/bastion/index.md).
