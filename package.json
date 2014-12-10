@@ -14,7 +14,8 @@
     "karma-coverage": "~0.2.6",
     "grunt-htmlhint": "~0.4.1",
     "grunt-concurrent": "~1.0.0",
-    "generator-bastion": "~0.1.2"
+    "generator-bastion": "~0.1.2",
+    "grunt-angular-gettext": "~0.2.15"
   },
   "engines": {
     "node": ">=0.8.0"
