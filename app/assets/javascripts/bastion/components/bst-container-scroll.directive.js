@@ -26,10 +26,11 @@ angular.module('Bastion.components').directive('bstContainerScroll', ['$window',
                 var addScroll = function () {
                     var windowWidth = windowElement.width(),
                         windowHeight = windowElement.height(),
+                        scrollWidth = element.scrollWidth || 0,
                         offset = element.offset().top;
 
                     if (attrs.controlWidth) {
-                        element.find(attrs.controlWidth).width(windowWidth);
+                        element.find(attrs.controlWidth).width(windowWidth - scrollWidth);
                     }
                     element.outerHeight(windowHeight - offset);
                     element.height(windowHeight - offset);
