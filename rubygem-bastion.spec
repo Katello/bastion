@@ -15,7 +15,7 @@
 
 Summary:    UI plugin for Foreman providing AngularJS structure
 Name:       %{?scl_prefix}rubygem-%{gem_name}
-Version:    0.1.12
+Version:    0.1.13
 Release:    1%{?dist}
 Group:      Applications/System
 License:    GPLv2+
@@ -121,6 +121,9 @@ ln -s %{foreman_assets_plugin} %{buildroot}%{foreman_dir}/public/assets/bastion
 %files devel
 
 %changelog
+* Tue Dec 09 2014 Eric D. Helms <ericdhelms@gmail.com> 0.1.12-1
+- Update rubygem-bastion to 0.1.12 (ericdhelms@gmail.com)
+
 * Mon Dec 01 2014 Eric D. Helms <ericdhelms@gmail.com> 0.1.10-1
 - Update rubygem-bastion to 0.1.10 (ericdhelms@gmail.com)
 
