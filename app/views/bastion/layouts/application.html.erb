@@ -8,8 +8,10 @@
 <% end %>
 
 <% content_for(:content) do %>
-  <div class="article maincontent rcue-styles" data-no-turbolink="true">
-    <section class="container-fluid" ui-view></section>
+  <div class="article maincontent patternfly-styles" data-no-turbolink="true">
+    <section class="container-fluid">
+        <div class="row" ui-view></div>
+    </section>
   </div>
 <% end %>
 

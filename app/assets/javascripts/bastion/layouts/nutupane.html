@@ -1,6 +1,6 @@
 <section>
 
-  <div data-block="messages" bst-alert error-messages="errorMessages" success-messages="successMessages"></div>
+  <div data-block="messages" bst-alerts error-messages="errorMessages" success-messages="successMessages"></div>
 
   <div class="row nutupane-bar">
     <h2 class="col-sm-2">
@@ -31,7 +31,7 @@
                typeahead-empty
                typeahead-template-url="components/views/autocomplete-scoped-search.html"/>
         <span class="input-group-btn">
-          <button ng-click="table.search(table.searchTerm)" class="btn btn-default" type="button"><i class="icon-search"></i></button>
+          <button ng-click="table.search(table.searchTerm)" class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
         </span>
       </div>
     </div>
@@ -53,11 +53,11 @@
 
   <div class="row nutupane" bst-table="table" nutupane-table ng-class="{'table-reduced': $root.$state.current.collapsed}">
     <div class="loading-mask" ng-show="table.working" ng-class="{ 'loading-mask-collapsed': $root.$state.current.collapsed }">
-      <i class="icon-spinner icon-spin"></i>
+      <i class="fa fa-spinner fa-spin"></i>
       <span ng-hide="$root.$state.current.collapsed">{{ "Loading..." | translate }}</span>
     </div>
 
-    <div bst-container-scroll control-width="table" bst-infinite-scroll="table.nextPage()" data="table.rows">
+    <div bst-container-scroll bst-infinite-scroll="table.nextPage()" data="table.rows">
       <div ui-view="table"></div>
     </div>
   </div>

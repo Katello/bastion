@@ -19,19 +19,14 @@ angular.module('Bastion.components').directive('bstContainerScroll', ['$window',
     return {
         restrict: 'A',
 
-        compile: function (tElement, attrs) {
+        compile: function (tElement) {
             tElement.addClass("container-scroll-wrapper");
             return function (scope, element) {
                 var windowElement = angular.element($window);
                 var addScroll = function () {
-                    var windowWidth = windowElement.width(),
-                        windowHeight = windowElement.height(),
-                        scrollWidth = element.scrollWidth || 0,
+                    var windowHeight = windowElement.height(),
                         offset = element.offset().top;
 
-                    if (attrs.controlWidth) {
-                        element.find(attrs.controlWidth).width(windowWidth - scrollWidth);
-                    }
                     element.outerHeight(windowHeight - offset);
                     element.height(windowHeight - offset);
                 };

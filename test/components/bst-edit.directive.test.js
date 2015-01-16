@@ -105,7 +105,7 @@ describe('Directive: bstEdit', function() {
         });
 
         it("should call the method set to on-delete when clicking delete button", function() {
-            var element = editableElement.find('.icon-remove');
+            var element = editableElement.find('.fa-remove');
             spyOn(testItem, 'delete');
 
             element.trigger('click');

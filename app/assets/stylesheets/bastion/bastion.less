@@ -2,8 +2,9 @@
 //
 // Temporary namespace to prevent Boostrap3/RCUE from
 // Colliding with Boostrap2 from Foreman core
-.rcue-styles {
-  @import "rcue/rcue";
+// TODO remove?
+.patternfly-styles {
+  @import "patternfly/patternfly";
 
   // Bastion Components
   @import "mixins";
@@ -37,7 +38,7 @@
     display: none;
   }
 
-  [class*="icon-"] {
+  [class*="fa-"] {
     &.green {
       color: #57a81c;
     }
@@ -98,14 +99,14 @@
     background: white;
     font-size: 3em;
 
-    .icon-spinner {
+    .fa-spinner {
       margin: 20% 0  0 40%;
     }
 
     &.loading-mask-panel {
       left: 20.1%;
 
-      .icon-spinner {
+      .fa-spinner {
         margin: 20% 0  0 33%;
       }
     }

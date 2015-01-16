@@ -16,52 +16,23 @@
  * @name Bastion.components.directive:bstAlert
  *
  * @description
- *   Simple directive for encapsulating alert displays.
+ *   Simple directive for encapsulating an alert display.
  *
  * @example
  *   <pre>
- *     <div bst-alert
- *          successMessages="successMessages"
- *          errorMessages="errorMessages">
- *     </div>
+ *     <div bst-alert="success"></div>
+ *   </pre>
  */
 angular.module('Bastion.components').directive('bstAlert', function () {
     return {
         templateUrl: 'components/views/bst-alert.html',
+        transclude: true,
         scope: {
-            successMessages: '=',
-            infoMessages: '=',
-            warningMessages: '=',
-            errorMessages: '='
+            type: '@bstAlert',
+            close: '&'
         },
-
-        link: function (scope) {
-            scope.alerts = {};
-            scope.types = ['success', 'info', 'warning', 'danger'];
-
-            function handleMessages(type, messages) {
-                scope.alerts[type] =  messages;
-            }
-
-            scope.$watch('successMessages', function (messages) {
-                handleMessages('success', messages);
-            }, true);
-
-            scope.$watch('infoMessages', function (messages) {
-                handleMessages('info', messages);
-            }, true);
-
-            scope.$watch('warningMessages', function (messages) {
-                handleMessages('warning', messages);
-            }, true);
-
-            scope.$watch('errorMessages', function (messages) {
-                handleMessages('danger', messages);
-            }, true);
-
-            scope.closeAlert = function (type, index) {
-                scope.alerts[type].splice(index, 1);
-            };
+        controller: function ($scope, $attrs) {
+            $scope.closeable = 'close' in $attrs;
         }
     };
 });

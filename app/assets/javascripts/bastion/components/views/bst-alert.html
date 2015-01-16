@@ -1,6 +1,18 @@
-<div ng-repeat="type in types">
-  <div alert ng-repeat="alert in alerts[type] track by $index" type="type" close="closeAlert(type, $index)">
-    {{ alert }}
-  </div>
-</div>
+<div class="alert" ng-class='"alert-" + (type || "warning")'>
+  <button ng-show="closeable" type="button" class="close" aria-hidden="true" ng-click="close()">
+    <span class="pficon pficon-close"></span>
+  </button>
+  <span class="pficon-layered">
+      <span ng-show="type === 'danger'" class="pficon pficon-error-octagon"></span>
+      <span ng-show="type === 'danger'" class="pficon pficon-error-exclamation"></span>
 
+      <span ng-show="type === 'warning'" class="pficon pficon-warning-triangle"></span>
+      <span ng-show="type === 'warning'" class="pficon pficon-warning-exclamation"></span>
+
+      <span ng-show="type === 'info'" class="pficon pficon-info"></span>
+
+      <span ng-show="type === 'success'" class="pficon pficon-ok"></span>
+  </span>
+
+  <div ng-transclude></div>
+</div>
