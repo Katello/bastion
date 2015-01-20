@@ -159,17 +159,19 @@ angular.module('Bastion').run(['$rootScope', '$state', '$stateParams', 'gettextC
 
         // Set the current language
         gettextCatalog.currentLanguage = currentLocale;
-
         $rootScope.$on('$stateChangeStart',
             function () {
-            //save location.search so we can add it back after transition is done
-            this.locationSearch = $location.search();
-        });
+                //save location.search so we can add it back after transition is done
+                this.locationSearch = $location.search().search;
+            }
+        );
 
         $rootScope.$on('$stateChangeSuccess',
             function (event, toState, toParams, fromStateIn, fromParamsIn) {
                 //restore all query string parameters back to $location.search
-                $location.search(this.locationSearch);
+                if (this.locationSearch) {
+                    $location.search('search', this.locationSearch);
+                }
 
                 //Record our from state, so we can transition back there
                 if (!fromStateIn.abstract) {
