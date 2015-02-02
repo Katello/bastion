@@ -25,16 +25,7 @@ describe('Directive: bstAlert', function() {
     }));
 
     beforeEach(function() {
-        element = angular.element('<div bst-alert ' +
-            'success-messages="successMessages" ' +
-            'info-messages="infoMessages" ' +
-            'warning-messages="warningMessages" ' +
-            'error-messages="errorMessages"></div>');
-
-        scope.successMessages = [];
-        scope.infoMessages = [];
-        scope.warningMessages = [];
-        scope.errorMessages = [];
+        element = angular.element('<div bst-alert="info"></div>');
 
         compile(element)(scope);
         scope.$digest();
@@ -42,43 +33,20 @@ describe('Directive: bstAlert', function() {
         elementScope = element.isolateScope();
     });
 
-    it("should display success alerts", function() {
+    it("should display an alert", function() {
         scope.successMessages = ['hello'];
         scope.$digest();
 
-        expect(elementScope.alerts['success'].length).toBe(1);
-        expect(elementScope.alerts['success'][0]).toBe('hello');
+        expect(element.find('.alert').length).toBe(1);
     });
 
-    it("should display info alerts", function() {
-        scope.infoMessages = ['hello'];
+    it("should display a close icon if a close function is provided", function () {
+        element = angular.element('<div bst-alert="info" close="close()"></div>');
+
+        compile(element)(scope);
         scope.$digest();
+        elementScope = element.isolateScope();
 
-        expect(elementScope.alerts['info'].length).toBe(1);
-        expect(elementScope.alerts['info'][0]).toBe('hello');
+        expect(elementScope.closeable).toBe(true);
     });
-
-    it("should display warning alerts", function() {
-        scope.warningMessages = ['hello'];
-        scope.$digest();
-
-        expect(elementScope.alerts['warning'].length).toBe(1);
-        expect(elementScope.alerts['warning'][0]).toBe('hello');
-    });
-
-    it("should display success alerts", function() {
-        scope.errorMessages = ['hello'];
-        scope.$digest();
-
-        expect(elementScope.alerts['danger'].length).toBe(1);
-        expect(elementScope.alerts['danger'][0]).toBe('hello');
-    });
-
-    it("provides a way to close alerts", function() {
-        elementScope.alerts = {success: ['yo!', 'hello'], danger: ['foo']};
-        elementScope.closeAlert('success', 1);
-        expect(elementScope.alerts['success'].length).toBe(1);
-        expect(elementScope.alerts['danger'].length).toBe(1);
-    });
-
 });

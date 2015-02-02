@@ -1,4 +1,5 @@
 @import "variables";
+@import (reference) "patternfly/patternfly";
 
 .table {
   table-layout: fixed;
@@ -13,8 +14,8 @@
 
   th.row-select,
   td.row-select {
-    width: 25px;
-    max-width: 25px;
+    width: 30px;
+    max-width: 30px;
   }
 }
 
@@ -78,11 +79,11 @@ td.row-select {
         left: 4px;
       }
 
-      .icon-sort-down {
+      .fa-sort-down {
         bottom: 2px;
       }
 
-      .icon-sort-up {
+      .fa-sort-up {
         top: 4px;
       }
 
@@ -108,7 +109,7 @@ td.row-select {
     }
 
     .active-row {
-      .icon-active {
+      .fa-active {
         margin-top: 1px;
         font-size: 14px;
         position: absolute;
@@ -189,7 +190,7 @@ td.row-select {
 
 .filter-input {
   float: left;
-  margin-right: 10px;
+  margin: 0 0 10px;
   width: 33%;
 }
 
@@ -228,7 +229,7 @@ td.row-select {
 
   .details-header {
     min-height: 40px;
-  }
+  }                                                                                                                            y
 
   .nutupane-sub-section {
     height: 250px;
@@ -239,7 +240,7 @@ td.row-select {
     }
   }
 
-  .icon-backward {
+  .fa-backward {
     padding-right: 5px;
   }
 
@@ -289,8 +290,7 @@ td.row-select {
 }
 
 .nutupane-info {
-  padding-top: 7px;
-  margin-right: 10px;
+  padding: 2px 10px;
 }
 
 .detail:not(:last-child) {
@@ -396,4 +396,8 @@ div.alch-dialog.open.info-value {
 
 .working-indicator {
   font-size: 200%;
+}
+
+table .progress {
+  margin-bottom: 0;
 }

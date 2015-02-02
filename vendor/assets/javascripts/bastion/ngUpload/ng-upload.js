@@ -6,7 +6,7 @@
 //
 // <div ng-app="app">
 //   <div ng-controller="mainCtrl">
-//    <form action="/uploads"
+//    <form ng-attr-action="/uploads"
 //      ng-upload="completed(content)">
 //      ng-upload-loading="loading()"
 //      <input type="file" name="avatar"></input>
@@ -45,10 +45,14 @@ angular.module('ngUpload', [])
       link: function(scope, element, attrs) {
         element.bind('click', function($event) {
           // prevent default behavior of click
-          if ($event) { $event.preventDefault(); }
+          if ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+          }
 
           if (element.attr('disabled')) { return; }
           var form = getParentNodeByTagName(element, 'form');
+          form.triggerHandler('submit');
           form[0].submit();
         });
       }
@@ -73,20 +77,9 @@ angular.module('ngUpload', [])
 
     return {
       restrict: 'AC',
-      scope: true,
       link: function (scope, element, attrs) {
         // Give each directive instance a new id
         iframeID++;
-
-        function getActionAttrValue() {
-          var action = element.attr('action');
-          var separator = action.indexOf('?') === -1 ? '?' : '&';
-          var tStamp = +(new Date());
-
-          // Append a timestamp field to the url
-          // to prevent browser caching results
-          return action + separator + '_t=' + tStamp;
-        }
 
         function setLoadingState(state) {
           scope.$isUploading = state;
@@ -99,7 +92,7 @@ angular.module('ngUpload', [])
         //    // add the Rails CSRF hidden input to form
         //    enableRailsCsrf: bool
         // }
-        var fn = attrs.ngUpload ? $parse(attrs.ngUpload) : null;
+        var fn = attrs.ngUpload ? $parse(attrs.ngUpload) : angular.noop;
         var loading = attrs.ngUploadLoading ? $parse(attrs.ngUploadLoading) : null;
 
         if ( attrs.hasOwnProperty( "uploadOptionsConvertHidden" ) ) {
@@ -119,7 +112,6 @@ angular.module('ngUpload', [])
         element.attr({
           'target': 'upload-iframe-' + iframeID,
           'method': 'post',
-          'action': getActionAttrValue(),
           'enctype': 'multipart/form-data',
           'encoding': 'multipart/form-data'
         });
@@ -145,8 +137,15 @@ angular.module('ngUpload', [])
         setLoadingState(false);
         // Start upload
         element.bind('submit', function uploadStart() {
+          var formController = scope[attrs.name];
+          // if form is invalid don't submit (e.g. keypress 13)
+          if(formController && formController.$invalid) return false;
           // perform check before submit file
-          if (options.beforeSubmit) { return options.beforeSubmit(); }
+          if (options.beforeSubmit && options.beforeSubmit(scope, {}) == false) return false;
+
+          // bind load after submit to prevent initial load triggering uploadEnd
+          iframe.bind('load', uploadEnd);
+
           // If convertHidden option is enabled, set the value of hidden fields to the eval of the ng-model
           if (options.convertHidden) {
             angular.forEach(element.find('input'), function(el) {
@@ -171,7 +170,9 @@ angular.module('ngUpload', [])
         });
 
         // Finish upload
-        iframe.bind('load', function uploadEnd() {
+       function uploadEnd() {
+          // unbind load after uploadEnd to prevent another load triggering uploadEnd
+          iframe.unbind('load');
           if (!scope.$$phase) {
             scope.$apply(function() {
               setLoadingState(false);
@@ -197,9 +198,9 @@ angular.module('ngUpload', [])
                  fn(scope, { content: content});
              });
           } else {
-             fn(scope, { content: content});
+            fn(scope, { content: content});
           }
-        });
+        }
       }
     };
   }]);

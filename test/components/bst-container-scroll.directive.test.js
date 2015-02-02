@@ -28,7 +28,7 @@ describe('Directive: bstContainerScroll', function() {
 
     beforeEach(function() {
         tableElement = angular.element(
-            '<div bst-container-scroll control-width="table">' +
+            '<div bst-container-scroll>' +
               '<table>' +
                 '<thead>' +
                   '<tr><th>Column 1</th></tr>' +
@@ -43,19 +43,6 @@ describe('Directive: bstContainerScroll', function() {
 
         compile(tableElement)(scope);
         scope.$digest();
-    });
-
-    it("should adjust the table width on window resize", function() {
-        var table = tableElement.find('table'),
-            tableWidth = table.width(),
-            windowElement = angular.element(window);
-
-        expect(table.width()).toNotEqual(windowElement.width());
-
-        table.width('300px');
-        windowElement.trigger('resize');
-
-        expect(table.width()).toEqual(windowElement.width());
     });
 
     it("should adjust the table height on window resize", function() {

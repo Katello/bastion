@@ -1,0 +1,6 @@
+<div ng-repeat="type in types">
+  <div bst-alert="{{type}}" ng-repeat="alert in alerts[type] track by $index" close="closeAlert(type, $index)">
+    {{ alert }}
+  </div>
+</div>
+

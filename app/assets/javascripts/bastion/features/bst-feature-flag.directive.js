@@ -27,7 +27,7 @@
      *     <button class="btn btn-default"
      *             bst-feature-flag="custom_products"
      *             ui-sref="products.discovery.scan">
-     *       <i class="icon-screenshot"></i>
+     *       <i class="fa fa-screenshot"></i>
      *       {{ "Repo Discovery" | translate }}
      *     </button>
      *

@@ -16,10 +16,11 @@
     "angular-blocks": "~>0.1.8",
     "underscore": "=1.5.2",
     "ngUpload": "~0.5.5",
-    "bootstrap": "~3.0.1",
-    "font-awesome": "~3.2.1",
+    "bootstrap": "~3.1.1",
+    "font-awesome": "4.2.0",
     "angular-animate": "=1.2.0",
-    "angular-uuid4": "0.1.0"
+    "angular-uuid4": "0.1.0",
+    "patternfly": "1.1.3"
   },
   "devDependencies": {
     "jquery": "=1.9.1",
@@ -32,58 +33,62 @@
   },
   "exportsOverride": {
     "json3": {
-      "javascripts/bastion": "lib/json3.js"
+      "javascripts/bastion/json3": "lib/json3.js"
     },
     "es5-shim": {
-      "javascripts/bastion": "es5-shim.js"
+      "javascripts/bastion/es5-shim": "es5-shim.js"
     },
     "angular": {
-      "javascripts/bastion": "angular.js"
+      "javascripts/bastion/angular": "angular.js"
     },
     "angular-sanitize": {
-      "javascripts/bastion": "angular-sanitize.js"
+      "javascripts/bastion/angular-sanitize": "angular-sanitize.js"
     },
     "angular-resource": {
-      "javascripts/bastion": "angular-resource.js"
+      "javascripts/bastion/angular-resource": "angular-resource.js"
     },
     "angular-route": {
-      "javascripts/bastion": "angular-route.js"
+      "javascripts/bastion/angular-route": "angular-route.js"
     },
     "angular-gettext": {
-      "javascripts/bastion": "dist/angular-gettext.js"
+      "javascripts/bastion/angular-gettext": "dist/angular-gettext.js"
     },
     "angular-blocks": {
-      "javascripts/bastion": "src/angular-blocks.js"
+      "javascripts/bastion/angular-blocks": "src/angular-blocks.js"
     },
     "angular-bootstrap": {
-      "javascripts/bastion": [
+      "javascripts/bastion/angular-bootstrap": [
         "ui-bootstrap.js",
         "ui-bootstrap-tpls.js"
       ]
     },
     "angular-animate": {
-      "javascripts/bastion": "angular-animate.js"
+      "javascripts/bastion/angular-animate": "angular-animate.js"
     },
     "angular-ui-router": {
-      "javascripts/bastion": "release/angular-ui-router.js"
+      "javascripts/bastion/angular-ui-router": "release/angular-ui-router.js"
     },
     "angular-uuid4": {
-      "javascripts/bastion": "angular-uuid4.js"
+      "javascripts/bastion/angular-uuid4": "angular-uuid4.js"
     },
     "underscore": {
-      "javascripts/bastion": "underscore.js"
+      "javascripts/bastion/underscore": "underscore.js"
     },
     "ngUpload": {
-      "javascripts/bastion": "ng-upload.js"
+      "javascripts/bastion/ngUpload": "ng-upload.js"
     },
     "bootstrap": {
-      "stylesheets/bastion": "less/*.less",
-      "fonts/bastion": "dist/fonts/*"
+      "stylesheets/bastion/bootstrap/less": "less/*.less",
+      "fonts/bastion/bootstrap": "dist/fonts/*"
     },
     "font-awesome": {
       "stylesheets/bastion/font-awesome/less": "less/*.less",
       "stylesheets/bastion/font-awesome/scss": "scss/*.scss",
-      "fonts/bastion": "font/*"
+      "fonts/bastion/font-awesome/": "font/*"
+    },
+    "patternfly": {
+      "fonts/bastion/patternfly/": "dist/fonts",
+      "stylesheets/bastion/patternfly": "less/*.less"
     }
   }
 }

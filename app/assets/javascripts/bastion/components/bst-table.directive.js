@@ -147,7 +147,7 @@ angular.module('Bastion.components')
     }])
     .directive('bstTableColumn', ['$compile', function ($compile) {
         var sortIconTemplate = '<th ng-click="table.sortBy(column)">' +
-                                  '<i class="sort-icon" ng-show="table.resource.sort.by == column.id" ng-class="{\'icon-sort-down\': column.sortOrder == \'DESC\', \'icon-sort-up\': column.sortOrder == \'ASC\'}"></i>' +
+                                  '<i class="sort-icon" ng-show="table.resource.sort.by == column.id" ng-class="{\'fa fa-sort-down\': column.sortOrder == \'DESC\', \'fa fa-sort-up\': column.sortOrder == \'ASC\'}"></i>' +
                                '</th>';
         return {
             require: '^bstTableHead',
@@ -201,7 +201,7 @@ angular.module('Bastion.components')
         };
 
         activeRowTemplate = function (activeTest) {
-            return '<i class="icon-chevron-right selected-icon" ' +
+            return '<i class="fa fa-chevron-right selected-icon" ' +
                    'ng-show="' + activeTest  + ' "></i>';
         };
 
