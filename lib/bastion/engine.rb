@@ -32,7 +32,7 @@ module Bastion
     end
 
     initializer "angular_templates", :group => :all do |app|
-      app.config.angular_templates.ignore_prefix = '[bastion]*\/+'
+      app.config.angular_templates.ignore_prefix = %w([bastion]*\/+)
     end
 
     rake_tasks do

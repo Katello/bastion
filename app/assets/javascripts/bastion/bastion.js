@@ -22,6 +22,7 @@
 //= require "bastion/angular-blocks/angular-blocks"
 //= require_tree "../../../../vendor/assets/javascripts/bastion/angular-bootstrap"
 //= require "bastion/angular-animate/angular-animate"
+//= require "angular-rails-templates"
 
 //= require "bastion/bastion.module"
 //= require "bastion/bastion-resource.factory"
