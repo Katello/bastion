@@ -36,7 +36,32 @@ angular.module('Bastion.components').directive('pathSelector',
         templateUrl: 'components/views/path-selector.html',
         link: function (scope, element, attrs, ngModel) {
             var activeItemId, convertPathObjects, selectionRequired;
-            selectionRequired = attrs['selectionRequired'] ? attrs['selectionRequired'] === 'true' : true;
+            selectionRequired = attrs.selectionRequired ? attrs.selectionRequired === 'true' : true;
+
+            function forEachItem(callback) {
+                angular.forEach(scope.paths, function (path) {
+                    angular.forEach(path, function (item) {
+                        callback(item);
+                    });
+                });
+            }
+
+            function selectById(id) {
+                forEachItem(function (item) {
+                    if (item.id === id) {
+                        ngModel.$setViewValue(item);
+                        item.selected = true;
+                    }
+                });
+            }
+
+            function unselectActive() {
+                forEachItem(function (item) {
+                    if (item.id === activeItemId) {
+                        item.selected = false;
+                    }
+                });
+            }
 
             scope.itemChanged = function (item) {
                 if (item && scope.mode === 'singleSelect') {
@@ -52,7 +77,7 @@ angular.module('Bastion.components').directive('pathSelector',
 
             convertPathObjects = function (paths) {
                 if (scope.pathAttribute) {
-                    paths =  _.pluck(paths, scope.pathAttribute);
+                    paths = _.pluck(paths, scope.pathAttribute);
                 }
                 return paths;
             };
@@ -79,31 +104,6 @@ angular.module('Bastion.components').directive('pathSelector',
                     item.disabled = disable;
                 });
             });
-
-            function selectById(id) {
-                forEachItem(function (item) {
-                    if (item.id === id) {
-                        ngModel.$setViewValue(item);
-                        item.selected = true;
-                    }
-                });
-            }
-
-            function unselectActive() {
-                forEachItem(function (item) {
-                    if (item.id === activeItemId) {
-                        item.selected = false;
-                    }
-                });
-            }
-
-            function forEachItem(callback) {
-                angular.forEach(scope.paths, function (path) {
-                    angular.forEach(path, function (item) {
-                        callback(item);
-                    });
-                });
-            }
         }
     };
 });

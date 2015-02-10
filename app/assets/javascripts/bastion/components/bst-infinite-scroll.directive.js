@@ -38,7 +38,8 @@ angular.module('Bastion.components').directive('bstInfiniteScroll', [function ()
         },
         controller: function ($scope, $element) {
 
-            var result, raw = $element[0];
+            var result, getScrollHeight, isPromise, loadUntilScroll,
+                raw = $element[0];
 
             $element.bind('scroll', function () {
                 var sliderPosition = raw.scrollTop + raw.offsetHeight;
@@ -47,24 +48,25 @@ angular.module('Bastion.components').directive('bstInfiniteScroll', [function ()
                 }
             });
 
-            var getScrollHeight = function () {
+            getScrollHeight = function () {
                 var scrollHeight = 0;
                 $element.children().each(function () {
-                    scrollHeight = scrollHeight + $(this).get(0).scrollHeight;
+                    scrollHeight = scrollHeight + angular.element(this).get(0).scrollHeight;
                 });
                 return scrollHeight;
             };
 
-            var isPromise = function (promise) {
+            isPromise = function (promise) {
                 return promise && promise.hasOwnProperty('then');
             };
 
-            var loadUntilScroll = function () {
-                var result;
+            loadUntilScroll = function () {
+                var loadResult;
+
                 if (getScrollHeight() < $element.height()) {
-                    result = $scope.loadMoreFunction();
-                    if (isPromise(result)) {
-                        result.then(function () {
+                    loadResult = $scope.loadMoreFunction();
+                    if (isPromise(loadResult)) {
+                        loadResult.then(function () {
                             if (getScrollHeight() < $element.height()) {
                                 loadUntilScroll();
                             }
@@ -73,7 +75,7 @@ angular.module('Bastion.components').directive('bstInfiniteScroll', [function ()
                 }
             };
 
-            if (!$scope.skipInitialLoad && ($scope.data === undefined || $scope.data.length === 0)) {
+            if (!$scope.skipInitialLoad && (angular.isUndefined($scope.data) || $scope.data.length === 0)) {
                 result = $scope.loadMoreFunction();
                 if (isPromise(result)) {
                     result.then(loadUntilScroll);

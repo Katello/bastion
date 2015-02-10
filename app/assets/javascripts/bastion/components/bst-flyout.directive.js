@@ -12,7 +12,7 @@ angular.module('Bastion.components').directive('bstFlyout', function () {
         restrict: 'EA',
         replace: true,
         scope: {
-            'flyout' : '=bstFlyout'
+            'flyout': '=bstFlyout'
         },
         templateUrl: 'components/views/bst-flyout.html'
     };

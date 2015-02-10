@@ -33,18 +33,20 @@ angular.module('Bastion.components').directive('pageTitle', ['PageTitle', functi
             var title;
 
             return function (scope, iElem, iAttrs, ngModel) {
+                var unbind;
+
                 transclude(scope, function (clone) {
                     title = clone.text();
                 });
 
                 if (ngModel) {
-                    var unbind = scope.$watch(function () {
+                    unbind = scope.$watch(function () {
                         return ngModel.$viewValue;
                     }, function (model) {
                         unbind();
                         if (model.hasOwnProperty('$promise')) {
-                            model.$promise.then(function (model) {
-                                scope[scope.modelName] = model;
+                            model.$promise.then(function (data) {
+                                scope[scope.modelName] = data;
                                 PageTitle.setTitle(title, scope);
                             });
                         } else {

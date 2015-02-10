@@ -30,10 +30,9 @@ angular.module('Bastion.components').directive('typeaheadEmpty', function () {
         require: 'ngModel',
         link: function (scope, element, attrs, modelCtrl) {
             element.bind('focus', function () {
-                if (modelCtrl.$viewValue === undefined || modelCtrl.$viewValue === '') {
+                if (angular.isUndefined(modelCtrl.$viewValue) || modelCtrl.$viewValue === '') {
                     modelCtrl.$setViewValue(' ');
-                }
-                else {
+                } else {
                     modelCtrl.$setViewValue(modelCtrl.$viewValue);
                 }
             });

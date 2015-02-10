@@ -38,7 +38,7 @@ angular.module('Bastion.components').directive('bstFormButtons', function () {
         },
         link: function (scope, iElement, iAttrs, controller) {
 
-            if (scope.working === undefined) {
+            if (angular.isUndefined(scope.working)) {
                 scope.working = false;
             }
 

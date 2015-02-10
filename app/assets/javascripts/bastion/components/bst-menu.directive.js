@@ -13,7 +13,7 @@ angular.module('Bastion.components').directive('bstMenu', ['$window', function (
         replace: true,
         scope: {
             'menu': '=bstMenu',
-            'compact' : '@'
+            'compact': '@'
         },
         templateUrl: 'components/views/bst-menu.html',
         controller: ['$scope', function ($scope) {
@@ -38,11 +38,11 @@ angular.module('Bastion.components').directive('bstMenu', ['$window', function (
         link: function (scope, element, attrs) {
             var elementOriginalOffset;
 
-            if (attrs.compact !== undefined) {
-                elementOriginalOffset = $(element).offset().top;
+            if (angular.isDefined(attrs.compact)) {
+                elementOriginalOffset = angular.element(element).offset().top;
 
                 angular.element($window).bind('scroll', function () {
-                    var windowScrollTop = $($window).scrollTop();
+                    var windowScrollTop = angular.element($window).scrollTop();
 
                     if (windowScrollTop > elementOriginalOffset + 2) {
                         element.parent().addClass('compact');

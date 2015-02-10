@@ -37,6 +37,27 @@ angular.module('Bastion.components')
     .controller('BstEditController', ['$scope', '$filter', function ($scope, $filter) {
         var previousValue;
 
+        function handleAction(action) {
+            $scope.editMode = false;
+            $scope.workingMode = true;
+
+            if (angular.isDefined(action) && action.hasOwnProperty('then')) {
+                action.then(
+                    function () {
+                        $scope.updateDisplay($scope.model);
+                        $scope.workingMode = false;
+                    },
+                    function () {
+                        $scope.workingMode = false;
+                        $scope.editMode = true;
+                    }
+                );
+
+            } else {
+                $scope.workingMode = false;
+            }
+        }
+
         $scope.edit = function () {
             var options;
 
@@ -44,11 +65,11 @@ angular.module('Bastion.components')
                 $scope.editMode = true;
                 previousValue = $scope.model;
 
-                if ($scope.handleOptions !== undefined) {
+                if (angular.isDefined($scope.handleOptions)) {
                     options = $scope.handleOptions();
                 }
 
-                if (options !== undefined) {
+                if (angular.isDefined(options)) {
                     if (options.hasOwnProperty('then')) {
                         $scope.workingMode = true;
                         $scope.editMode = false;
@@ -93,27 +114,6 @@ angular.module('Bastion.components')
             handleAction(action);
         };
 
-        function handleAction(action) {
-            $scope.editMode = false;
-            $scope.workingMode = true;
-
-            if (action !== undefined && action.hasOwnProperty('then')) {
-                action.then(
-                    function () {
-                        $scope.updateDisplay($scope.model);
-                        $scope.workingMode = false;
-                    },
-                    function () {
-                        $scope.workingMode = false;
-                        $scope.editMode = true;
-                    }
-                );
-
-            } else {
-                $scope.workingMode = false;
-            }
-        }
-
         $scope.cancel = function () {
             $scope.editMode = false;
             $scope.disableSave = false;
@@ -132,7 +132,7 @@ angular.module('Bastion.components')
 
             handleDelete = $scope.handleDelete({ value: $scope.model });
 
-            if (handleDelete !== undefined && handleDelete.hasOwnProperty('then')) {
+            if (angular.isDefined(handleDelete) && handleDelete.hasOwnProperty('then')) {
 
                 handleDelete.then(
                     function () {
@@ -169,7 +169,7 @@ angular.module('Bastion.components')
         // Watch the model and displayed values for changes
         // and update the displayed value accordingly.
         $scope.$watch('model + displayValue', function (newValue) {
-            if (newValue !== undefined) {
+            if (angular.isDefined(newValue)) {
                 $scope.updateDisplay($scope.model);
             }
         });
@@ -255,7 +255,7 @@ angular.module('Bastion.components')
             },
             templateUrl: 'components/views/bst-edit-select.html',
             compile: function (element, attrs) {
-                var optionsFormat = attrs['optionsFormat'];
+                var optionsFormat = attrs.optionsFormat;
                 if (optionsFormat) {
                     element.find('select').attr('ng-options', optionsFormat);
                 }
@@ -341,7 +341,7 @@ angular.module('Bastion.components')
 
             handleAdd = $scope.handleAdd(value);
 
-            if (handleAdd !== undefined && handleAdd.hasOwnProperty('then')) {
+            if (angular.isDefined(handleAdd) && handleAdd.hasOwnProperty('then')) {
 
                 handleAdd.then(
                     function () {

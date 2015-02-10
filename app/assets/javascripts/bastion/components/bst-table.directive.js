@@ -112,16 +112,16 @@ angular.module('Bastion.components')
             scope: true,
             controller: 'BstTableHeadController',
             compile: function (tElement, tAttrs) {
-                if (tAttrs.rowSelect !== undefined) {
+                if (angular.isDefined(tAttrs.rowSelect)) {
                     tElement.prepend(rowSelectTemplate());
-                } else if (tAttrs.rowChoice !== undefined) {
+                } else if (angular.isDefined(tAttrs.rowChoice)) {
                     tElement.prepend(rowChoiceTemplate());
                 }
 
                 return function (scope, element, attrs, bstTableController) {
-                    if (tAttrs.rowSelect !== undefined) {
+                    if (angular.isDefined(tAttrs.rowSelect)) {
                         scope.table.rowSelect = true;
-                    } else  if (tAttrs.rowChoice !== undefined) {
+                    } else if (angular.isDefined(tAttrs.rowChoice)) {
                         scope.table.rowChoice = true;
                     }
 
@@ -156,19 +156,21 @@ angular.module('Bastion.components')
             controller: ['$scope', function ($scope) {
                 $scope.column = { show: true };
             }],
-            compile: function (element, attributes) {
-                if (attributes.hasOwnProperty("sortable")) {
-                    var newElement = angular.element(sortIconTemplate);
-                    newElement.find('.sort-icon').before(element.html());
+            compile: function (tElement, tAttributes) {
+                var newElement;
+
+                if (tAttributes.hasOwnProperty("sortable")) {
+                    newElement = angular.element(sortIconTemplate);
+                    newElement.find('.sort-icon').before(tElement.html());
                     newElement.addClass('sortable');
-                    newElement.addClass(element.attr('class'));
-                    element.replaceWith(newElement);
+                    newElement.addClass(tElement.attr('class'));
+                    tElement.replaceWith(newElement);
                 }
                 return function (scope, element, attributes, bstTableHeadController) {
                     if (attributes.hasOwnProperty("sortable")) {
                         $compile(element)(scope);
                     }
-                    scope.column.id = attributes["bstTableColumn"];
+                    scope.column.id = attributes.bstTableColumn;
                     bstTableHeadController.addColumn(scope.column);
 
                     scope.$watch('column.show', function (show) {
@@ -202,7 +204,7 @@ angular.module('Bastion.components')
 
         activeRowTemplate = function (activeTest) {
             return '<i class="fa fa-chevron-right selected-icon" ' +
-                   'ng-show="' + activeTest  + ' "></i>';
+                   'ng-show="' + activeTest + ' "></i>';
         };
 
         return {
@@ -212,19 +214,19 @@ angular.module('Bastion.components')
             controller: 'BstTableRowController',
             compile: function (tElement, tAttrs) {
 
-                if (tAttrs.activeRow !== undefined) {
+                if (angular.isDefined(tAttrs.activeRow)) {
                     tElement.find('td:first-child').append(activeRowTemplate(tAttrs.activeRow));
                 }
 
-                if (tAttrs.rowSelect !== undefined) {
+                if (angular.isDefined(tAttrs.rowSelect)) {
                     tElement.prepend(rowSelectTemplate(tAttrs.rowSelect));
                 }
 
-                if (tAttrs.rowChoice !== undefined) {
+                if (angular.isDefined(tAttrs.rowChoice)) {
                     tElement.prepend(rowChoiceTemplate(tAttrs.rowChoice));
                 }
 
-                if (tAttrs.activeRow !== undefined) {
+                if (angular.isDefined(tAttrs.activeRow)) {
                     tElement.find('td').attr('ng-class', '{ "active-row": ' + tAttrs.activeRow + ' }');
                 }
 

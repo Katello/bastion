@@ -40,7 +40,7 @@ angular.module('Bastion.components').directive('bstAlerts', function () {
             scope.types = ['success', 'info', 'warning', 'danger'];
 
             function handleMessages(type, messages) {
-                scope.alerts[type] =  messages;
+                scope.alerts[type] = messages;
             }
 
             scope.$watch('successMessages', function (messages) {

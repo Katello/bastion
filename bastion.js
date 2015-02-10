@@ -4,6 +4,7 @@ module.exports = function (grunt) {
     var configs = requireDir('./grunt');
 
     grunt.loadTasks(__dirname + '/node_modules/grunt-contrib-jshint/tasks');
+    grunt.loadTasks(__dirname + '/node_modules/grunt-eslint/tasks');
     grunt.loadTasks(__dirname + '/node_modules/grunt-htmlhint/tasks');
     grunt.loadTasks(__dirname + '/node_modules/grunt-bower-task/tasks');
     grunt.loadTasks(__dirname + '/node_modules/grunt-karma/tasks');

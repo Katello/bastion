@@ -25,10 +25,10 @@ angular.module('Bastion.components.formatters').filter('booleanToYesNo', ['trans
         yesValue = yesValue || translate("Yes");
         noValue = noValue || translate("No");
 
-        if (boolValue !== '' && boolValue !== null && boolValue !== undefined) {
+        if (boolValue !== '' && boolValue !== null && angular.isDefined(boolValue)) {
             return (boolValue === true) ? yesValue : noValue;
-        } else {
-            return "";
         }
+
+        return "";
     };
 }]);
