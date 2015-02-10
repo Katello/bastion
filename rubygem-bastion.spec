@@ -15,7 +15,7 @@
 
 Summary:    UI plugin for Foreman providing AngularJS structure
 Name:       %{?scl_prefix}rubygem-%{gem_name}
-Version:    0.2.3
+Version:    0.2.4
 Release:    1%{?dist}
 Group:      Applications/System
 License:    GPLv2+
@@ -107,6 +107,7 @@ ln -s %{foreman_assets_plugin} %{buildroot}%{foreman_dir}/public/assets/bastion
 
 %exclude %{gem_instdir}/test
 %exclude %{gem_instdir}/.jshintrc
+%exclude %{gem_instdir}/eslint.yaml
 %exclude %{gem_instdir}/grunt
 %exclude %{gem_instdir}/bastion.js
 %exclude %{gem_instdir}/Gruntfile.js
