@@ -32,8 +32,7 @@ angular.module('Bastion.components').directive('typeaheadEmpty', function () {
             element.bind('focus', function () {
                 if (modelCtrl.$viewValue === undefined || modelCtrl.$viewValue === '') {
                     modelCtrl.$setViewValue(' ');
-                }
-                else {
+                } else {
                     modelCtrl.$setViewValue(modelCtrl.$viewValue);
                 }
             });

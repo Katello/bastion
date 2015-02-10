@@ -11,7 +11,7 @@ angular.module('Bastion.components').directive('bstDropdown', function () {
         restrict: 'EA',
         replace: true,
         scope: {
-            'dropdown' : '=bstDropdown'
+            'dropdown': '=bstDropdown'
         },
         templateUrl: 'components/views/bst-dropdown.html',
 

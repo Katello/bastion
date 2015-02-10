@@ -48,10 +48,9 @@ angular.module('Bastion.auth').config(['$httpProvider', '$provide',
                                 message = translate('You are not authorized to perform this action.');
                                 response.data.errors = [message];
                                 response.data.displayMessage = message;
-                                return $q.reject(response);
-                            } else {
-                                return $q.reject(response);
                             }
+
+                            return $q.reject(response);
                         }
                     };
                 }]

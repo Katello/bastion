@@ -16,16 +16,9 @@ angular.module('Bastion.components').directive('nutupaneTable', ['$compile', '$w
             var originalTable, clonedTable, clonedThs,
                 windowElement = angular.element($window);
 
-            scope.$on("$stateChangeSuccess", function (event, newState, newParams, oldState) {
-                // Only clone the table if the collapsed value changed or it's the first time.
-                if (newState.collapsed !== oldState.collapsed || !oldState.name) {
-                    buildTable();
-                } else {
-                    element.find("table:not(.cloned-nutupane-table)").find('thead').hide();
-                }
-            });
-
             function buildTable() {
+                var rowSelect;
+
                 element.find('.cloned-nutupane-table').remove();
 
                 originalTable = element.find('table');
@@ -42,7 +35,7 @@ angular.module('Bastion.components').directive('nutupaneTable', ['$compile', '$w
                 $compile(element.find('.cloned-nutupane-table'))(scope);
 
                 // Need to remove duplicate row-select created by second $compile
-                var rowSelect = element.find(".row-select")[0];
+                rowSelect = element.find(".row-select")[0];
                 if (rowSelect) {
                     angular.element(rowSelect).remove();
                 }
@@ -68,6 +61,15 @@ angular.module('Bastion.components').directive('nutupaneTable', ['$compile', '$w
                     windowElement.trigger('resize');
                 });
             }
+
+            scope.$on("$stateChangeSuccess", function (event, newState, newParams, oldState) {
+                // Only clone the table if the collapsed value changed or it's the first time.
+                if (newState.collapsed !== oldState.collapsed || !oldState.name) {
+                    buildTable();
+                } else {
+                    element.find("table:not(.cloned-nutupane-table)").find('thead').hide();
+                }
+            });
 
             buildTable();
         }

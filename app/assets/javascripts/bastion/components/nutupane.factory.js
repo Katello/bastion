@@ -116,10 +116,11 @@ angular.module('Bastion.components').factory('Nutupane',
             };
 
             self.table.autocomplete = function (term) {
-                var data, promise, params;
+                var data, promise, localParams;
+
                 if (resource.autocomplete) {
-                    params = self.getParams();
-                    params.search = term;
+                    localParams = self.getParams();
+                    localParams.search = term;
                     data = resource.autocomplete(params);
                 } else {
                     data = self.table.fetchAutocomplete(term);
@@ -127,13 +128,12 @@ angular.module('Bastion.components').factory('Nutupane',
 
                 promise = data.$promise;
                 if (promise) {
-                    return promise.then(function (data) {
-                        return self.table.transformScopedSearch(data);
+                    return promise.then(function (response) {
+                        return self.table.transformScopedSearch(response);
                     });
                 }
-                else {
-                    return data;
-                }
+
+                return data;
             };
 
             self.table.transformScopedSearch = function (results) {
@@ -292,7 +292,7 @@ angular.module('Bastion.components').factory('Nutupane',
             self.table.nextPage = function () {
                 var table = self.table;
                 if (table.working || !table.hasMore()) {
-                    return;
+                    return false;
                 }
                 return self.query();
             };
@@ -300,12 +300,13 @@ angular.module('Bastion.components').factory('Nutupane',
             self.table.hasMore = function () {
                 var length = self.table.rows.length,
                     subtotal = self.table.resource.subtotal,
-                    hasMore = false;
+                    hasMore = false,
+                    justBegun;
 
                 if (!subtotal) {
                     hasMore = false;
                 } else {
-                    var justBegun = (length === 0 && subtotal !== 0);
+                    justBegun = (length === 0 && subtotal !== 0);
                     hasMore = (length < subtotal) || justBegun;
                 }
                 return hasMore;

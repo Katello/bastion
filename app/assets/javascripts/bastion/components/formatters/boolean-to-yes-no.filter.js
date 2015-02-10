@@ -27,8 +27,8 @@ angular.module('Bastion.components.formatters').filter('booleanToYesNo', ['trans
 
         if (boolValue !== '' && boolValue !== null && boolValue !== undefined) {
             return (boolValue === true) ? yesValue : noValue;
-        } else {
-            return "";
         }
+
+        return "";
     };
 }]);

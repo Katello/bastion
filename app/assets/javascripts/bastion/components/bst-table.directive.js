@@ -121,7 +121,7 @@ angular.module('Bastion.components')
                 return function (scope, element, attrs, bstTableController) {
                     if (tAttrs.rowSelect !== undefined) {
                         scope.table.rowSelect = true;
-                    } else  if (tAttrs.rowChoice !== undefined) {
+                    } else if (tAttrs.rowChoice !== undefined) {
                         scope.table.rowChoice = true;
                     }
 
@@ -156,19 +156,21 @@ angular.module('Bastion.components')
             controller: ['$scope', function ($scope) {
                 $scope.column = { show: true };
             }],
-            compile: function (element, attributes) {
-                if (attributes.hasOwnProperty("sortable")) {
-                    var newElement = angular.element(sortIconTemplate);
-                    newElement.find('.sort-icon').before(element.html());
+            compile: function (tElement, tAttributes) {
+                var newElement;
+
+                if (tAttributes.hasOwnProperty("sortable")) {
+                    newElement = angular.element(sortIconTemplate);
+                    newElement.find('.sort-icon').before(tElement.html());
                     newElement.addClass('sortable');
-                    newElement.addClass(element.attr('class'));
-                    element.replaceWith(newElement);
+                    newElement.addClass(tElement.attr('class'));
+                    tElement.replaceWith(newElement);
                 }
                 return function (scope, element, attributes, bstTableHeadController) {
                     if (attributes.hasOwnProperty("sortable")) {
                         $compile(element)(scope);
                     }
-                    scope.column.id = attributes["bstTableColumn"];
+                    scope.column.id = attributes.bstTableColumn;
                     bstTableHeadController.addColumn(scope.column);
 
                     scope.$watch('column.show', function (show) {
@@ -202,7 +204,7 @@ angular.module('Bastion.components')
 
         activeRowTemplate = function (activeTest) {
             return '<i class="fa fa-chevron-right selected-icon" ' +
-                   'ng-show="' + activeTest  + ' "></i>';
+                   'ng-show="' + activeTest + ' "></i>';
         };
 
         return {

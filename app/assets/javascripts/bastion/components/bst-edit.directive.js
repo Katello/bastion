@@ -37,6 +37,27 @@ angular.module('Bastion.components')
     .controller('BstEditController', ['$scope', '$filter', function ($scope, $filter) {
         var previousValue;
 
+        function handleAction(action) {
+            $scope.editMode = false;
+            $scope.workingMode = true;
+
+            if (action !== undefined && action.hasOwnProperty('then')) {
+                action.then(
+                    function () {
+                        $scope.updateDisplay($scope.model);
+                        $scope.workingMode = false;
+                    },
+                    function () {
+                        $scope.workingMode = false;
+                        $scope.editMode = true;
+                    }
+                );
+
+            } else {
+                $scope.workingMode = false;
+            }
+        }
+
         $scope.edit = function () {
             var options;
 
@@ -92,27 +113,6 @@ angular.module('Bastion.components')
             var action = $scope.handleRemove({ value: $scope.model });
             handleAction(action);
         };
-
-        function handleAction(action) {
-            $scope.editMode = false;
-            $scope.workingMode = true;
-
-            if (action !== undefined && action.hasOwnProperty('then')) {
-                action.then(
-                    function () {
-                        $scope.updateDisplay($scope.model);
-                        $scope.workingMode = false;
-                    },
-                    function () {
-                        $scope.workingMode = false;
-                        $scope.editMode = true;
-                    }
-                );
-
-            } else {
-                $scope.workingMode = false;
-            }
-        }
 
         $scope.cancel = function () {
             $scope.editMode = false;
@@ -255,7 +255,7 @@ angular.module('Bastion.components')
             },
             templateUrl: 'components/views/bst-edit-select.html',
             compile: function (element, attrs) {
-                var optionsFormat = attrs['optionsFormat'];
+                var optionsFormat = attrs.optionsFormat;
                 if (optionsFormat) {
                     element.find('select').attr('ng-options', optionsFormat);
                 }

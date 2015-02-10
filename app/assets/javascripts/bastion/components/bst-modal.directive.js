@@ -43,8 +43,8 @@ angular.module('Bastion.components').directive('bstModal',
 
                 modalController = ['$scope', '$modalInstance', 'model', function ($scope, $modalInstance, model) {
                     $scope[scope.modelName] = model;
-                    $scope['modalHeader'] = scope.modalHeader;
-                    $scope['modalBody'] = scope.modalBody;
+                    $scope.modalHeader = scope.modalHeader;
+                    $scope.modalBody = scope.modalBody;
 
                     $scope.ok = function () {
                         $modalInstance.close();

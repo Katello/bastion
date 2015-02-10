@@ -13,7 +13,7 @@ angular.module('Bastion.components').directive('bstMenu', ['$window', function (
         replace: true,
         scope: {
             'menu': '=bstMenu',
-            'compact' : '@'
+            'compact': '@'
         },
         templateUrl: 'components/views/bst-menu.html',
         controller: ['$scope', function ($scope) {

@@ -44,7 +44,7 @@
             scope: true,
             link: function (scope, element, attrs) {
                 attrs.ngIf = function () {
-                    return FeatureFlag.featureEnabled(attrs['bstFeatureFlag']);
+                    return FeatureFlag.featureEnabled(attrs.bstFeatureFlag);
                 };
 
                 ngIf.link.apply(ngIf, arguments);

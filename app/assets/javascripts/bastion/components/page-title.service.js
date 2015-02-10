@@ -26,8 +26,10 @@ angular.module('Bastion.components').service('PageTitle', ['$window', '$interpol
         this.titles = [];
 
         this.setTitle = function (title, locals) {
+            var interpolated;
+
             if (title) {
-                var interpolated = $interpolate(title);
+                interpolated = $interpolate(title);
 
                 $window.document.title = interpolated(locals);
                 this.titles.push($window.document.title);

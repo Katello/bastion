@@ -34,9 +34,9 @@ angular.module('Bastion.menu').service('MenuExpander', [function () {
     this.getMenu = function (menuName) {
         if (this.menu.hasOwnProperty(menuName)) {
             return this.menu[menuName];
-        } else {
-            return [];
         }
+
+        return [];
     };
 
     this.setMenu = function (menuName, items) {
