@@ -112,16 +112,16 @@ angular.module('Bastion.components')
             scope: true,
             controller: 'BstTableHeadController',
             compile: function (tElement, tAttrs) {
-                if (tAttrs.rowSelect !== undefined) {
+                if (angular.isDefined(tAttrs.rowSelect)) {
                     tElement.prepend(rowSelectTemplate());
-                } else if (tAttrs.rowChoice !== undefined) {
+                } else if (angular.isDefined(tAttrs.rowChoice)) {
                     tElement.prepend(rowChoiceTemplate());
                 }
 
                 return function (scope, element, attrs, bstTableController) {
-                    if (tAttrs.rowSelect !== undefined) {
+                    if (angular.isDefined(tAttrs.rowSelect)) {
                         scope.table.rowSelect = true;
-                    } else if (tAttrs.rowChoice !== undefined) {
+                    } else if (angular.isDefined(tAttrs.rowChoice)) {
                         scope.table.rowChoice = true;
                     }
 
@@ -214,19 +214,19 @@ angular.module('Bastion.components')
             controller: 'BstTableRowController',
             compile: function (tElement, tAttrs) {
 
-                if (tAttrs.activeRow !== undefined) {
+                if (angular.isDefined(tAttrs.activeRow)) {
                     tElement.find('td:first-child').append(activeRowTemplate(tAttrs.activeRow));
                 }
 
-                if (tAttrs.rowSelect !== undefined) {
+                if (angular.isDefined(tAttrs.rowSelect)) {
                     tElement.prepend(rowSelectTemplate(tAttrs.rowSelect));
                 }
 
-                if (tAttrs.rowChoice !== undefined) {
+                if (angular.isDefined(tAttrs.rowChoice)) {
                     tElement.prepend(rowChoiceTemplate(tAttrs.rowChoice));
                 }
 
-                if (tAttrs.activeRow !== undefined) {
+                if (angular.isDefined(tAttrs.activeRow)) {
                     tElement.find('td').attr('ng-class', '{ "active-row": ' + tAttrs.activeRow + ' }');
                 }
 

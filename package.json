@@ -17,7 +17,8 @@
     "generator-bastion": "~0.1.2",
     "grunt-angular-gettext": "~0.2.15",
     "grunt-eslint": "~6.0.0",
-    "eslint": "~0.14.1"
+    "eslint": "~0.14.1",
+    "eslint-plugin-angular": "0.0.3"
   },
   "engines": {
     "node": ">=0.8.0"

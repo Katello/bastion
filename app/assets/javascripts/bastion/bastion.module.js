@@ -47,7 +47,7 @@ angular.module('Bastion').config(
 
         $httpProvider.defaults.headers.common = {
             Accept: 'application/json, text/plain, version=2; */*',
-            'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content')
+            'X-CSRF-TOKEN': angular.element('meta[name=csrf-token]').attr('content')
         };
 
         $urlRouterProvider.rule(function ($injector, $location) {
@@ -81,7 +81,7 @@ angular.module('Bastion').config(
             return {
                 request: function (config) {
                     if (config.url.indexOf('.html') !== -1) {
-                        if ($templateCache.get(config.url) === undefined) {
+                        if (angular.isUndefined($templateCache.get(config.url))) {
                             config.url = '/' + config.url;
                         }
                     }
@@ -138,7 +138,7 @@ angular.module('Bastion').run(['$rootScope', '$state', '$stateParams', 'gettextC
         };
 
         $rootScope.stateIncludes = function (state, params) {
-            if (params !== undefined) {
+            if (angular.isDefined(params)) {
                 angular.forEach(params, function (value, key) {
                     params[key] = value.toString();
                 });

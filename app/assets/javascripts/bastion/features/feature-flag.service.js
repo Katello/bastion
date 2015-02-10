@@ -48,7 +48,7 @@
          * @returns {Boolean}
          */
         this.featureEnabled = function (flag) {
-            return (featureFlags[flag] === undefined) ? true : featureFlags[flag].enabled;
+            return angular.isUndefined(featureFlags[flag]) ? true : featureFlags[flag].enabled;
         };
 
         /**
@@ -83,9 +83,9 @@
         this.addStates = function (feature, states) {
             feature = featureFlags[feature];
 
-            if (feature === undefined) {
+            if (angular.isUndefined(feature)) {
                 feature = {states: []};
-            } else if (feature.states === undefined) {
+            } else if (angular.isUndefined(undefined)) {
                 feature.states = [];
             }
 

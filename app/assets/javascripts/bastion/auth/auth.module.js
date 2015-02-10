@@ -75,7 +75,7 @@ angular.module('Bastion.auth').run(['$rootScope', '$window', 'Authorization',
     function ($rootScope, $window, Authorization) {
         $rootScope.$on('$stateChangeStart', function (event, toState) {
             var permission = toState.permission;
-            if (permission !== false && (permission === undefined || Authorization.denied(permission))) {
+            if (permission !== false && (angular.isUndefined(permission) || Authorization.denied(permission))) {
                 $window.location.href = '/katello/403';
             }
         });

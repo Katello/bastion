@@ -1,4 +1,7 @@
 ---
+plugins:
+  - angular
+
 env:
   browser: true
   node: true
@@ -39,3 +42,14 @@ rules:
   dot-notation:
     - 2
     - {"allowPattern": "^[a-z]+(_[a-z]+)+$"}
+
+  # Angular Plugin Rules
+  angular:
+    ng_angularelement: 2
+    ng_directive_name:
+      - 2
+      - bst
+    ng_empty_controller: 2
+    ng_module_name:
+      - 2
+      - Bastion

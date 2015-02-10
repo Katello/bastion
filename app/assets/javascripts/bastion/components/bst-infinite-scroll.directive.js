@@ -51,7 +51,7 @@ angular.module('Bastion.components').directive('bstInfiniteScroll', [function ()
             getScrollHeight = function () {
                 var scrollHeight = 0;
                 $element.children().each(function () {
-                    scrollHeight = scrollHeight + $(this).get(0).scrollHeight;
+                    scrollHeight = scrollHeight + angular.element(this).get(0).scrollHeight;
                 });
                 return scrollHeight;
             };
@@ -75,7 +75,7 @@ angular.module('Bastion.components').directive('bstInfiniteScroll', [function ()
                 }
             };
 
-            if (!$scope.skipInitialLoad && ($scope.data === undefined || $scope.data.length === 0)) {
+            if (!$scope.skipInitialLoad && (angular.isUndefined($scope.data) || $scope.data.length === 0)) {
                 result = $scope.loadMoreFunction();
                 if (isPromise(result)) {
                     result.then(loadUntilScroll);
