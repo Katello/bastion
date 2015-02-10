@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = "Description of Bastion."
 
   s.files = Dir["{app,config,lib,vendor,grunt}/**/*"] + 
-               ["Rakefile", "README.md", "Gruntfile.js", "package.json", "bower.json", "bastion.js",
+               ["Rakefile", "README.md", "Gruntfile.js", "package.json", "bower.json", "bastion.js", "eslint.yaml",
                 "LICENSE", ".jshintrc"]
 
   s.test_files = Dir["test/**/*"]
