@@ -39,13 +39,16 @@ angular.module('Bastion.components').directive('pathSelector',
             selectionRequired = attrs['selectionRequired'] ? attrs['selectionRequired'] === 'true' : true;
 
             scope.itemChanged = function (item) {
-                if (item && scope.mode === 'singleSelect') {
-                    if (item.selected || selectionRequired) {
-                        unselectActive();
-                        selectById(item.id);
-                        activeItemId = item.id;
-                    } else {
-                        ngModel.$setViewValue(undefined);
+                if (item && !item.disabled) {
+                    if (scope.mode === 'singleSelect') {
+                        item.selected = !item.selected;
+                        if (item.selected || selectionRequired) {
+                            unselectActive();
+                            selectById(item.id);
+                            activeItemId = item.id;
+                        } else {
+                            ngModel.$setViewValue(undefined);
+                        }
                     }
                 }
             };

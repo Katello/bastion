@@ -72,12 +72,9 @@ describe('Directive: pathSelector', function() {
     });
 
     it("should select both items if two items with the same id exist", function() {
-        var checkbox = element.find('.path-list:first .path-list-item:first').find('input');
+        var path = element.find('.path-list:first .path-list-item:first');
 
-        checkbox.trigger('click');
-        checkbox.attr('checked', 'checked');
-        checkbox.prop('checked', true);
-
+        path.trigger('click');
         expect(element.find('.path-list:eq(1)').find('.path-list-item:first input').is(':checked')).toBe(true);
     });
 
@@ -104,14 +101,15 @@ describe('Directive: pathSelector', function() {
     });
 
     it ("should not unselect by default", function () {
-        var checkbox = element.find('.path-list:first .path-list-item:first').find('input');
+        var path = element.find('.path-list:first .path-list-item:first'),
+            checkbox = path.find('input');
 
         expect(checkbox.is(':checked')).toBe(false);
 
-        checkbox.click();
+        path.click();
         expect(checkbox.is(':checked')).toBe(true);
 
-        checkbox.click();
+        path.click();
         expect(checkbox.is(':checked')).toBe(true);
     });
 
