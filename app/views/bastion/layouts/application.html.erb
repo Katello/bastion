@@ -27,9 +27,7 @@
       admin: <%= User.current.admin %>
     });
     angular.module('Bastion').value('markActiveMenu', mark_active_menu);
-    angular.module('Bastion').constant('BastionConfig', {
-        markTranslated: <%= SETTINGS[:mark_translated] || false %>
-    });
+    angular.module('Bastion').constant('BastionConfig', angular.fromJson('<%= Bastion.config.to_json.html_safe %>'));
   </script>
   <% Bastion.plugins.each do |name, plugin| %>
     <%= javascript_include_tag(plugin[:javascript]) %>

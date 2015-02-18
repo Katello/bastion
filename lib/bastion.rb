@@ -18,4 +18,16 @@ module Bastion
     @@plugins[plugin[:name]] = plugin
   end
 
+  def self.config
+    base_config = {
+      'markTranslated' => SETTINGS[:mark_translated] || false
+    }
+
+    Bastion.plugins.each do |name, plugin|
+      base_config.merge!(plugin[:config]) if plugin[:config]
+    end
+
+    base_config
+  end
+
 end
