@@ -25,58 +25,52 @@
 angular.module('Bastion.components').directive('bstModal',
     ['$templateCache', '$modal', function ($templateCache, $modal) {
     return {
-        // To be expanded when we add additional type of modals
-        templateUrl: 'components/views/bst-modal.html',
-        replace: true,
+        transclude: true,
         scope: {
             action: '&bstModal',
             modelName: '@model',
-            model: '=',
-            modalHeader: '@',
-            modalBody: '@',
-            modalConfirm: '@'
+            model: '='
         },
-        compile: function (element) {
-            return function (scope) {
-                var modalInstance, modalController, modalId;
+        link: function (scope, iElement, iAttrs, nullCtrl, transclude) {
+            var modalInstance, modalController, modalId;
 
-                modalId = 'bstModal%d.html'.replace('%d', Math.random().toString());
+            modalId = 'bstModal%d.html'.replace('%d', Math.random().toString());
 
-                modalController = ['$scope', '$modalInstance', 'model', function ($scope, $modalInstance, model) {
-                    $scope[scope.modelName] = model;
-                    $scope.modalHeader = scope.modalHeader;
-                    $scope.modalBody = scope.modalBody;
-                    $scope.modalConfirm = scope.modalConfirm;
+            modalController = ['$scope', '$modalInstance', 'model', function ($scope, $modalInstance, model) {
+                $scope[scope.modelName] = model;
 
-                    $scope.ok = function () {
-                        $modalInstance.close();
-                    };
-
-                    $scope.cancel = function () {
-                        $modalInstance.dismiss('cancel');
-                    };
-                }];
-
-                scope.openModal = function () {
-                    modalInstance = $modal.open({
-                        templateUrl: modalId,
-                        controller: modalController,
-                        resolve: {
-                            model: function () {
-                                return scope[scope.modelName];
-                            }
-                        }
-                    });
-
-                    modalInstance.result.then(function () {
-                        scope.action();
-                    });
+                $scope.ok = function () {
+                    $modalInstance.close();
                 };
 
-                scope.$parent.openModal = scope.openModal;
+                $scope.cancel = function () {
+                    $modalInstance.dismiss('cancel');
+                };
+            }];
 
-                $templateCache.put(modalId, element.html());
+            scope.openModal = function () {
+                modalInstance = $modal.open({
+                    templateUrl: modalId,
+                    controller: modalController,
+                    resolve: {
+                        model: function () {
+                            return scope[scope.modelName];
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function () {
+                    scope.action();
+                });
             };
+
+            scope.$parent.openModal = scope.openModal;
+
+            transclude(function (clone) {
+                var template = angular.element('<div extend-template="components/views/bst-modal.html"></div>');
+                template.append(clone);
+                $templateCache.put(modalId, template);
+            });
         }
     };
 }]);
