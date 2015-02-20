@@ -33,7 +33,8 @@ angular.module('Bastion.components').directive('bstModal',
             modelName: '@model',
             model: '=',
             modalHeader: '@',
-            modalBody: '@'
+            modalBody: '@',
+            modalConfirm: '@'
         },
         compile: function (element) {
             return function (scope) {
@@ -45,6 +46,7 @@ angular.module('Bastion.components').directive('bstModal',
                     $scope[scope.modelName] = model;
                     $scope.modalHeader = scope.modalHeader;
                     $scope.modalBody = scope.modalBody;
+                    $scope.modalConfirm = scope.modalConfirm;
 
                     $scope.ok = function () {
                         $modalInstance.close();
