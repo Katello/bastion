@@ -15,8 +15,9 @@ describe('Directive: bstModal', function() {
     var scope,
         compile,
         $modal,
+        $templateCache,
         $q,
-        translate,
+        modalId,
         testItem,
         element,
         elementScope;
@@ -28,12 +29,6 @@ describe('Directive: bstModal', function() {
             name: 'Test Name',
             taco: 'carnitas',
             delete: function() {}
-        };
-
-        translate = function() {
-            this.$get = function() {
-                return function() {};
-            };
         };
 
         $modal = {
@@ -50,25 +45,39 @@ describe('Directive: bstModal', function() {
             }
         };
 
-        $provide.provider('translateFilter', translate);
         $provide.provider('$modal', $modal);
     }));
 
-    beforeEach(inject(function(_$compile_, _$rootScope_, _$q_) {
+    beforeEach(inject(function(_$compile_, _$rootScope_, _$q_, _$templateCache_) {
         compile = _$compile_;
         scope = _$rootScope_;
         $q = _$q_;
+        $templateCache = _$templateCache_;
     }));
 
     beforeEach(function() {
-        element = angular.element(
-            '<span bst-modal="item.delete(item)" model="testItem">' +
-                '<p>Hello!</p></span>');
+        var html = '<span bst-modal="item.delete(item)">' +
+                     '<p data-block="modal-header">Header</p>' +
+                     '<p data-block="modal-body">Body</p>' +
+                   '</span>';
+
+        element = angular.element(html);
+        spyOn($templateCache, 'put').andCallThrough();
 
         compile(element)(scope);
         scope.$digest();
 
         elementScope = element.scope();
+        modalId = $templateCache.put.mostRecentCall.args[0];
+    });
+
+    it("uses angular-blocks to extend a modal template", function () {
+        var modal = $templateCache.get(modalId);
+
+        expect($templateCache.put).toHaveBeenCalled();
+        expect(modal.attr('extend-template')).toBe('components/views/bst-modal.html');
+        expect(modal.find('[data-block="modal-header"]').html()).toBe('Header');
+        expect(modal.find('[data-block="modal-body"]').html()).toBe('Body');
     });
 
     it("allows the opening of a modal dialog via bootstrap ui", function() {
