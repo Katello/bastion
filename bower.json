@@ -14,6 +14,7 @@
     "angular-gettext": "=1.0.0",
     "angular-ui-router": "=0.2.10",
     "angular-blocks": "~>0.1.8",
+    "angular-i18n": "1.3.13",
     "underscore": "=1.5.2",
     "ngUpload": "~0.5.5",
     "bootstrap": "~3.1.1",
@@ -64,6 +65,9 @@
     },
     "angular-animate": {
       "javascripts/bastion/angular-animate": "angular-animate.js"
+    },
+    "angular-i18n": {
+      "javascripts/bastion/angular-i18n": "*.js"
     },
     "angular-ui-router": {
       "javascripts/bastion/angular-ui-router": "release/angular-ui-router.js"
