@@ -65,8 +65,9 @@ angular.module('Bastion.components').directive('pathSelector',
 
             scope.itemChanged = function (item) {
                 if (item && !item.disabled) {
+                    item.selected = !item.selected;
+
                     if (scope.mode === 'singleSelect') {
-                        item.selected = !item.selected;
                         if (item.selected || selectionRequired) {
                             unselectActive();
                             selectById(item.id);
