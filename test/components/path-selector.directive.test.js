@@ -15,7 +15,8 @@ describe('Directive: pathSelector', function() {
     var scope,
         compile,
         paths,
-        element;
+        element,
+        elementScope;
 
     beforeEach(module(
         'Bastion.components',
@@ -72,9 +73,12 @@ describe('Directive: pathSelector', function() {
     });
 
     it("should select both items if two items with the same id exist", function() {
-        var path = element.find('.path-list:first .path-list-item:first');
+        var checkbox = element.find('.path-list:first .path-list-item:first').find('input');
 
-        path.trigger('click');
+        checkbox.trigger('click');
+        checkbox.attr('checked', 'checked');
+        checkbox.prop('checked', true);
+
         expect(element.find('.path-list:eq(1)').find('.path-list-item:first input').is(':checked')).toBe(true);
     });
 
@@ -101,15 +105,14 @@ describe('Directive: pathSelector', function() {
     });
 
     it ("should not unselect by default", function () {
-        var path = element.find('.path-list:first .path-list-item:first'),
-            checkbox = path.find('input');
+        var checkbox = element.find('.path-list:first .path-list-item:first').find('input');
 
         expect(checkbox.is(':checked')).toBe(false);
 
-        path.click();
+        checkbox.click();
         expect(checkbox.is(':checked')).toBe(true);
 
-        path.click();
+        checkbox.click();
         expect(checkbox.is(':checked')).toBe(true);
     });
 

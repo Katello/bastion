@@ -64,17 +64,13 @@ angular.module('Bastion.components').directive('pathSelector',
             }
 
             scope.itemChanged = function (item) {
-                if (item && !item.disabled) {
-                    item.selected = !item.selected;
-
-                    if (scope.mode === 'singleSelect') {
-                        if (item.selected || selectionRequired) {
-                            unselectActive();
-                            selectById(item.id);
-                            activeItemId = item.id;
-                        } else {
-                            ngModel.$setViewValue(undefined);
-                        }
+                if (item && scope.mode === 'singleSelect') {
+                    if (item.selected || selectionRequired) {
+                        unselectActive();
+                        selectById(item.id);
+                        activeItemId = item.id;
+                    } else {
+                        ngModel.$setViewValue(undefined);
                     }
                 }
             };
