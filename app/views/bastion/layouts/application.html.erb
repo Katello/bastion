@@ -28,7 +28,7 @@
     angular.module('Bastion').value('Permissions', angular.fromJson('<%= User.current.cached_roles.collect { |role| role.permissions }.flatten.to_json.html_safe %>'));
     angular.module('Bastion').value('CurrentUser', {
       id: <%= User.current.id %>,
-      admin: <%= User.current.admin %>
+      admin: <%= User.current.admin || User.current.usergroups.any? { |group| group.admin } %>
     });
     angular.module('Bastion').value('markActiveMenu', mark_active_menu);
     angular.module('Bastion').constant('BastionConfig', angular.fromJson('<%= Bastion.config.to_json.html_safe %>'));
