@@ -17,9 +17,8 @@
 
 <% content_for(:javascripts) do %>
   <%= javascript_include_tag 'bastion/bastion' %>
-  <% localization_path = "bastion/angular-i18n/angular-locale_#{I18n.locale}.js" %>
-  <% if File.exist?("#{Bastion::Engine.root}/vendor/assets/javascripts/#{localization_path}") %>
-    <%= javascript_include_tag(localization_path) %>
+  <% if File.exist?("#{Bastion::Engine.root}/vendor/assets/javascripts/#{Bastion.localization_path(I18n.locale)}") %>
+    <%= javascript_include_tag(Bastion.localization_path(I18n.locale)) %>
   <% end %>
   <script type="text/javascript">
     angular.module('Bastion.features').value('FeatureSettings', angular.fromJson(<%= SETTINGS[:features].nil? ? {} : SETTINGS[:features].to_json.html_safe %>));

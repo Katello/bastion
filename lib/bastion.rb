@@ -30,4 +30,8 @@ module Bastion
     base_config
   end
 
+  def self.localization_path(locale)
+    "bastion/angular-i18n/angular-locale_#{locale}.js"
+  end
+
 end

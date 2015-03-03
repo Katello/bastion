@@ -27,8 +27,15 @@ module Bastion
 
       SETTINGS[:bastion][:assets][:precompile] = [
         'bastion/bastion.css',
-        'bastion/bastion.js'
+        'bastion/bastion.js',
       ]
+
+      locale_files = Dir.glob("#{Bastion::Engine.root}/vendor/assets/javascripts/#{Bastion.localization_path("*")}")
+      locale_files.map do |file|
+        file.gsub!("#{Bastion::Engine.root}/vendor/assets/javascripts/", "")
+      end
+
+      SETTINGS[:bastion][:assets][:precompile].concat(locale_files)
     end
 
     initializer "angular_templates", :group => :all do |app|
