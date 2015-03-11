@@ -15,11 +15,4 @@ module.exports = function (grunt) {
     var bastion = require('./bastion.js');
 
     bastion(grunt);
-
-    grunt.registerTask('ci', [
-        'eslint',
-        'jshint',
-        'htmlhint',
-        'karma:ci'
-    ]);
 };
