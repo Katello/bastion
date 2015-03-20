@@ -57,7 +57,11 @@
       <span ng-hide="$root.$state.current.collapsed">{{ "Loading..." | translate }}</span>
     </div>
 
-    <div bst-container-scroll bst-infinite-scroll="table.nextPage()" data="table.rows">
+    <p bst-alert="info" ng-show="table.rows.length === 0 && !table.working">
+      <span data-block="no-rows-message"></span>
+    </p>
+
+    <div ng-show="table.rows.length > 0" bst-container-scroll bst-infinite-scroll="table.nextPage()" data="table.rows">
       <div ui-view="table"></div>
     </div>
   </div>

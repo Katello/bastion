@@ -69,7 +69,11 @@
         <a ng-click="detailsTable.selectAllResults(false)" translate>Deselect all</a>
       </div>
 
-      <div data-block="table"></div>
+      <p bst-alert="info" ng-show="detailsTable.rows.length === 0 && !detailsTable.working">
+        <span data-block="no-rows-message"></span>
+      </p>
+
+      <div ng-show="detailsTable.rows.length > 0" data-block="table"></div>
     </div>
   </div>
 
