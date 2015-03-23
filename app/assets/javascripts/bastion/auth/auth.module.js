@@ -42,7 +42,13 @@ angular.module('Bastion.auth').config(['$httpProvider', '$provide',
                                 translate = $injector.get('translate');
 
                             if (response.status === 401) {
-                                $window.location.href = '/users/login';
+                                // Reload current page if API request in order to
+                                // ensure correct redirect upon login.
+                                if (response.config.url.indexOf('api') >= 0) {
+                                    $window.location.reload();
+                                } else {
+                                    $window.location.href = '/users/login';
+                                }
                             } else if (response.status === 403) {
                                 // Add unauthorized display message to response
                                 message = translate('You are not authorized to perform this action.');
