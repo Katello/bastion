@@ -24,6 +24,7 @@ angular.module('Bastion.components').directive('nutupaneTable', ['$compile', '$w
                 originalTable = element.find('table');
                 clonedTable = originalTable.clone();
 
+                clonedTable.attr('ng-show', 'table.rows.length > 0');
                 clonedTable.removeAttr("nutupane-table");
                 clonedTable.addClass("cloned-nutupane-table");
                 clonedTable.find('tbody').remove();
