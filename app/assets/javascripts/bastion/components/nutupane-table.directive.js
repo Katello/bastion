@@ -14,6 +14,7 @@ angular.module('Bastion.components').directive('nutupaneTable', ['$compile', '$w
         restrict: 'A',
         link: function (scope, element) {
             var originalTable, clonedTable, clonedThs,
+                bstTableName = element.attr('bst-table'),
                 windowElement = angular.element($window);
 
             function buildTable() {
@@ -24,6 +25,11 @@ angular.module('Bastion.components').directive('nutupaneTable', ['$compile', '$w
                 originalTable = element.find('table');
                 clonedTable = originalTable.clone();
 
+                if (!bstTableName) {
+                    bstTableName = element.find('[bst-table]').attr('bst-table');
+                }
+
+                clonedTable.attr('ng-show', bstTableName + '.rows.length > 0');
                 clonedTable.removeAttr("nutupane-table");
                 clonedTable.addClass("cloned-nutupane-table");
                 clonedTable.find('tbody').remove();
