@@ -17,6 +17,9 @@ rules:
   quotes: 0
   camelcase: 2
   indent: 2
+  new-cap:
+    - 2
+    - {"newIsCap": true, "capIsNew": false}
   no-mixed-spaces-and-tabs: 2
   no-multiple-empty-lines: 2
   no-trailing-spaces: 2
