@@ -58,14 +58,6 @@ angular.module('Bastion.components').directive('nutupaneTable', ['$compile', '$w
                 angular.forEach(originalTable.find('th'), function (th, index) {
                     $compile(clonedThs[index])(angular.element(th).scope());
                 });
-
-                originalTable.bind("DOMNodeInserted", function () {
-                    windowElement.trigger('resize');
-                });
-
-                originalTable.bind("DOMNodeInsertedIntoDocument", function () {
-                    windowElement.trigger('resize');
-                });
             }
 
             scope.$on("$stateChangeSuccess", function (event, newState, newParams, oldState) {

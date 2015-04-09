@@ -3,12 +3,14 @@
  * @name Bastion.components.directive:bstTable
  * @restrict A
  *
+ * @requires $window
+ *
  * @description
  *
  * @example
  */
 angular.module('Bastion.components')
-    .directive('bstTable', [function () {
+    .directive('bstTable', ['$window', function ($window) {
         return {
             restrict: 'A',
             replace: true,
@@ -17,7 +19,22 @@ angular.module('Bastion.components')
                 'rowSelect': '@',
                 'rowChoice': '@'
             },
-            controller: 'BstTableController'
+            controller: 'BstTableController',
+            link: function (scope) {
+                var resize = function () {
+                    angular.element($window).trigger('resize');
+                };
+
+                // Trigger resize after resource $promise is resolved
+                scope.$watch('table.resource', function (resource) {
+                    if (resource && resource.hasOwnProperty('$promise')) {
+                        resource.$promise.then(resize);
+                    }
+                });
+
+                // Trigger resize when rows change
+                scope.$watch('table.rows', resize);
+            }
         };
     }])
     .controller('BstTableController', ['$scope', function ($scope) {
