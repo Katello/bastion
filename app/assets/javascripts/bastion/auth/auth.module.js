@@ -79,9 +79,23 @@ angular.module('Bastion.auth').config(['$httpProvider', '$provide',
  */
 angular.module('Bastion.auth').run(['$rootScope', '$window', 'Authorization',
     function ($rootScope, $window, Authorization) {
+
+        function isAuthorized(permission) {
+            return !(permission !== false && (angular.isUndefined(permission) || Authorization.denied(permission)));
+        }
+
         $rootScope.$on('$stateChangeStart', function (event, toState) {
-            var permission = toState.permission;
-            if (permission !== false && (angular.isUndefined(permission) || Authorization.denied(permission))) {
+            var permission = toState.permission, permitted;
+
+            if (!(permission instanceof Array)) {
+                permission = [permission];
+            }
+
+            permitted = _.find(permission, function (perm) {
+                return isAuthorized(perm);
+            });
+
+            if (angular.isUndefined(permitted)) {
                 $window.location.href = '/katello/403';
             }
         });
