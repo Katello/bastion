@@ -3,7 +3,7 @@
     <li class="path-list-item" ng-repeat="item in path" ng-class="{ 'disabled-item': item.disabled }">
       <label class="path-list-item-label" ng-disabled="item.disabled" ng-class="{ active: item.selected }" ng-mouseenter="hover" ng-mouseleave="hover = false">
         <input type="checkbox" ng-model="item.selected" ng-change="itemChanged(item)" ng-disabled="item.disabled"/>
-        {{ item.name }}
+          <span ng-class="{{ item.customClass }}">{{ item.name }}</span>
       </label>
     </li>
   </ul>
