@@ -7,11 +7,12 @@ require "bastion/version"
 Gem::Specification.new do |s|
   s.name        = "bastion"
   s.version     = Bastion::VERSION
-  s.authors     = ["Katello"]
-  s.email       = [""]
-  s.homepage    = "http://www.katello.org"
-  s.summary     = "Summary of Bastion."
-  s.description = "Description of Bastion."
+  s.authors     = ["Eric D Helms", "Walden Raines"]
+  s.email       = ["ericdhelms@gmail.com", "walden@redhat.com"]
+  s.homepage    = "http://www.github.com/Katello/bastion"
+  s.summary     = "UI library of AngularJS based components for Foreman"
+  s.description = "Bastion provides a UI library of AngularJS based components designed " \
+                  "to integrate and work with Foreman."
 
   s.files = Dir["{app,config,lib,vendor,grunt}/**/*"] + 
                ["Rakefile", "README.md", "Gruntfile.js", "package.json", "bower.json", "bastion.js", "eslint.yaml",
