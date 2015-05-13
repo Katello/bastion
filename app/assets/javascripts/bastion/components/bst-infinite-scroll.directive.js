@@ -9,6 +9,8 @@
  *   Note that the element using the bst-infinite-scroll directive should have it's overflow
  *   set properly.
  *
+ * @requires $window
+ *
  * @example
  *   <pre>
  *     <div bst-infinite-scroll="loadMore()" style="height: 100px; overflow-y: auto;">
@@ -16,7 +18,7 @@
  *     </div>
  *   </pre>
  */
-angular.module('Bastion.components').directive('bstInfiniteScroll', [function () {
+angular.module('Bastion.components').directive('bstInfiniteScroll', ['$window', function ($window) {
     return {
         scope: {
             data: '=',
@@ -25,7 +27,7 @@ angular.module('Bastion.components').directive('bstInfiniteScroll', [function ()
         },
         controller: function ($scope, $element) {
 
-            var result, getScrollHeight, isPromise, loadUntilScroll,
+            var getScrollHeight, isPromise, loadUntilScroll,
                 raw = $element[0];
 
             $element.bind('scroll', function () {
@@ -62,11 +64,10 @@ angular.module('Bastion.components').directive('bstInfiniteScroll', [function ()
                 }
             };
 
+            angular.element($window).bind('resize', loadUntilScroll);
+
             if (!$scope.skipInitialLoad && (angular.isUndefined($scope.data) || $scope.data.length === 0)) {
-                result = $scope.loadMoreFunction();
-                if (isPromise(result)) {
-                    result.then(loadUntilScroll);
-                }
+                loadUntilScroll();
             }
         }
     };

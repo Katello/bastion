@@ -17,7 +17,7 @@ describe('Directive: bstInfiniteScroll', function () {
             }
         };
         $scope.data = [];
-        element = angular.element('<div data="data" bst-infinite-scroll="scrollHandler.doIt()" style=" height: 100px; position: absolute; overflow-y: auto;"></div>');
+        element = angular.element('<div data="data" bst-infinite-scroll="scrollHandler.doIt()" style="height: 100px; position: absolute; overflow-y: auto;"></div>');
         $('body').append(element);
     }));
 
@@ -78,10 +78,12 @@ describe('Directive: bstInfiniteScroll', function () {
 
         it("loads more results if the scroll height is less than element height.", function() {
             spyOn($scope.scrollHandler, "doIt").andCallThrough();
-            element.height("9px");
+            element.height("11px");
 
             $compile(element)($scope);
             $scope.$digest();
+            $scope.$digest();
+
 
             expect($scope.scrollHandler.doIt.callCount).toBe(1);
         });
@@ -98,7 +100,7 @@ describe('Directive: bstInfiniteScroll', function () {
         });
 
         it("does not load more results if the scroll height is greater than the element height.", function() {
-            element.height("11px");
+            element.height("9px");
             element.append('<p style="height: 10px;"></p>');
             $compile(element)($scope);
 
@@ -106,6 +108,20 @@ describe('Directive: bstInfiniteScroll', function () {
             $scope.$digest();
 
             expect($scope.scrollHandler.doIt.callCount).toBe(0);
+        });
+
+        it("on resize", function() {
+            element.height("11px");
+            $compile(element)($scope);
+            $scope.$digest();
+            spyOn($scope.scrollHandler, "doIt").andCallThrough();
+
+            element.height("21px");
+            $(window).trigger('resize');
+            $scope.$digest();
+
+
+            expect($scope.scrollHandler.doIt.callCount).toBe(1);
         });
     });
 });
