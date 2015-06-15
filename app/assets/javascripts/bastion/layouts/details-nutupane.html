@@ -50,14 +50,13 @@
     </div>
   </div>
 
-  <div class="nutupane" bst-table="detailsTable" nutupane-table>
+  <div class="nutupane nutupane-details-table" bst-table="detailsTable" nutupane-table>
     <div class="loading-mask loading-mask-collapsed" ng-show="detailsTable.refreshing">
       <i class="fa fa-spinner fa-spin"></i>
       <span ng-hide="$root.$state.current.collapsed">{{ "Loading..." | translate }}</span>
     </div>
 
-    <div bst-container-scroll bst-infinite-scroll="detailsTable.nextPage()"
-         data="detailsTable.rows" skip-initial-load="!detailsTable.initialLoad">
+    <div bst-container-scroll data="detailsTable.rows">
 
       <div class="nutupane-select-all" ng-show="detailsTable.selectAllResultsEnabled && detailsTable.allSelected() && !detailsTable.allResultsSelected">
         <span translate>All {{ detailsTable.rows.length }} items on this page are selected.</span>
@@ -73,7 +72,9 @@
         <span data-block="no-rows-message"></span>
       </p>
 
-      <div ng-show="detailsTable.rows.length > 0" data-block="table"></div>
+      <div infinite-scroll="detailsTable.nextPage()" infinite-scroll-container="'.nutupane-details-table .container-scroll-wrapper'">
+        <div ng-show="detailsTable.rows.length > 0" data-block="table"></div>
+      </div>
     </div>
   </div>
 
