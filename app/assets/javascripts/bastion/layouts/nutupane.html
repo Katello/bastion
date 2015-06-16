@@ -61,8 +61,8 @@
       <span data-block="no-rows-message"></span>
     </p>
 
-    <div ng-show="table.rows.length > 0" bst-container-scroll bst-infinite-scroll="table.nextPage()" data="table.rows">
-      <div ui-view="table"></div>
+    <div ng-show="table.rows.length > 0" bst-container-scroll data="table.rows">
+      <div infinite-scroll="table.nextPage()" infinite-scroll-container="'.container-scroll-wrapper'" ui-view="table"></div>
     </div>
   </div>
 
