@@ -1,9 +1,12 @@
-To push the strings to zanata:
+To extract the strings, run 
 
-zanata-cli push -s . -t locale --copy-trans false
+grunt i18n:extract
 
-to pull from zanata
+THEN run
 
-zanata-cli pull -s . -t locale
+grunt i18n:compile
 
+see
+
+https://github.com/katello/bastion#i18n
 
