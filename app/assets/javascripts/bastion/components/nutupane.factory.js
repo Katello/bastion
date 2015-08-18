@@ -5,6 +5,7 @@
  * @requires $location
  * @requires $q
  * @requires $timeout
+ * @requires $rootScope
  *
  * @description
  *   Defines the Nutupane factory for adding common functionality to the Nutupane master-detail
@@ -28,7 +29,7 @@
     </pre>
  */
 angular.module('Bastion.components').factory('Nutupane',
-    ['$location', '$q', '$timeout', function ($location, $q, $timeout) {
+    ['$location', '$q', '$timeout', '$rootScope', function ($location, $q, $timeout, $rootScope) {
         var Nutupane = function (resource, params, action) {
             var self = this;
             params = params || {};
@@ -95,6 +96,8 @@ angular.module('Bastion.components').factory('Nutupane',
                             table.selectAll(true);
                         }
                         table.resource.offset = table.rows.length;
+
+                        $rootScope.$emit('nutupane:loaded');
                     }, 0);
                     table.working = false;
                     table.refreshing = false;

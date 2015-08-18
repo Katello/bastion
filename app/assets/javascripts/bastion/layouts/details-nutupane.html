@@ -72,7 +72,7 @@
         <span data-block="no-rows-message"></span>
       </p>
 
-      <div infinite-scroll="detailsTable.nextPage()" infinite-scroll-container="'.nutupane-details-table .container-scroll-wrapper'">
+      <div infinite-scroll="detailsTable.nextPage()" infinite-scroll-container="'.nutupane-details-table .container-scroll-wrapper'" infinite-scroll-listen-for-event="nutupane:loaded">
         <div ng-show="detailsTable.rows.length > 0" data-block="table"></div>
       </div>
     </div>
