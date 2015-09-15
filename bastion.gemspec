@@ -15,7 +15,8 @@ Gem::Specification.new do |s|
                   "to integrate and work with Foreman."
 
   s.files = Dir["{app,config,lib,vendor,grunt}/**/*"] + 
-               ["Rakefile", "README.md", "Gruntfile.js", "package.json", "bower.json", "bastion.js", "eslint.yaml",
+               ["Rakefile", "README.md", "Gruntfile.js", "package.json", 
+                "bower.json", "bastion.js", "eslint.yaml", ".eslintignore",
                 "LICENSE", ".jshintrc"]
 
   s.test_files = Dir["test/**/*"]
