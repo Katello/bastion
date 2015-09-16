@@ -353,6 +353,11 @@ angular.module('Bastion.components').factory('Nutupane',
                 self.table.rows = [];
                 self.query();
             };
+
+            self.setSearchKey = function (newKey) {
+                self.searchKey = newKey;
+                self.table.searchTerm = $location.search()[self.searchKey];
+            };
         };
         return Nutupane;
     }]

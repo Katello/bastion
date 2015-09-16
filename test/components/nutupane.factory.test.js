@@ -233,6 +233,11 @@ describe('Factory: Nutupane', function() {
             expect(translated[2]).toBe(data[1]);
         });
 
+        it("provides a way to change the searchKey", function() {
+            nutupane.setSearchKey("keyFoo");
+            expect(nutupane.searchKey).toBe("keyFoo");
+        });
+
         it("autocompletes using the original resource if possible", function() {
             var data;
             Resource.autocomplete = function() {return ["foo"]};
