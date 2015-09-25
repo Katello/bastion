@@ -1,0 +1,46 @@
+<li ng-show="bookmarks.length === 0">
+  <a translate>No Bookmarks</a>
+</li>
+<li ng-repeat="bookmark in bookmarks">
+  <a ng-click="setQuery(bookmark)" class="ng-scope">{{ bookmark.name }}</a>
+</li>
+<li class="divider"></li>
+<li>
+  <a ng-click="add()" translate class="ng-scope">Bookmark this search</a>
+</li>
+
+<div bst-modal="save()" model="newBookmark">
+  <span>{{ bookmark.query }}</span>
+  <div data-block="modal-header" translate>Add Bookmark</div>
+  <div data-block="modal-body">
+    <form name="bookmarkForm" class="form-horizontal" novalidate role="form">
+      <div bst-form-group label="{{ 'Name' | translate }}">
+        <input id="name"
+               name="name"
+               ng-model="newBookmark.name"
+               type="text"
+               tabindex="1"
+               autofocus
+               required/>
+      </div>
+      <div bst-form-group label="{{ 'Search query' | translate }}">
+        <input id="query"
+               name="query"
+               ng-model="newBookmark.query"
+               type="text"
+               tabindex="1"
+               autofocus
+               required/>
+      </div>
+      <div bst-form-group label="{{ 'Public' | translate }}">
+        <input id="public"
+               name="public"
+               ng-model="newBookmark.public"
+               type="checkbox"
+               tabindex="1"
+               autofocus/>
+      </div>
+    </form>
+  </div>
+  <div data-block="modal-confirm-button" translate>Save</div>
+</div>
