@@ -15,9 +15,9 @@ Foreman::Application.routes.draw do
 
   end
 
-  scope :bastion, :module => :bastion do
-    match '/:bastion_page/(*path)', :to => "bastion#index", constraints: BastionPagesConstraint.new, :via => :get
-    match '/bastion/(*path)', :to => "bastion#index_ie", :via => :get
+  scope :module => :bastion do
+    get '/:bastion_page/(*path)', :to => "bastion#index", constraints: BastionPagesConstraint.new
+    get '/bastion/(*path)', :to => "bastion#index_ie"
   end
 
 end
