@@ -1,6 +1,8 @@
 module.exports = {
     options: {
-        configFile: __dirname + '/../eslint.yaml'
+        configFile: __dirname + '/../eslint.yaml',
+        ignorePath: __dirname + '/../.eslintignore',
+        quiet: true
     },
     target: [
         'Gruntfile.js',

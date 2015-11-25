@@ -62,7 +62,8 @@
     </p>
 
     <div ng-show="table.rows.length > 0" bst-container-scroll data="table.rows">
-      <div infinite-scroll="table.nextPage()" infinite-scroll-container="'.container-scroll-wrapper'" ui-view="table"></div>
+      <div infinite-scroll="table.nextPage()" infinite-scroll-container="'.container-scroll-wrapper'" infinite-scroll-listen-for-event="nutupane:loaded"
+           ui-view="table"></div>
     </div>
   </div>
 
