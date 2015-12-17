@@ -18,8 +18,8 @@ angular.module('Bastion.components').directive('bstAlert', function () {
             type: '@bstAlert',
             close: '&'
         },
-        controller: function ($scope, $attrs) {
+        controller: ['$scope', '$attrs', function ($scope, $attrs) {
             $scope.closeable = 'close' in $attrs;
-        }
+        }]
     };
 });
