@@ -14,7 +14,7 @@ module Bastion
       app.routes_reloader.paths.unshift("#{Bastion::Engine.root}/config/routes.rb")
     end
 
-    initializer "bastion.plugin", :group => :all do |app|
+    initializer "bastion.configure_assets", :group => :all do |app|
       SETTINGS[:bastion] = {:assets => {}} if SETTINGS[:bastion].nil?
 
       SETTINGS[:bastion][:assets][:precompile] = [
@@ -28,6 +28,10 @@ module Bastion
       end
 
       SETTINGS[:bastion][:assets][:precompile].concat(locale_files)
+    end
+
+    initializer 'bastion.assets.precompile', :after => 'bastion.configure_assets' do |app|
+      app.config.assets.precompile += SETTINGS[:bastion][:assets][:precompile]
     end
 
     initializer "angular_templates", :group => :all do |app|
