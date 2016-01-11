@@ -3,21 +3,6 @@ require 'bastion/engine'
 
 namespace :bastion do
 
-  desc 'Compile assets for Bastion'
-  task 'assets:precompile' do
-    require 'uglifier'
-
-    SETTINGS = {
-      :bastion => {
-        :assets => {
-          :js_compressor => Uglifier.new(:mangle => false)
-        }
-      }
-    }
-
-    Rake::Task["plugin:assets:precompile"].invoke('bastion')
-  end
-
   desc 'Run linting and tests for the plugin'
   task 'ci' do
     success = grunt('ci')
