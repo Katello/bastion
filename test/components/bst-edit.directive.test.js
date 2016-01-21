@@ -8,6 +8,7 @@ describe('Directive: bstEdit', function() {
         'components/views/bst-edit.html',
         'components/views/bst-edit-text.html',
         'components/views/bst-edit-textarea.html',
+        'components/views/bst-edit-number.html',
         'components/views/bst-edit-select.html',
         'components/views/bst-edit-add-item.html',
         'components/views/bst-edit-checkbox.html',
@@ -195,6 +196,47 @@ describe('Directive: bstEdit', function() {
             element.trigger('click');
 
             expect(input.css('display')).not.toBe('none');
+        });
+
+    });
+
+    describe('bstEditNumber directive', function() {
+        var editableElement;
+
+        it("should display an input with type of number on editable click", function() {
+            editableElement = angular.element(
+                '<span bst-edit-number="item.name"></span>');
+
+            scope.item = testItem;
+
+            compile(editableElement)(scope);
+            scope.$digest();
+
+            var element = editableElement.find('.editable'),
+                input = editableElement.find('input');
+            element.trigger('click');
+
+            expect(input.css('display')).not.toBe('none');
+            expect(input.attr('type')).toBe('number');
+        });
+
+        it("should display an input with type of number on editable click with min and max", function() {
+            editableElement = angular.element(
+                '<span bst-edit-number="item.name" min=123 max=456></span>');
+
+            scope.item = testItem;
+
+            compile(editableElement)(scope);
+            scope.$digest();
+
+            var element = editableElement.find('.editable'),
+                input = editableElement.find('input');
+            element.trigger('click');
+
+            expect(input.css('display')).not.toBe('none');
+            expect(input.attr('type')).toBe('number');
+            expect(input.attr('min')).toBe('123');
+            expect(input.attr('max')).toBe('456');
         });
 
     });
