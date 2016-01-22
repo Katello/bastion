@@ -193,6 +193,22 @@ angular.module('Bastion.components')
             templateUrl: 'components/views/bst-edit-textarea.html'
         };
     })
+    .directive('bstEditNumber', function () {
+        return {
+            replace: true,
+            scope: {
+                model: '=bstEditNumber',
+                readonly: '=',
+                min: '@',
+                max: '@',
+                handleSave: '&onSave',
+                handleCancel: '&onCancel',
+                deletable: '@deletable',
+                handleDelete: '&onDelete'
+            },
+            templateUrl: 'components/views/bst-edit-number.html'
+        };
+    })
     .directive('bstEditCheckbox', function () {
         return {
             replace: true,
