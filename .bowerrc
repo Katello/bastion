@@ -1,4 +1,4 @@
 {
     "json": "bower.json",
-    "directory": ".tmp/bower_components"
+    "directory": "bower_components"
 }
