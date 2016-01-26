@@ -6,5 +6,5 @@ vendor/assets/dev-components
 coverage/
 .tmp/
 public/
-
+.zanata-cache/
 *.swp
