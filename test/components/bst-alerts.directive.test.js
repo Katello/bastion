@@ -4,7 +4,12 @@ describe('Directive: bstAlerts', function() {
         element,
         elementScope;
 
-    beforeEach(module('Bastion.components', 'components/views/bst-alerts.html', 'components/views/bst-alert.html'));
+    beforeEach(module(
+        'ngSanitize',
+        'Bastion.components', 
+        'components/views/bst-alerts.html', 
+        'components/views/bst-alert.html'
+    ));
 
     beforeEach(inject(function(_$compile_, _$rootScope_) {
         compile = _$compile_;
