@@ -6,6 +6,7 @@
  * @requires $q
  * @requires $timeout
  * @requires $rootScope
+ * @requires GlobalNotification
  *
  * @description
  *   Defines the Nutupane factory for adding common functionality to the Nutupane master-detail
@@ -29,7 +30,7 @@
     </pre>
  */
 angular.module('Bastion.components').factory('Nutupane',
-    ['$location', '$q', '$timeout', '$rootScope', function ($location, $q, $timeout, $rootScope) {
+    ['$location', '$q', '$timeout', '$rootScope', 'GlobalNotification', function ($location, $q, $timeout, $rootScope, GlobalNotification) {
         var Nutupane = function (resource, params, action) {
             var self = this;
             params = params || {};
@@ -68,6 +69,10 @@ angular.module('Bastion.components').factory('Nutupane',
                 params.search = self.searchTransform(params.search);
 
                 resource[table.action](params, function (response) {
+
+                    if (response.error) {
+                        GlobalNotification.setErrorMessage(response.error);
+                    }
 
                     angular.forEach(response.results, function (row) {
                         row.selected = table.allResultsSelected;
