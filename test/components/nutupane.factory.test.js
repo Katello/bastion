@@ -1,6 +1,7 @@
 describe('Factory: Nutupane', function() {
     var $timeout,
         $location,
+        $rootScope,
         Resource,
         expectedResult,
         Nutupane;
@@ -28,10 +29,11 @@ describe('Factory: Nutupane', function() {
         };
     }));
 
-    beforeEach(inject(function(_$location_, _$timeout_, _Nutupane_) {
+    beforeEach(inject(function(_$location_, _$timeout_, _Nutupane_, _$rootScope_) {
         $location = _$location_;
         $timeout = _$timeout_;
         Nutupane = _Nutupane_;
+        $rootScope = _$rootScope_;
     }));
 
     describe("adds additional functionality to the Nutupane table by", function() {
@@ -294,6 +296,23 @@ describe('Factory: Nutupane', function() {
                 spyOn(nutupane, "query");
                 nutupane.table.sortBy({id: "name"});
                 expect(nutupane.query).toHaveBeenCalled();
+            });
+
+            describe("watches $locationChangeStart", function () {
+                beforeEach(function () {
+                    nutupane.table.closeItem = function() {};
+                    spyOn(nutupane.table, 'closeItem');
+                });
+
+                it("and closes the item pane if the url matches the org switcher url", function () {
+                    $rootScope.$emit("$locationChangeStart", '/organizations/1-Default%20Organization/select');
+                    expect(nutupane.table.closeItem).toHaveBeenCalled();
+                });
+
+                it("and does nothing if the URL does not match the org switcher url", function () {
+                    $rootScope.$emit("$locationChangeStart", '/some-other-url/select');
+                    expect(nutupane.table.closeItem).not.toHaveBeenCalled();
+                });
             });
         });
     });

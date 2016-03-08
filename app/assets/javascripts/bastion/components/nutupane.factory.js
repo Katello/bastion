@@ -32,7 +32,8 @@
 angular.module('Bastion.components').factory('Nutupane',
     ['$location', '$q', '$timeout', '$rootScope', 'GlobalNotification', function ($location, $q, $timeout, $rootScope, GlobalNotification) {
         var Nutupane = function (resource, params, action) {
-            var self = this;
+            var self = this,
+                orgSwitcherRegex = new RegExp("/(organizations|locations)/(.+/)*(select|clear)");
             params = params || {};
 
             self.searchKey = action ? action + 'Search' : 'search';
@@ -363,6 +364,12 @@ angular.module('Bastion.components').factory('Nutupane',
                 self.searchKey = newKey;
                 self.table.searchTerm = $location.search()[self.searchKey];
             };
+
+            $rootScope.$on('$locationChangeStart', function (event, newUrl) {
+                if (newUrl.match(orgSwitcherRegex)) {
+                    self.table.closeItem();
+                }
+            });
         };
         return Nutupane;
     }]
