@@ -139,7 +139,7 @@ td.row-select {
   }
 
   .dropdown-menu {
-    width: 100%;
+    min-width: 100%;
   }
 }
 
@@ -397,4 +397,10 @@ div.alch-dialog.open.info-value {
 
 table .progress {
   margin-bottom: 0;
+}
+
+.dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
