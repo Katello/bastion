@@ -7,6 +7,6 @@
  * @description
  *   Encode a url
  */
-angular.module('Bastion.utils').filter('urlencode', function ($window) {
+angular.module('Bastion.utils').filter('urlencode', ['$window', function ($window) {
     return $window.encodeURIComponent;
-});
+}]);
