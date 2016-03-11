@@ -42,6 +42,6 @@
         .module('Bastion.features')
         .directive('bstFeatureFlag', bstFeatureFlag);
 
-    bstFeatureFlag.$injector = ['ngIfDirective', 'FeatureFlag'];
+    bstFeatureFlag.$inject = ['ngIfDirective', 'FeatureFlag'];
 
 })();
