@@ -1,15 +1,15 @@
 describe('Directive: bstContainerScroll', function() {
     var scope,
         compile,
-        window,
+        windowElement,
         tableElement;
 
     beforeEach(module('Bastion.components'));
 
-    beforeEach(inject(function(_$compile_, _$rootScope_, _$window_) {
+    beforeEach(inject(function(_$compile_, _$rootScope_, $window) {
         compile = _$compile_;
         scope = _$rootScope_;
-        window = _$window_;
+        windowElement = angular.element($window)
     }));
 
     beforeEach(function() {
@@ -32,12 +32,21 @@ describe('Directive: bstContainerScroll', function() {
     });
 
     it("should adjust the table height on window resize", function() {
-        var table = tableElement.find('table'),
-            windowElement = angular.element(window);
-
         windowElement.height('100px');
         windowElement.trigger('resize');
 
         expect(tableElement.height()).toEqual(windowElement.height() - tableElement.offset().top);
+    });
+
+    it("should add the nutupane details padding if it exists", function () {
+        tableElement.css('padding-bottom', '10px');
+
+        compile(tableElement)(scope);
+        scope.$digest();
+
+        windowElement.height('100px');
+        windowElement.trigger('resize');
+
+        expect(tableElement.height()).toEqual(windowElement.height() - (tableElement.offset().top + 10));
     });
 });
