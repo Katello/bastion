@@ -58,8 +58,16 @@ angular.module('Bastion').config(
         });
 
         $urlRouterProvider.otherwise(function ($injector, $location) {
-            var $window = $injector.get('$window');
-            $window.location.href = $location.absUrl().replace(oldBrowserBastionPath, '');
+            var $window = $injector.get('$window'),
+                url = $location.absUrl();
+
+            // ensure we don't double encode +s
+            url = url.replace(/%2B/g, "+");
+
+            // Remove the old browser path if present
+            url = url.replace(oldBrowserBastionPath, '');
+
+            $window.location.href = url;
         });
 
         $locationProvider.html5Mode(true);
