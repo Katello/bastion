@@ -346,9 +346,10 @@ angular.module('Bastion.components').factory('Nutupane',
                 if (!column) {
                     return;
                 }
-
-                params["sort_by"] = column.id;
-                if (column.id === sort.by) {
+                if (column.id) {
+                    params["sort_by"] = column.id;
+                }
+                if (column.id === sort.by || column.id) {
                     params["sort_order"] = (sort.order === 'ASC') ? 'DESC' : 'ASC';
                 } else {
                     params["sort_order"] = 'ASC';
