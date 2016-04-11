@@ -24,7 +24,7 @@ angular.module('Bastion.components').directive('bstContainerScroll', ['$window',
             return function (scope, element) {
                 var windowElement = angular.element($window),
                     bottomPadding = parseInt(element.css('padding-bottom').replace('px', ''), 10),
-                    addScroll;
+                    newElementHeight, addScroll;
 
                 addScroll = function () {
                     var windowHeight = windowElement.height(),
@@ -34,8 +34,14 @@ angular.module('Bastion.components').directive('bstContainerScroll', ['$window',
                         offset = offset + bottomPadding;
                     }
 
-                    element.outerHeight(windowHeight - offset);
-                    element.height(windowHeight - offset);
+                    newElementHeight = windowHeight - offset;
+
+                    if (newElementHeight <= 100) {
+                        newElementHeight = 300;
+                    }
+
+                    element.outerHeight(newElementHeight);
+                    element.height(newElementHeight);
                 };
 
                 windowElement.bind('resize', addScroll);
