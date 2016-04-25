@@ -38,6 +38,17 @@ describe('Directive: bstContainerScroll', function() {
         expect(tableElement.height()).toEqual(windowElement.height() - tableElement.offset().top);
     });
 
+    it("should ensure that the element is at least 200px", function () {
+        windowElement.height('200px');
+        tableElement.css('padding-bottom', '200px');
+
+        compile(tableElement)(scope);
+        scope.$digest();
+
+        windowElement.trigger('resize');
+        expect(tableElement.height()).toEqual(300);
+    });
+
     it("should add the nutupane details padding if it exists", function () {
         tableElement.css('padding-bottom', '10px');
 
