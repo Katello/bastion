@@ -18,7 +18,6 @@
       </div>
     </div>
 
-
     <div class="col-sm-3 nutupane-info">
       <div class="input-group input-group">
         <input type="text"
@@ -64,10 +63,10 @@
     </div>
   </div>
 
-  <div class="row nutupane" bst-table="table" nutupane-table ng-class="{'table-reduced': $root.$state.current.collapsed}">
-    <div class="loading-mask" ng-show="table.refreshing" ng-class="{ 'loading-mask-collapsed': $root.$state.current.collapsed }">
+  <div class="row nutupane" bst-table="table" nutupane-table>
+    <div class="loading-mask" ng-show="table.refreshing" >
       <i class="fa fa-spinner fa-spin"></i>
-      <span ng-hide="$root.$state.current.collapsed">{{ "Loading..." | translate }}</span>
+      <span>{{ "Loading..." | translate }}</span>
     </div>
 
     <p bst-alert="info" ng-show="table.rows.length === 0 && !table.working && !table.searchTerm && !table.searchCompleted">
@@ -78,11 +77,11 @@
     </p>
 
     <div ng-show="table.rows.length > 0" bst-container-scroll data="table.rows">
-      <div infinite-scroll="table.nextPage()" infinite-scroll-container="'.container-scroll-wrapper'" infinite-scroll-listen-for-event="nutupane:loaded"
-           ui-view="table"></div>
+      <div infinite-scroll="table.nextPage()" infinite-scroll-container="'.container-scroll-wrapper'"
+           infinite-scroll-listen-for-event="nutupane:loaded">
+        <div data-block="table"></div>
+      </div>
     </div>
   </div>
-
-  <span class="action-panel" ui-view="action-panel"></span>
 
 </section>

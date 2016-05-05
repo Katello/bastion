@@ -1,8 +1,8 @@
 <div class="bst-edit">
   <div class="value" ng-class="{ 'editable' : !readonly }" ng-click="edit()" ng-hide="editMode || workingMode">
-    <span class="fr">
-      <i class="fa fa-edit inline-icon" ng-hide="editMode || readonly"></i>
-      <i class="fa fa-remove inline-icon" ng-click="delete($event)" ng-show="deletable && !editMode && !readonly"></i>
+    <span class="fr" ng-hide="editMode || readonly">
+    <i class="fa fa-edit inline-icon"></i>
+      <i class="fa fa-remove inline-icon" ng-click="delete($event)" ng-show="deletable"></i>
     </span>
     <span class="editable-value">{{ displayValue }}</span>
   </div>

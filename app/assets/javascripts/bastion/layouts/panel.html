@@ -2,4 +2,9 @@
   <i class="fa fa-spinner fa-spin"></i>
   {{ "Loading..." | translate }}
 </div>
-<span ng-hide="panel.loading" data-block="panel"></span>
+
+<div ncy-breadcrumb></div>
+
+<div ng-hide="panel.loading || panel.error">
+  <span data-block="content"></span>
+</div>
