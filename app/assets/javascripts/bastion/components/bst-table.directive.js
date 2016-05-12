@@ -44,7 +44,10 @@ angular.module('Bastion.components')
 
         this.selection = {allSelected: false, selectAllDisabled: false};
 
-        $scope.table.numSelected = 0;
+        if (!$scope.table.numSelected) {
+            $scope.table.numSelected = 0;
+        }
+
         $scope.table.chosenRow = null;
 
         $scope.table.getSelected = function () {
