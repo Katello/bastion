@@ -24,13 +24,33 @@ angular.module('Bastion.components').directive('bstAlert', ['$animate', '$timeou
             close: '&'
         },
         link: function (scope, element, attrs) {
+            var fadeOutAnimation;
+
+            scope.fadePrevented = true;
             scope.closeable = 'close' in attrs;
 
-            // Fade out success alerts after five seconds
-            if (scope.type === 'success') {
+            scope.startFade = function () {
                 $timeout(function () {
-                    $animate.leave(element.find('.alert'), scope.close);
+                    if (!scope.fadePrevented) {
+                        fadeOutAnimation = $animate.leave(element.find('.alert'));
+                        fadeOutAnimation.then(function () {
+                            scope.close();
+                        });
+                    }
                 }, SUCCESS_FADEOUT);
+            };
+
+            scope.cancelFade = function () {
+                scope.fadePrevented = true;
+                if (fadeOutAnimation) {
+                    $animate.cancel(fadeOutAnimation);
+                }
+            };
+
+            // Automatically fade out success alerts
+            if (scope.type === 'success') {
+                scope.fadePrevented = false;
+                scope.startFade();
             }
         }
     };
