@@ -9,6 +9,6 @@
      *   Cross application re-usable components
      */
     angular
-        .module('Bastion.components', []);
+        .module('Bastion.components', ['ngAnimate']);
 
 })();
