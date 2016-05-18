@@ -5,12 +5,12 @@
   "dependencies": {
     "json3": "~3.2.4",
     "es5-shim": "~2.0.8",
-    "angular": "=1.2.9",
+    "angular": "=1.5.5",
     "angular-bootstrap": "0.10.0",
-    "angular": "=1.2.9",
-    "angular-sanitize": "=1.2.9",
-    "angular-resource": "=1.2.9",
-    "angular-route": "=1.2.9",
+    "angular": "=1.5.5",
+    "angular-sanitize": "=1.5.5",
+    "angular-resource": "=1.5.5",
+    "angular-route": "=1.5.5",
     "angular-gettext": "=1.0.0",
     "angular-ui-router": "=0.2.10",
     "angular-blocks": "~>0.1.8",
@@ -18,16 +18,16 @@
     "underscore": "=1.5.2",
     "ngInfiniteScroll": "1.2.1",
     "ngUpload": "~0.5.5",
-    "angular-animate": "=1.2.0",
+    "angular-animate": "=1.5.5",
     "angular-uuid4": "0.1.0"
   },
   "devDependencies": {
     "jquery": "=1.9.1",
-    "angular-mocks": "=1.2.9",
-    "angular-scenario": "=1.2.9"
+    "angular-mocks": "=1.5.5",
+    "angular-scenario": "=1.5.5"
   },
   "resolutions": {
-    "angular": "1.2.9",
+    "angular": "1.5.5",
     "jquery": "=1.9.1"
   },
   "exportsOverride": {

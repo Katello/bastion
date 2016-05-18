@@ -1,4 +1,6 @@
 describe('Filter:urlencode', function() {
+    var urlencodeFilter;
+
     beforeEach(module('Bastion.utils'));
 
     beforeEach(inject(function($filter) {
