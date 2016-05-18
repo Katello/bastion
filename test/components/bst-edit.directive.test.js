@@ -44,8 +44,7 @@ describe('Directive: bstEdit', function() {
     }));
 
     describe('bstEdit controller', function() {
-        var element,
-            editController;
+        var editController;
 
         beforeEach(inject(function($controller) {
             editController = $controller('BstEditController', {$scope: scope});
@@ -205,9 +204,9 @@ describe('Directive: bstEdit', function() {
 
         it("should display an input with type of number on editable click", function() {
             editableElement = angular.element(
-                '<span bst-edit-number="item.name"></span>');
+                '<span bst-edit-number="number"></span>');
 
-            scope.item = testItem;
+            scope.number = 3;
 
             compile(editableElement)(scope);
             scope.$digest();
@@ -222,9 +221,9 @@ describe('Directive: bstEdit', function() {
 
         it("should display an input with type of number on editable click with min and max", function() {
             editableElement = angular.element(
-                '<span bst-edit-number="item.name" min=123 max=456></span>');
+                '<span bst-edit-number="number" min=123 max=456></span>');
 
-            scope.item = testItem;
+            scope.number = 123;
 
             compile(editableElement)(scope);
             scope.$digest();

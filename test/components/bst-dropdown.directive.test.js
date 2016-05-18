@@ -52,7 +52,7 @@ describe('Directive: bstDropdown', function() {
 
         beforeEach(function() {
             target = angular.element(element.find('li')[1]);
-            spyOn(elementScope, 'setHover').andCallThrough();
+            spyOn(elementScope, 'setHover').and.callThrough();
         });
 
         it("by setting the item to active on mouse in", function() {
@@ -75,7 +75,7 @@ describe('Directive: bstDropdown', function() {
 
         beforeEach(function() {
             target = angular.element(element.find('li')[2]);
-            spyOn(elementScope, 'setHover').andCallThrough();
+            spyOn(elementScope, 'setHover').and.callThrough();
         });
 
         it("by setting the item to active on mouse in", function() {

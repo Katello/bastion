@@ -58,7 +58,7 @@ describe('Directive: bstMenu', function() {
 
         beforeEach(function() {
             target = angular.element(element.find('li')[2]);
-            spyOn(elementScope, 'handleHover').andCallThrough();
+            spyOn(elementScope, 'handleHover').and.callThrough();
         });
 
         it("by setting the item to active on mouse in", function() {

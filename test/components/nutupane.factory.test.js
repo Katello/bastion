@@ -54,7 +54,7 @@ describe('Factory: Nutupane', function() {
         it("providing a method to fetch records for the table", function() {
             var expected = nutupane.table.rows.concat(expectedResult);
 
-            spyOn(Resource, 'queryPaged').andCallThrough();
+            spyOn(Resource, 'queryPaged').and.callThrough();
             nutupane.query();
 
             expect(Resource.queryPaged).toHaveBeenCalled();
@@ -65,7 +65,7 @@ describe('Factory: Nutupane', function() {
         });
 
         it("providing a method to refresh the table", function() {
-            spyOn(Resource, 'queryPaged').andCallThrough();
+            spyOn(Resource, 'queryPaged').and.callThrough();
             nutupane.refresh();
 
             expect(Resource.queryPaged).toHaveBeenCalled();
@@ -243,7 +243,7 @@ describe('Factory: Nutupane', function() {
         it("autocompletes using the original resource if possible", function() {
             var data;
             Resource.autocomplete = function() {return ["foo"]};
-            spyOn(Resource, 'autocomplete').andCallThrough();
+            spyOn(Resource, 'autocomplete').and.callThrough();
 
             data = nutupane.table.autocomplete();
             expect(Resource.autocomplete).toHaveBeenCalled();
@@ -253,7 +253,7 @@ describe('Factory: Nutupane', function() {
         it("autocompletes using fetchAutocomplete if resource doesn't support autocomplete", function() {
             var data;
             nutupane.table.fetchAutocomplete = function() {return ['bar']};
-            spyOn(nutupane.table, 'fetchAutocomplete').andCallThrough();
+            spyOn(nutupane.table, 'fetchAutocomplete').and.callThrough();
 
             data = nutupane.table.autocomplete();
             expect(nutupane.table.fetchAutocomplete).toHaveBeenCalled();

@@ -70,7 +70,7 @@ angular.module('Bastion').config(
             $window.location.href = url;
         });
 
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode({enabled: true, requireBase: false});
 
         $provide.factory('PrefixInterceptor', ['$q', '$templateCache', function ($q, $templateCache) {
             return {

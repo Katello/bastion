@@ -10,7 +10,7 @@ describe('Service: translate', function() {
 
     it('passes through to the gettextCatalog.getString', function() {
         var string = 'lalala';
-        spyOn(gettextCatalog, 'getString').andReturn(string);
+        spyOn(gettextCatalog, 'getString').and.returnValue(string);
         expect(translate(string)).toBe(string);
         expect(gettextCatalog.getString).toHaveBeenCalledWith(string);
     });
