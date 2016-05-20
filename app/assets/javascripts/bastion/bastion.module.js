@@ -59,6 +59,8 @@ angular.module('Bastion').config(
 
         $urlRouterProvider.otherwise(function ($injector, $location) {
             var $window = $injector.get('$window'),
+                $state = $injector.get('$state'),
+                parentState = $location.path().split('/')[1].replace('_', '-'),
                 url = $location.absUrl();
 
             // ensure we don't double encode +s
@@ -67,7 +69,12 @@ angular.module('Bastion').config(
             // Remove the old browser path if present
             url = url.replace(oldBrowserBastionPath, '');
 
-            $window.location.href = url;
+            if ($state.get(parentState)) {
+                $window.location.href = '/404';
+            } else {
+                $window.location.href = url;
+            }
+            return $location.path();
         });
 
         $locationProvider.html5Mode(true);
