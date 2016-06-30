@@ -77,7 +77,7 @@ describe('Directive: bstBookmark', function() {
     });
 
     it("should set bookmarks on the scope", function () {
-        spyOn(BstBookmark, 'queryPaged').andCallThrough();
+        spyOn(BstBookmark, 'queryPaged').and.callThrough();
         compileDirective();
         expect(BstBookmark.queryPaged).toHaveBeenCalled();
         expect(elementScope.bookmarks).toEqual(['bookmark']);
@@ -112,7 +112,7 @@ describe('Directive: bstBookmark', function() {
                 controller: scope.controllerName
             };
 
-            spyOn(BstBookmark, 'create').andCallThrough();
+            spyOn(BstBookmark, 'create').and.callThrough();
             spyOn(BstBookmark, 'queryPaged');
         });
 

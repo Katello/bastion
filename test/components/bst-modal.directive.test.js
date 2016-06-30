@@ -49,13 +49,13 @@ describe('Directive: bstModal', function() {
                    '</span>';
 
         element = angular.element(html);
-        spyOn($templateCache, 'put').andCallThrough();
+        spyOn($templateCache, 'put').and.callThrough();
 
         compile(element)(scope);
         scope.$digest();
 
         elementScope = element.scope();
-        modalId = $templateCache.put.mostRecentCall.args[0];
+        modalId = $templateCache.put.calls.mostRecent().args[0];
     });
 
     it("uses angular-blocks to extend a modal template", function () {
@@ -68,7 +68,7 @@ describe('Directive: bstModal', function() {
     });
 
     it("allows the opening of a modal dialog via bootstrap ui", function() {
-        spyOn($modal, 'open').andCallThrough();
+        spyOn($modal, 'open').and.callThrough();
 
         elementScope.openModal();
 
