@@ -192,7 +192,7 @@ angular.module('Bastion').run(['$rootScope', '$state', '$stateParams', 'gettextC
         );
 
         // Prevent angular from handling org/location switcher URLs
-        orgSwitcherRegex = new RegExp("/(organizations|locations)/(.+/)*(select|clear)");
+        orgSwitcherRegex = new RegExp("/(organizations|locations)");
         $rootScope.$on('$locationChangeStart', function (event, newUrl) {
             if (newUrl.match(orgSwitcherRegex)) {
                 event.preventDefault();
