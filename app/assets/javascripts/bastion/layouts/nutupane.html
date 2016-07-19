@@ -31,6 +31,12 @@
                typeahead-empty
                typeahead-template-url="components/views/autocomplete-scoped-search.html"/>
         <span class="input-group-btn">
+          <button class="btn btn-default"
+                  type="button"
+                  ng-click='table.search("") && (table.searchCompleted = false)' 
+                  ng-show="table.searchCompleted && table.searchTerm">
+            <i class="fa fa-times"></i>
+          </button>
           <button ng-click="table.search(table.searchTerm)" class="btn btn-default" type="button">
             <i class="fa fa-search"></i>
             <span translate>Search</span>
@@ -64,8 +70,11 @@
       <span ng-hide="$root.$state.current.collapsed">{{ "Loading..." | translate }}</span>
     </div>
 
-    <p bst-alert="info" ng-show="table.rows.length === 0 && !table.working">
+    <p bst-alert="info" ng-show="table.rows.length === 0 && !table.working && !table.searchTerm && !table.searchCompleted">
       <span data-block="no-rows-message"></span>
+    </p>
+    <p bst-alert="info" ng-show="table.rows.length === 0 && !table.working && (table.searchTerm || table.searchCompleted)">
+      <span data-block="no-search-results-message"></span>
     </p>
 
     <div ng-show="table.rows.length > 0" bst-container-scroll data="table.rows">
