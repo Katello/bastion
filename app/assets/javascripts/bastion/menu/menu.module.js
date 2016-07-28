@@ -6,6 +6,5 @@
  *   Module for menu related functionality.
  */
 angular.module('Bastion.menu', [
-    'Bastion',
     'Bastion.components'
 ]);

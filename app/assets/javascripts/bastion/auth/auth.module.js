@@ -5,7 +5,7 @@
  * @description
  *   Module for auth functionality.
  */
-angular.module('Bastion.auth', ['Bastion']);
+angular.module('Bastion.auth', []);
 
 /**
  * @ngdoc object

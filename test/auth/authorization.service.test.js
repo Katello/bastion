@@ -47,4 +47,8 @@ describe('Service:Authorization', function() {
             });
         });
     });
+
+    it("returns the current user", function () {
+        expect(Authorization.getCurrentUser()).toBe(CurrentUser);
+    });
 });

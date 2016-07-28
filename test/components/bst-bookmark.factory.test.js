@@ -3,7 +3,7 @@ describe('Factory: BstBookmark', function() {
         bookmarks,
         BstBookmark;
 
-    beforeEach(module('Bastion', 'Bastion.components'));
+    beforeEach(module('Bastion.components'));
 
     beforeEach(module(function() {
         bookmarks = {

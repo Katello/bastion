@@ -16,13 +16,13 @@
     angular.module('Bastion.features').value('FeatureSettings', angular.fromJson(<%= SETTINGS[:features].nil? ? {} : SETTINGS[:features].to_json.html_safe %>));
     angular.module('Bastion').value('currentLocale', '<%= I18n.locale %>');
     angular.module('Bastion').value('CurrentOrganization', "<%= Organization.current.id if Organization.current %>");
-    angular.module('Bastion').value('Permissions', angular.fromJson('<%= User.current.cached_roles.collect { |role| role.permissions }.flatten.to_json.html_safe %>'));
-    angular.module('Bastion').value('CurrentUser', {
-      id: <%= User.current.id %>,
-      admin: <%= User.current.admin || User.current.usergroups.any? { |group| group.admin } %>
-    });
     angular.module('Bastion').value('markActiveMenu', mark_active_menu);
     angular.module('Bastion').constant('BastionConfig', angular.fromJson('<%= Bastion.config.to_json.html_safe %>'));
+    angular.module('Bastion.auth').value('CurrentUser', {
+        id: <%= User.current.id %>,
+        admin: <%= User.current.admin || User.current.usergroups.any? { |group| group.admin } %>
+    });
+    angular.module('Bastion.auth').value('Permissions', angular.fromJson('<%= User.current.cached_roles.collect { |role| role.permissions }.flatten.to_json.html_safe %>'));
   </script>
   <% Bastion.plugins.each do |name, plugin| %>
     <%= javascript_include_tag(plugin[:javascript]) %>

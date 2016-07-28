@@ -6,20 +6,13 @@
  *   Base module that defines the Katello module namespace and includes any thirdparty
  *   modules used by the application.
  */
-angular.module('Bastion', [
-    'ui.router',
-    'ngResource',
-    'Bastion.i18n',
-    'Bastion.components'
-]);
+angular.module('Bastion', []);
 
 /**
  * @ngdoc config
  * @name  Bastion.config
  *
  * @requires $httpProvider
- * @requires $urlRouterProvider
- * @requires $locationProvider
  * @requires $provide
  * @requires BastionConfig
  *
@@ -28,61 +21,12 @@ angular.module('Bastion', [
  *   to every request and adding Xs to translated strings.
  */
 angular.module('Bastion').config(
-    ['$httpProvider', '$urlRouterProvider', '$locationProvider', '$provide', 'BastionConfig',
-    function ($httpProvider, $urlRouterProvider, $locationProvider, $provide, BastionConfig) {
-        var oldBrowserBastionPath = '/bastion#';
-
+    ['$httpProvider', '$provide', 'BastionConfig',
+    function ($httpProvider, $provide, BastionConfig) {
         $httpProvider.defaults.headers.common = {
             Accept: 'application/json, text/plain, version=2; */*',
             'X-CSRF-TOKEN': angular.element('meta[name=csrf-token]').attr('content')
         };
-
-        $urlRouterProvider.rule(function ($injector, $location) {
-            var $sniffer = $injector.get('$sniffer'),
-                $window = $injector.get('$window'),
-                path = $location.path();
-
-            if (!$sniffer.history) {
-                $window.location.href = oldBrowserBastionPath + $location.path();
-            }
-
-            if (/^\/katello($|\/)/.test(path)) {
-                $window.location.href = $location.url();
-                $window.location.reload();
-            }
-
-            // removing trailing slash to prevent endless redirect
-            if (path[path.length - 1] === '/') {
-                return path.slice(0, -1);
-            }
-        });
-
-        $urlRouterProvider.otherwise(function ($injector, $location) {
-            var $window = $injector.get('$window'),
-                $state = $injector.get('$state'),
-                rootPath = $location.path().split('/')[1].replace('_', '-'),
-                url = $location.absUrl(),
-                foundParentState;
-
-            // ensure we don't double encode +s
-            url = url.replace(/%2B/g, "+");
-
-            // Remove the old browser path if present
-            url = url.replace(oldBrowserBastionPath, '');
-
-            foundParentState = _.find($state.get(), function (state) {
-                return state.url && state.url.replace('/', '') === rootPath;
-            });
-
-            if (foundParentState) {
-                $window.location.href = '/404';
-            } else {
-                $window.location.href = url;
-            }
-            return $location.path();
-        });
-
-        $locationProvider.html5Mode({enabled: true, requireBase: false});
 
         $provide.factory('PrefixInterceptor', ['$q', '$templateCache', function ($q, $templateCache) {
             return {

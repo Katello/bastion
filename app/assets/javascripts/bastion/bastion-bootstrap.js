@@ -13,5 +13,6 @@ BASTION_MODULES = [
     'Bastion.auth',
     'Bastion.menu',
     'Bastion.i18n',
-    'Bastion.features'
+    'Bastion.features',
+    'Bastion.routing'
 ];

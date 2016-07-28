@@ -5,4 +5,4 @@
  * @description
  *   Module for common utilities.
  */
-angular.module('Bastion.utils', ['Bastion', 'uuid4']);
+angular.module('Bastion.utils', ['uuid4', 'ngResource']);
