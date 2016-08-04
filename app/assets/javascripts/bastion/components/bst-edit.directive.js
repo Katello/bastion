@@ -28,7 +28,7 @@ angular.module('Bastion.components')
             $scope.editMode = false;
             $scope.workingMode = true;
 
-            if (angular.isDefined(action) && action.hasOwnProperty('then')) {
+            if (angular.isDefined(action) && 'then' in action) {
                 action.then(
                     function () {
                         $scope.updateDisplay($scope.model);
@@ -57,7 +57,7 @@ angular.module('Bastion.components')
                 }
 
                 if (angular.isDefined(options)) {
-                    if (options.hasOwnProperty('then')) {
+                    if ('then' in options) {
                         $scope.workingMode = true;
                         $scope.editMode = false;
                         options.then(function (data) {
@@ -119,7 +119,7 @@ angular.module('Bastion.components')
 
             handleDelete = $scope.handleDelete({ value: $scope.model });
 
-            if (angular.isDefined(handleDelete) && handleDelete.hasOwnProperty('then')) {
+            if (angular.isDefined(handleDelete) && 'then' in handleDelete) {
 
                 handleDelete.then(
                     function () {
@@ -344,7 +344,7 @@ angular.module('Bastion.components')
 
             handleAdd = $scope.handleAdd(value);
 
-            if (angular.isDefined(handleAdd) && handleAdd.hasOwnProperty('then')) {
+            if (angular.isDefined(handleAdd) && 'then' in handleAdd) {
 
                 handleAdd.then(
                     function () {
