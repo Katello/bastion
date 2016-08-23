@@ -33,7 +33,7 @@ module.exports = {
 
             basePath + 'app/assets/javascripts/bastion/bastion-bootstrap.js',
             basePath + 'app/assets/javascripts/bastion/bastion.module.js',
-            basePath + 'app/assets/javascripts/bastion/bastion-resource.factory.js',
+            basePath + 'app/assets/javascripts/bastion/routing.module.js',
             basePath + 'app/assets/javascripts/bastion/i18n/i18n.module.js',
             basePath + 'app/assets/javascripts/bastion/i18n/*.js',
             basePath + 'app/assets/javascripts/bastion/auth/auth.module.js',

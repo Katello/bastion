@@ -1,18 +1,17 @@
 /**
  * @ngdoc factory
- * @name  Bastion.factory:BastionResource
+ * @name  Bastion.utils.factory:BastionResource
  *
- * @requires BastionResource
+ * @requires $resource
  *
  * @description
  *   Base module that defines the Katello module namespace and includes any thirdparty
  *   modules used by the application.
  */
-angular.module('Bastion').factory('BastionResource', ['$resource', function ($resource) {
+angular.module('Bastion.utils').factory('BastionResource', ['$resource', function ($resource) {
 
     return function (url, paramDefaults, actions) {
         var defaultActions;
-
         defaultActions = {
             queryPaged: {method: 'GET', isArray: false},
             queryUnpaged: {method: 'GET', isArray: false, params: {'full_result': true}}

@@ -6,6 +6,5 @@
  *   Module for internationalization.
  */
 angular.module('Bastion.i18n', [
-    'gettext',
-    'Bastion'
+    'gettext'
 ]);

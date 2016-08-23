@@ -3,7 +3,7 @@
  * @name Bastion.components.directive:currentTasks
  *
  * @requires $document
- * @requires CurrentUser
+ * @requires authorizationService
  * @requires Task
  *
  * @description
@@ -14,8 +14,8 @@
     <span current-tasks></span>
  */
 angular.module('Bastion.components').directive('currentTasks',
-    ['$document', 'CurrentUser', 'Task',
-    function ($document, CurrentUser, Task) {
+    ['$document', 'authorizationService', 'Task',
+    function ($document, authorizationService, Task) {
 
         return {
             restrict: 'A',
@@ -26,7 +26,7 @@ angular.module('Bastion.components').directive('currentTasks',
                 // Hide the current tasks list if the user clicks outside of it
                 var currentTasksMenu = angular.element('#currentTasks');
                 $scope.visible = false;
-                $scope.currentUser = CurrentUser;
+                $scope.currentUser = authorizationService.getCurrentUser();
                 $scope.count = 0;
 
                 $scope.toggleVisibility = function () {
@@ -48,7 +48,8 @@ angular.module('Bastion.components').directive('currentTasks',
                 });
             }],
             link: function (scope) {
-                Task.registerSearch({ 'active_only': true, 'type': 'user', 'user_id': CurrentUser.id}, scope.updateTasks);
+                var searchParams = {'active_only': true, 'type': 'user', 'user_id': authorizationService.getCurrentUser().id};
+                Task.registerSearch(searchParams, scope.updateTasks);
             }
         };
     }]);

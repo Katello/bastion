@@ -32,4 +32,8 @@ angular.module('Bastion.auth').service('Authorization', ['CurrentUser', 'Permiss
     this.denied = function (permissionName, model) {
         return !this.permitted(permissionName, model);
     };
+
+    this.getCurrentUser = function () {
+        return CurrentUser;
+    };
 }]);

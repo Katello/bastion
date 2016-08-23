@@ -1,7 +1,7 @@
 describe('Factory: BastionResource', function() {
     var resource;
 
-    beforeEach(module('Bastion'));
+    beforeEach(module('Bastion.utils'));
 
     beforeEach(inject(function($injector) {
         resource = $injector.get('BastionResource');

@@ -14,7 +14,7 @@
 //= require "angular-rails-templates"
 
 //= require "bastion/bastion.module"
-//= require "bastion/bastion-resource.factory"
+//= require "bastion/routing.module.js"
 
 //= require "bastion/i18n/i18n.module"
 //= require "bastion/i18n/translate.service.js"
