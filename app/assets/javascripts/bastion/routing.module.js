@@ -72,7 +72,7 @@ angular.module('Bastion.routing', ['ui.router']);
             return $location.path();
         });
 
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode({enabled: true, requireBase: false});
 
     }
 
