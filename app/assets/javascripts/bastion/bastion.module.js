@@ -6,7 +6,7 @@
  *   Base module that defines the Katello module namespace and includes any thirdparty
  *   modules used by the application.
  */
-angular.module('Bastion', []);
+angular.module('Bastion', ['ncy-angular-breadcrumb']);
 
 /**
  * @ngdoc config
