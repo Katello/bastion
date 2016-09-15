@@ -139,7 +139,7 @@ angular.module('Bastion.components')
                 }
 
                 return function (scope, element, attrs, bstTableController) {
-                    if (angular.isDefined(tAttrs.rowSelect)) {
+                    if (angular.isDefined(tAttrs.rowSelect) && angular.isDefined(scope.table)) {
                         scope.table.rowSelect = true;
                     } else if (angular.isDefined(tAttrs.rowChoice)) {
                         scope.table.rowChoice = true;

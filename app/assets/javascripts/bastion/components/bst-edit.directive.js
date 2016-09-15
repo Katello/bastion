@@ -16,7 +16,6 @@
 angular.module('Bastion.components')
     .directive('bstEdit', function () {
         return {
-            replace: true,
             controller: 'BstEditController',
             templateUrl: 'components/views/bst-edit.html'
         };
@@ -169,7 +168,6 @@ angular.module('Bastion.components')
     }])
     .directive('bstEditText', function () {
         return {
-            replace: true,
             scope: {
                 model: '=bstEditText',
                 readonly: '=',
@@ -183,7 +181,6 @@ angular.module('Bastion.components')
     })
     .directive('bstEditTextarea', function () {
         return {
-            replace: true,
             scope: {
                 model: '=bstEditTextarea',
                 readonly: '=',
@@ -195,7 +192,6 @@ angular.module('Bastion.components')
     })
     .directive('bstEditNumber', function () {
         return {
-            replace: true,
             scope: {
                 model: '=bstEditNumber',
                 readonly: '=',
@@ -211,7 +207,6 @@ angular.module('Bastion.components')
     })
     .directive('bstEditCheckbox', function () {
         return {
-            replace: true,
             scope: {
                 model: '=bstEditCheckbox',
                 readonly: '=',
@@ -225,7 +220,6 @@ angular.module('Bastion.components')
     })
     .directive('bstEditCustom', function () {
         return {
-            replace: true,
             transclude: true,
             templateUrl: 'components/views/bst-edit-custom.html',
             scope: {
@@ -242,7 +236,6 @@ angular.module('Bastion.components')
     })
     .directive('bstEditSelect', function () {
         return {
-            replace: true,
             scope: {
                 model: '=bstEditSelect',
                 displayValueDefault: '=displayValueDefault',
@@ -267,7 +260,6 @@ angular.module('Bastion.components')
     })
     .directive('bstEditMultiselect', function () {
         return {
-            replace: true,
             templateUrl: 'components/views/bst-edit-multiselect.html',
             scope: {
                 model: '=bstEditMultiselect',
