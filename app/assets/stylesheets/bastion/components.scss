@@ -1,0 +1,28 @@
+.header-bar {
+  background: rgb(250, 250, 250);
+  padding: 10px 15px 10px 0;
+  border-bottom: 1px solid rgb(230, 230, 230);
+
+  h2 {
+    margin: 5px 0 0 0;
+  }
+}
+
+.dl-horizontal.dl-horizontal-left {
+  dt {
+    overflow: visible;
+    text-align: left;
+    text-overflow: clip;
+    white-space: pre-wrap;
+    width: 125px;
+  }
+
+  dt:after {
+    content: ':';
+  }
+
+  dd {
+    margin-left: 200px;
+    word-wrap: break-word;
+  }
+}

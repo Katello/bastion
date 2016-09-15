@@ -1,0 +1,28 @@
+<div class="loading-mask fa-3x" ng-show="page.loading">
+  <i class="fa fa-spinner fa-spin"></i>
+  {{ "Loading..." | translate }}
+</div>
+
+<div class="row header-bar">
+  <div class="col-sm-10">
+    <span data-block="header"></span>
+  </div>
+
+  <div class="fr">
+    <span data-block="item-actions"></span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div ncy-breadcrumb></div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div ng-hide="page && (page.loading || page.error)">
+      <span data-block="content"></span>
+    </div>
+  </div>
+</div>

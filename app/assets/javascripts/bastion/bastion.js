@@ -9,6 +9,7 @@
 //= require "bastion/ngInfiniteScroll/ng-infinite-scroll.js"
 //= require "bastion/angular-gettext/angular-gettext"
 //= require "bastion/angular-blocks/angular-blocks"
+//= require "bastion/angular-breadcrumb/angular-breadcrumb"
 //= require_tree "../../../../vendor/assets/javascripts/bastion/angular-bootstrap"
 //= require "bastion/angular-animate/angular-animate"
 //= require "angular-rails-templates"
