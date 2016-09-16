@@ -269,6 +269,11 @@ angular.module('Bastion.components').factory('Nutupane',
                 }
             };
 
+            self.table.clearSearch = function () {
+                self.table.search(null);
+                self.table.searchCompleted = true;
+            };
+
             // Must be overridden
             self.table.closeItem = function () {
                 if (!self.masterOnly) {

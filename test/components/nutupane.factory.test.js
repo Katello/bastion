@@ -101,6 +101,15 @@ describe('Factory: Nutupane', function() {
             expect($location.search().search).toEqual("Find Me");
         });
 
+        it("can clear the search", function () {
+            spyOn(nutupane.table, 'search');
+
+            nutupane.table.clearSearch();
+
+            expect(nutupane.table.search).toHaveBeenCalledWith(null);
+            expect(nutupane.table.searchCompleted).toBe(true);
+        });
+
         it("enforcing the user of this factory to define a closeItem function", function() {
             expect(nutupane.table.closeItem).toThrow();
         });
