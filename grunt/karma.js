@@ -13,6 +13,9 @@ module.exports = {
         preprocessors: {
             'app/assets/javascripts/**/*.html': ['ng-html2js']
         },
+        exclude: [
+            basePath + 'app/assets/javascripts/bastion/bastion-bootstrap.js'
+        ],
         files: [
             basePath + '.tmp/bower_components/jquery/jquery.js',
             basePath + 'vendor/assets/javascripts/bastion/underscore/underscore.js',
@@ -31,7 +34,6 @@ module.exports = {
             basePath + 'vendor/assets/javascripts/bastion/ngInfiniteScroll/ng-infinite-scroll.js',
             basePath + '.tmp/bower_components/angular-mocks/angular-mocks.js',
 
-            basePath + 'app/assets/javascripts/bastion/bastion-bootstrap.js',
             basePath + 'app/assets/javascripts/bastion/bastion.module.js',
             basePath + 'app/assets/javascripts/bastion/routing.module.js',
             basePath + 'app/assets/javascripts/bastion/i18n/i18n.module.js',

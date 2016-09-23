@@ -50,10 +50,6 @@ describe('config: Bastion.routing', function () {
         });
 
         describe("handles undefined states by", function () {
-            beforeEach(function () {
-
-            });
-
             it("redirecting to a 404 page if the parent state is found", function () {
                 spyOn($state, 'get').and.returnValue([{url: '/found-state'}]);
                 goTo('/found_state/does_not_exist');
