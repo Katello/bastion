@@ -83,6 +83,7 @@ angular.module('Bastion').run(['$rootScope', '$state', '$stateParams', 'gettextC
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
         $rootScope.transitionTo = $state.transitionTo;
+        $rootScope.$location = $location;
 
         $rootScope.isState = function (stateName) {
             return $state.is(stateName);
