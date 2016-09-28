@@ -6,7 +6,7 @@ describe('config: Bastion.routing', function () {
         $rootScope.$digest();
     }
 
-    beforeEach(module('Bastion.routing'));
+    beforeEach(module('Bastion.routing', 'layouts/404.html'));
 
     beforeEach(module(function ($provide) {
         $sniffer = {
@@ -52,8 +52,11 @@ describe('config: Bastion.routing', function () {
         describe("handles undefined states by", function () {
             it("redirecting to a 404 page if the parent state is found", function () {
                 spyOn($state, 'get').and.returnValue([{url: '/found-state'}]);
+                spyOn($state, 'go');
+
                 goTo('/found_state/does_not_exist');
-                expect($window.location.href).toBe('/404');
+
+                expect($state.go).toHaveBeenCalledWith('404');
             });
 
             it("redirecting to the url if no parent state is found", function () {

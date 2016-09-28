@@ -13,7 +13,7 @@ angular.module('Bastion.routing', ['ui.router']);
      * @description
      *   Routing configuration for Bastion.
      */
-    function bastionRouting($urlRouterProvider, $locationProvider) {
+    function bastionRouting($stateProvider, $urlRouterProvider, $locationProvider) {
         var oldBrowserBastionPath = '/bastion#', getRootPath;
 
         getRootPath = function (path) {
@@ -24,6 +24,11 @@ angular.module('Bastion.routing', ['ui.router']);
             }
             return rootPath;
         };
+
+        $stateProvider.state('404', {
+            permission: null,
+            templateUrl: 'layouts/404.html'
+        });
 
         $urlRouterProvider.rule(function ($injector, $location) {
             var $sniffer = $injector.get('$sniffer'),
@@ -65,7 +70,7 @@ angular.module('Bastion.routing', ['ui.router']);
             }
 
             if (foundParentState) {
-                $window.location.href = '/404';
+                $state.go('404');
             } else {
                 $window.location.href = url;
             }
@@ -73,9 +78,8 @@ angular.module('Bastion.routing', ['ui.router']);
         });
 
         $locationProvider.html5Mode({enabled: true, requireBase: false});
-
     }
 
     angular.module('Bastion.routing').config(bastionRouting);
-    bastionRouting.$inject = ['$urlRouterProvider', '$locationProvider'];
+    bastionRouting.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
 })();
