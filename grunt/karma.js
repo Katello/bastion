@@ -18,7 +18,6 @@ module.exports = {
         ],
         files: [
             basePath + '.tmp/bower_components/jquery/jquery.js',
-            basePath + 'vendor/assets/javascripts/bastion/underscore/underscore.js',
             basePath + 'vendor/assets/javascripts/bastion/angular/angular.js',
             basePath + 'vendor/assets/javascripts/bastion/angular-sanitize/angular-sanitize.js',
             basePath + 'vendor/assets/javascripts/bastion/angular-resource/angular-resource.js',
@@ -27,13 +26,13 @@ module.exports = {
             basePath + 'vendor/assets/javascripts/bastion/angular-animate/angular-animate.js',
             basePath + 'vendor/assets/javascripts/bastion/angular-bootstrap/ui-bootstrap.js',
             basePath + 'vendor/assets/javascripts/bastion/angular-bootstrap/ui-bootstrap-tpls.js',
-            basePath + 'vendor/assets/javascripts/bastion/underscore/underscore.js',
             basePath + 'vendor/assets/javascripts/bastion/angular-ui-router/angular-ui-router.js',
             basePath + 'vendor/assets/javascripts/bastion/angular-gettext/angular-gettext.js',
             basePath + 'vendor/assets/javascripts/bastion/ngUpload/ng-upload.js',
             basePath + 'vendor/assets/javascripts/bastion/ngInfiniteScroll/ng-infinite-scroll.js',
             basePath + 'vendor/assets/javascripts/bastion/angular-breadcrumb/angular-breadcrumb.js',
             basePath + '.tmp/bower_components/angular-mocks/angular-mocks.js',
+            basePath + '.tmp/bower_components/lodash/lodash.js',
 
             basePath + 'app/assets/javascripts/bastion/bastion.module.js',
             basePath + 'app/assets/javascripts/bastion/routing.module.js',

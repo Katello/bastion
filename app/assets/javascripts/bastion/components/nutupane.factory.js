@@ -231,10 +231,10 @@ angular.module('Bastion.components').factory('Nutupane',
 
                 if (self.table.allResultsSelected) {
                     selected.included.search = self.table.searchTerm || '';
-                    selected.excluded.ids = _.pluck(self.getDeselected(), identifier);
+                    selected.excluded.ids = _.map(self.getDeselected(), identifier);
                 } else {
                     selectedRows = self.table.getSelected();
-                    selected.included.ids = _.pluck(selectedRows, identifier);
+                    selected.included.ids = _.map(selectedRows, identifier);
                     selected.included.resources = selectedRows;
                 }
                 return selected;
