@@ -1,5 +1,3 @@
-//= require "bastion/underscore/underscore"
-
 //= require "bastion/angular/angular"
 //= require "bastion/angular-resource/angular-resource"
 //= require "bastion/angular-sanitize/angular-sanitize"

@@ -28,9 +28,9 @@ angular.module('Bastion.menu').service('MenuExpander', [function () {
 
     this.setMenu = function (menuName, items) {
         if (this.menu.hasOwnProperty(menuName)) {
-            this.menu[menuName] = _.uniq(_.union(this.menu[menuName], items), false, function (item) {
+            this.menu[menuName] = _.uniqBy(_.union(this.menu[menuName], items), function (item) {
                 return item.url;
-            }, this);
+            });
         } else {
             this.menu[menuName] = items;
         }

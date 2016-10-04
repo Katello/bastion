@@ -290,13 +290,13 @@ angular.module('Bastion.components')
 
         getIds = function (models) {
             models = models || [];
-            return _.pluck(models, "id");
+            return _.map(models, "id");
         };
 
         checkPrevious = function () {
             _.each($scope.options, function (tag) {
                 var appliedIds = getIds($scope.model);
-                if (_.contains(appliedIds, tag.id, 0)) {
+                if (_.includes(appliedIds, tag.id, 0)) {
                     tag.selected = true;
                 } else {
                     tag.selected = false;

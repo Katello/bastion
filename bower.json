@@ -15,7 +15,6 @@
     "angular-ui-router": "=0.3.1",
     "angular-blocks": "~>0.1.8",
     "angular-i18n": "1.3.13",
-    "underscore": "=1.5.2",
     "ngInfiniteScroll": "1.2.1",
     "ngUpload": "0.5.18",
     "angular-animate": "=1.5.5",
@@ -24,7 +23,8 @@
   "devDependencies": {
     "jquery": "=1.9.1",
     "angular-mocks": "=1.5.5",
-    "angular-scenario": "=1.5.5"
+    "angular-scenario": "=1.5.5",
+    "lodash": "~4.15.0"
   },
   "resolutions": {
     "angular": "1.5.5",
@@ -72,9 +72,6 @@
     },
     "angular-uuid4": {
       "javascripts/bastion/angular-uuid4": "angular-uuid4.js"
-    },
-    "underscore": {
-      "javascripts/bastion/underscore": "underscore.js"
     },
     "ngUpload": {
       "javascripts/bastion/ngUpload": "ng-upload.js"

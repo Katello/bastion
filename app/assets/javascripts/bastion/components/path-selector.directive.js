@@ -64,7 +64,7 @@ angular.module('Bastion.components').directive('pathSelector',
 
             convertPathObjects = function (paths) {
                 if (scope.pathAttribute) {
-                    paths = _.pluck(paths, scope.pathAttribute);
+                    paths = _.map(paths, scope.pathAttribute);
                 }
                 return paths;
             };
