@@ -52,3 +52,12 @@ ul {
 .breadcrumbs .breadcrumb {
   margin-bottom: 0;
 }
+
+// Need to override these because .bastion .dropdown-menu (we wrap
+// everything in .bastion) has more specificity than these selectors
+// and thus overrides them making them not displayed when they should be.
+[uib-typeahead-popup].dropdown-menu,
+.uib-datepicker-popup.dropdown-menu
+{
+  display: block;
+}

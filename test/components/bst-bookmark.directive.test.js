@@ -6,7 +6,7 @@ describe('Directive: bstBookmark', function() {
         elementScope,
         BstBookmark,
         bookmarks,
-        $modal;
+        $uibModal;
 
     compileDirective = function () {
         compile(element)(scope);
@@ -24,7 +24,7 @@ describe('Directive: bstBookmark', function() {
             return this;
         };
 
-        $modal = {
+        $uibModal = {
             $get: function() {
                 return this;
             }
@@ -59,7 +59,7 @@ describe('Directive: bstBookmark', function() {
             }
         };
 
-        $provide.provider('$modal', $modal);
+        $provide.provider('$uibModal', $uibModal);
         $provide.provider('translate', translate);
         $provide.provider('BstBookmark', BstBookmark);
     }));

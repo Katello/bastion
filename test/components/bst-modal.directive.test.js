@@ -1,7 +1,7 @@
 describe('Directive: bstModal', function() {
     var scope,
         compile,
-        $modal,
+        $uibModal,
         $templateCache,
         $q,
         modalId,
@@ -18,7 +18,7 @@ describe('Directive: bstModal', function() {
             delete: function() {}
         };
 
-        $modal = {
+        $uibModal = {
             $get: function() {
                 return this;
             },
@@ -32,7 +32,7 @@ describe('Directive: bstModal', function() {
             }
         };
 
-        $provide.provider('$modal', $modal);
+        $provide.provider('$uibModal', $uibModal);
     }));
 
     beforeEach(inject(function(_$compile_, _$rootScope_, _$q_, _$templateCache_) {
@@ -68,10 +68,10 @@ describe('Directive: bstModal', function() {
     });
 
     it("allows the opening of a modal dialog via bootstrap ui", function() {
-        spyOn($modal, 'open').and.callThrough();
+        spyOn($uibModal, 'open').and.callThrough();
 
         elementScope.openModal();
 
-        expect($modal.open).toHaveBeenCalled();
+        expect($uibModal.open).toHaveBeenCalled();
     });
 });

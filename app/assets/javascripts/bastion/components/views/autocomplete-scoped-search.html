@@ -6,5 +6,7 @@
   <i class='ui-autocomplete-completed'>
     {{ match.model.completed }}
   </i>
-  {{ match.model.label }}
+  <span ng-bind-html="match.label | uibTypeaheadHighlight:query">
+    {{ match.model.label }}
+  </span>
 </a>
