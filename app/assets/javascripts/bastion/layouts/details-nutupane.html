@@ -23,8 +23,7 @@
                      ng-model="detailsTable.searchTerm"
                      bst-on-enter="detailsTable.search(detailsTable.searchTerm)"
                      ng-trim="false"
-                     typeahead="item.label for item in detailsTable.autocomplete($viewValue)"
-                     typeahead-empty
+                     uib-typeahead="item.label for item in detailsTable.autocomplete($viewValue)"
                      typeahead-template-url="components/views/autocomplete-scoped-search.html"/>
 
               <button type="button" class="clear" aria-hidden="true" ng-show="detailsTable.searchTerm" ng-click='detailsTable.clearSearch()'>

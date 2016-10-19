@@ -1,5 +1,4 @@
-<ul class="dropdown"
-    ng-class="{ 'dropdown-right' : isRight(dropdown.direction), 'dropdown-active' : dropdown.show }">
+<ul uib-dropdown ng-class="{ 'dropdown-right' : isRight(dropdown.direction), 'dropdown-active' : dropdown.show }">
   <li class="dropdown-item"
       ng-repeat="item in dropdown"
       ng-mouseenter="setHover(item, true)"

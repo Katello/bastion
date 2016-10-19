@@ -4,13 +4,13 @@
  * @restrict A
  *
  * @requires $templateCache
- * @requires $modal
+ * @requires $uibModal
  *
  * @description
  *   Provides a wrapper around angular-ui's modal dialog service.
  */
 angular.module('Bastion.components').directive('bstModal',
-    ['$templateCache', '$modal', function ($templateCache, $modal) {
+    ['$templateCache', '$uibModal', function ($templateCache, $uibModal) {
     return {
         scope: {
             action: '&bstModal',
@@ -30,20 +30,20 @@ angular.module('Bastion.components').directive('bstModal',
             return function (scope) {
                 var modalInstance, modalController;
 
-                modalController = ['$scope', '$modalInstance', 'model', function ($scope, $modalInstance, model) {
+                modalController = ['$scope', '$uibModalInstance', 'model', function ($scope, $uibModalInstance, model) {
                     $scope[scope.modelName] = model;
 
                     $scope.ok = function () {
-                        $modalInstance.close();
+                        $uibModalInstance.close();
                     };
 
                     $scope.cancel = function () {
-                        $modalInstance.dismiss('cancel');
+                        $uibModalInstance.dismiss('cancel');
                     };
                 }];
 
                 scope.openModal = function () {
-                    modalInstance = $modal.open({
+                    modalInstance = $uibModal.open({
                         templateUrl: modalId,
                         controller: modalController,
                         resolve: {

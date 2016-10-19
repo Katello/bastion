@@ -34,9 +34,9 @@ describe('Directive: bstDropdown', function() {
         elementScope = element.isolateScope();
     });
 
-    it("should display a .dropdown <ul>", function() {
+    it("should display a dropdown <ul>", function() {
         expect(element.is('ul')).toBe(true);
-        expect(element.hasClass('dropdown')).toBe(true);
+        expect(element[0].hasAttribute('uib-dropdown')).toBe(true);
     });
 
     it("should display a .dropdown-item <li> for each top level menu item", function() {

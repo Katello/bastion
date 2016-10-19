@@ -8,7 +8,11 @@
      * @description
      *   Cross application re-usable components
      */
-    angular
-        .module('Bastion.components', ['ngResource', 'Bastion.utils']);
+    angular.module('Bastion.components', [
+        'ngResource',
+        'Bastion.utils',
+        'ui.bootstrap.alert',
+        'ui.bootstrap.tpls'
+    ]);
 
 })();

@@ -14,8 +14,7 @@
                bst-on-enter="table.search(table.searchTerm)"
                ng-model="table.searchTerm"
                ng-trim="false"
-               typeahead="item.label for item in table.autocomplete($viewValue)"
-               typeahead-empty
+               uib-typeahead="item.label for item in table.autocomplete($viewValue)"
                typeahead-template-url="components/views/autocomplete-scoped-search.html"/>
           <span class="input-group-btn">
             <button class="btn btn-default"
