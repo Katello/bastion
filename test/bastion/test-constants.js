@@ -1,3 +1,4 @@
+BASTION_MODULES = [];
 angular.module('Bastion').value('currentLocale', 'Here');
 angular.module('Bastion').value('CurrentOrganization', "ACME");
 angular.module('Bastion').value('Authorization', {});

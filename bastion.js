@@ -3,11 +3,11 @@ var requireDir = require('require-dir');
 module.exports = function (grunt) {
     var configs = requireDir('./grunt');
 
-    grunt.loadTasks(__dirname + '/node_modules/grunt-eslint/tasks');
-    grunt.loadTasks(__dirname + '/node_modules/grunt-htmlhint/tasks');
-    grunt.loadTasks(__dirname + '/node_modules/grunt-bower-task/tasks');
-    grunt.loadTasks(__dirname + '/node_modules/grunt-karma/tasks');
-    grunt.loadTasks(__dirname + '/node_modules/grunt-angular-gettext/tasks');
+    grunt.loadTasks('node_modules/grunt-eslint/tasks');
+    grunt.loadTasks('node_modules/grunt-htmlhint/tasks');
+    grunt.loadTasks('node_modules/grunt-bower-task/tasks');
+    grunt.loadTasks('node_modules/grunt-karma/tasks');
+    grunt.loadTasks('node_modules/grunt-angular-gettext/tasks');
 
     grunt.initConfig(configs);
 
