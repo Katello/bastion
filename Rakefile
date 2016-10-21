@@ -37,7 +37,7 @@ def setup_npm
   syscall('sudo npm -g install grunt-cli bower yo phantomjs')
 
   puts "Installing NPM dependencies"
-  syscall("npm install #{Bastion::Engine.root} grunt") if !bastion_core?
+  syscall("npm install #{Bastion::Engine.root}") if !bastion_core?
   syscall("npm install") if File.exist?('package.json')
   syscall("bower install") if bastion_core?
 end
