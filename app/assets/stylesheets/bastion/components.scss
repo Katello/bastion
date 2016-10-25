@@ -8,13 +8,17 @@
   }
 }
 
+.nav.nav-tabs.details-nav {
+  margin-bottom: 10px;
+}
+
 .dl-horizontal.dl-horizontal-left {
   dt {
     overflow: visible;
     text-align: left;
     text-overflow: clip;
-    white-space: pre-wrap;
-    width: 125px;
+    white-space: inherit;
+    width: 150px;
   }
 
   dt:after {
