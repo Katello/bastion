@@ -60,3 +60,7 @@ ul {
   @extend .text-muted;
   padding: 1px 10px;
 }
+
+.breadcrumbs .breadcrumb {
+  margin-bottom: 0;
+}
