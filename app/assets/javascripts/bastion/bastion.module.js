@@ -70,14 +70,15 @@ angular.module('Bastion').config(
  * @requires currentLocale
  * @requires $location
  * @requires $window
+ * @requires $breadcrumb
  * @requires PageTitle
  * @requires markActiveMenu
  *
  * @description
  *   Set up some common state related functionality and set the current language.
  */
-angular.module('Bastion').run(['$rootScope', '$state', '$stateParams', 'gettextCatalog', 'currentLocale', '$location', '$window', 'PageTitle', 'markActiveMenu',
-    function ($rootScope, $state, $stateParams, gettextCatalog, currentLocale, $location, $window, PageTitle, markActiveMenu) {
+angular.module('Bastion').run(['$rootScope', '$state', '$stateParams', 'gettextCatalog', 'currentLocale', '$location', '$window', '$breadcrumb', 'PageTitle', 'markActiveMenu',
+    function ($rootScope, $state, $stateParams, gettextCatalog, currentLocale, $location, $window, $breadcrumb, PageTitle, markActiveMenu) {
         var fromState, fromParams, orgSwitcherRegex;
 
         $rootScope.$state = $state;
