@@ -132,8 +132,11 @@ angular.module('Bastion').run(['$rootScope', '$state', '$stateParams', 'gettextC
 
         // Prevent angular from handling org/location switcher URLs
         orgSwitcherRegex = new RegExp("/(organizations|locations)");
-        $rootScope.$on('$locationChangeStart', function (event, newUrl) {
-            if (newUrl.match(orgSwitcherRegex)) {
+        $rootScope.$on('$locationChangeStart', function (event, newUrl, oldUrl) {
+            // do not handle links when leaving smart proxies page
+            var proxiesRegex = /smart_proxies/;
+            var condition = newUrl.match(orgSwitcherRegex) || (oldUrl.match(proxiesRegex) && !newUrl.match(proxiesRegex));
+            if (condition) {
                 event.preventDefault();
                 $window.location.href = newUrl;
             }
