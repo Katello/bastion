@@ -1,12 +1,4 @@
 <div class="control-group buttons">
-  <button class="btn btn-default"
-          type="button"
-          ng-click="handleCancel()"
-          ng-disabled="working"
-          translate>
-    Cancel
-  </button>
-
   <button class="btn btn-primary"
           ng-click="handleSave(); working = true"
           ng-disabled="invalid || working">
@@ -14,5 +6,13 @@
     <i class="fa fa-spinner fa-spin" ng-show="working"></i>
     <span ng-show="working" translate>Saving...</span>
     <span ng-hide="working" translate>Save</span>
+  </button>
+
+  <button class="btn btn-default"
+          type="button"
+          ng-click="handleCancel()"
+          ng-disabled="working"
+          translate>
+    Cancel
   </button>
 </div>
