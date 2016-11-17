@@ -5,20 +5,8 @@
   font-weight: normal;
 }
 
-.alert {
-  margin: 10px;
-
-  ul {
-    list-style: none;
-  }
-
-  p {
-    margin-bottom: 0;
-  }
-
-  div {
-    display: inline;
-  }
+.alert ul {
+  list-style: none;
 }
 
 // Patternfly Overrides
