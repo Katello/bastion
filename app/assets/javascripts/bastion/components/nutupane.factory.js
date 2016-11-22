@@ -6,6 +6,7 @@
  * @requires $q
  * @requires $timeout
  * @requires $rootScope
+ * @requires TableCache
  * @requires GlobalNotification
  *
  * @description
@@ -30,15 +31,20 @@
     </pre>
  */
 angular.module('Bastion.components').factory('Nutupane',
-    ['$location', '$q', '$timeout', '$rootScope', 'GlobalNotification', function ($location, $q, $timeout, $rootScope, GlobalNotification) {
+    ['$location', '$q', '$timeout', '$rootScope', 'TableCache', 'GlobalNotification', function ($location, $q, $timeout, $rootScope, TableCache, GlobalNotification) {
         var Nutupane = function (resource, params, action) {
             var self = this,
                 orgSwitcherRegex = new RegExp("/(organizations|locations)/(.+/)*(select|clear)");
+
+            function getTableName() {
+                return $location.path().split('/').join('-');
+            }
+
             params = params || {};
 
             self.searchKey = action ? action + 'Search' : 'search';
 
-            self.table = {
+            self.table = TableCache.getTable(getTableName()) || {
                 action: action || 'queryPaged',
                 params: params,
                 resource: resource,
@@ -104,6 +110,7 @@ angular.module('Bastion.components').factory('Nutupane',
                         }
                         table.resource.offset = table.rows.length;
 
+                        TableCache.setTable(getTableName(), table);
                         $rootScope.$emit('nutupane:loaded');
                     }, 0);
                     table.working = false;
