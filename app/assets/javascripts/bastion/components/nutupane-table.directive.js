@@ -70,6 +70,7 @@ angular.module('Bastion.components').directive('nutupaneTable', ['$compile', '$w
             });
 
             buildTable();
+            windowElement.trigger('resize');
         }
     };
 }]);
