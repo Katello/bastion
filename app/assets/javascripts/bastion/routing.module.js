@@ -14,7 +14,7 @@ angular.module('Bastion.routing', ['ui.router']);
      *   Routing configuration for Bastion.
      */
     function bastionRouting($stateProvider, $urlRouterProvider, $locationProvider) {
-        var oldBrowserBastionPath = '/bastion#', getRootPath;
+        var oldBrowserBastionPath = '/bastion#', getRootPath, shouldRemoveTrailingSlash;
 
         getRootPath = function (path) {
             var rootPath = null;
@@ -23,6 +23,16 @@ angular.module('Bastion.routing', ['ui.router']);
                 rootPath = path.replace('_', '-').split('/')[1];
             }
             return rootPath;
+        };
+
+        shouldRemoveTrailingSlash = function (path) {
+            var whiteList = ['pulp'], remove = true;
+
+            if (path.split('/')[1] && whiteList.indexOf(path.split('/')[1]) >= 0) {
+                remove = false;
+            }
+
+            return remove;
         };
 
         $stateProvider.state('404', {
@@ -39,8 +49,8 @@ angular.module('Bastion.routing', ['ui.router']);
                 $window.location.href = oldBrowserBastionPath + $location.path();
             }
 
-            // removing trailing slash to prevent endless redirect
-            if (path[path.length - 1] === '/') {
+            // removing trailing slash to prevent endless redirect if not in ignore list
+            if (path[path.length - 1] === '/' && shouldRemoveTrailingSlash(path)) {
                 return path.slice(0, -1);
             }
         });
