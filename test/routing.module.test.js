@@ -35,6 +35,11 @@ describe('config: Bastion.routing', function () {
             goTo('/state///');
             expect($window.location.href).toBe('http://server/state');
         });
+
+        it("doesn't remove slashes if whitelisted", function () {
+            goTo('/pulp/repos/');
+            expect($window.location.href).toBe('http://server/pulp/repos/');
+        });
     });
 
     describe("provides an otherwise method that", function () {
