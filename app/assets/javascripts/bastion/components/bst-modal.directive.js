@@ -15,17 +15,21 @@ angular.module('Bastion.components').directive('bstModal',
         scope: {
             action: '&bstModal',
             modelName: '@model',
-            model: '='
+            model: '=',
+            templateUrl: '@'
         },
-        compile: function(tElement) {
-            var template = angular.element('<div extend-template="components/views/bst-modal.html"></div>'), modalId;
+        compile: function(tElement, tAttrs) {
+            var template = angular.element('<div extend-template="components/views/bst-modal.html"></div>'),
+                templateUrl = tAttrs.templateUrl;
 
-            template.append(tElement.children());
-            tElement.html('');
-            tElement = angular.element(template);
+            if (!templateUrl) {
+                template.append(tElement.children());
+                tElement.html('');
+                tElement = angular.element(template);
 
-            modalId = 'bstModal%d.html'.replace('%d', Math.random().toString());
-            $templateCache.put(modalId, tElement);
+                templateUrl = 'bstModal%d.html'.replace('%d', Math.random().toString());
+                $templateCache.put(templateUrl, tElement);
+            }
 
             return function (scope) {
                 var modalInstance, modalController;
@@ -44,7 +48,7 @@ angular.module('Bastion.components').directive('bstModal',
 
                 scope.openModal = function () {
                     modalInstance = $uibModal.open({
-                        templateUrl: modalId,
+                        templateUrl: templateUrl,
                         controller: modalController,
                         resolve: {
                             model: function () {
