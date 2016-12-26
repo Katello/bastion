@@ -74,4 +74,18 @@ describe('Directive: bstModal', function() {
 
         expect($uibModal.open).toHaveBeenCalled();
     });
+    
+    it("allows the specification of a modal templateUrl", function() {
+        var html = '<span bst-modal="item.delete(item)" template-url="blah.html"></span>';
+
+        element = angular.element(html);
+        compile(element)(scope);
+        scope.$digest();
+
+        spyOn($uibModal, 'open').and.callThrough();
+
+        elementScope.openModal();
+
+        expect($uibModal.open.calls.mostRecent().args[0].templateUrl).toBe('blah.html');
+    });
 });
