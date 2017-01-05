@@ -47,8 +47,8 @@ td.row-select {
   .table {
     margin-bottom: 0;
 
-    tr:hover td, tr:hover td a,
-    tr.focus td, tr.focus td a {
+    tr:hover td, tr:hover td > a,
+    tr.focus td, tr.focus td > a {
       background-color: $listhover_color;
       color: #FFF;
 
@@ -61,7 +61,7 @@ td.row-select {
       background-color: $listhover_color;
       color: #FFF;
 
-      a {
+      > a {
         color: #FFF;
       }
 
@@ -110,7 +110,7 @@ td.row-select {
       background-color: lighten($listhover_color, 8%);
       color: white;
 
-      a {
+      > a {
         color: white;
       }
     }
