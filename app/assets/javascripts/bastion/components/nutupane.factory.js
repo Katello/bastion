@@ -192,6 +192,7 @@ angular.module('Bastion.components').factory('Nutupane',
             };
 
             self.refresh = function () {
+                TableCache.removeTable(getTableName());
                 self.table.refreshing = true;
                 self.table.resource.page = 0;
                 return self.load(true);
