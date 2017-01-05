@@ -8,7 +8,8 @@ describe('Factory: TableCahce', function () {
             get: function () {
                 return table;
             },
-            put: function () {}
+            put: function () {},
+            remove: function () {}
         };
 
         $cacheFactory = function () {
@@ -27,6 +28,12 @@ describe('Factory: TableCahce', function () {
         spyOn(cache, 'put').and.callThrough();
         TableCache.setTable("table", table);
         expect(cache.put).toHaveBeenCalledWith("table", table);
+    });
+
+    it("allows removing a table from the cache", function () {
+        spyOn(cache, 'remove').and.callThrough();
+        TableCache.removeTable("table");
+        expect(cache.remove).toHaveBeenCalledWith("table");
     });
 
     it("allows getting a table from the cache", function () {

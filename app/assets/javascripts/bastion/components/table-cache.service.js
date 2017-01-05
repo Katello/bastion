@@ -14,6 +14,10 @@
             cache.put(tableName, table);
         };
 
+        this.removeTable = function (tableName) {
+            cache.remove(tableName);
+        };
+
         this.getTable = function (tableName) {
             return cache.get(tableName);
         };
