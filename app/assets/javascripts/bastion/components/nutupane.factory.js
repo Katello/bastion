@@ -37,7 +37,7 @@ angular.module('Bastion.components').factory('Nutupane',
                 orgSwitcherRegex = new RegExp("/(organizations|locations)/(.+/)*(select|clear)");
 
             function getTableName() {
-                return $location.path().split('/').join('-');
+                return $location.path().split('/').join('-').slice(1);
             }
 
             params = params || {};
