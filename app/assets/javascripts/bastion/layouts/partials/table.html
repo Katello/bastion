@@ -1,21 +1,22 @@
-<div class="row header-bar">
-  <div class="row">
-    <div class="col-sm-12">
-      <div data-block="search-filter"></div>
-    </div>
-  </div>
+<div class="row toolbar-pf table-view-pf-toolbar-external" ng-class="{'empty-table': table.rows.length === 0}">
+  <div class="col-sm-12">
+    <form class="toolbar-pf-actions">
+      <div class="toolbar-pf-action-right">
+        <div data-block="list-actions"></div>
+      </div>
 
-  <div data-block="search">
-    <div class="col-sm-3">
-      <div class="input-group">
-        <input type="text"
-               class="form-control"
-               placeholder="{{ 'Filter...' | translate }}"
-               bst-on-enter="table.search(table.searchTerm)"
-               ng-model="table.searchTerm"
-               ng-trim="false"
-               uib-typeahead="item.label for item in table.autocomplete($viewValue)"
-               typeahead-template-url="components/views/autocomplete-scoped-search.html"/>
+      <div class="form-group toolbar-pf-filter">
+        <div data-block="search">
+          <div class="input-group">
+            <input type="text"
+                   class="form-control"
+                   placeholder="{{ 'Filter...' | translate }}"
+                   bst-on-enter="table.search(table.searchTerm)"
+                   ng-model="table.searchTerm"
+                   ng-trim="false"
+                   uib-typeahead="item.label for item in table.autocomplete($viewValue)"
+                   typeahead-template-url="components/views/autocomplete-scoped-search.html"/>
+
           <span class="input-group-btn">
             <button class="btn btn-default"
                     type="button"
@@ -31,48 +32,47 @@
             </button>
             <ul bst-bookmark controller-name="controllerName" query="table.searchTerm" class="dropdown-menu pull-right"></ul>
           </span>
+          </div>
+        </div>
 
+        <span data-block="filters"></span>
+        <span data-block="search-filter"></span>
+      </div>
+    </form>
+
+    <div class="row toolbar-pf-results" ng-show="table.rows.length > 0">
+      <div class="col-sm-9">
+        <span translate>Showing {{ table.rows.length }} of {{ table.resource.subtotal }} ({{ table.resource.total }} Total)</span>
+      </div>
+
+      <div class="col-sm-3 table-view-pf-select-results" ng-show="table.rowSelect">
+        <span translate>{{ table.numSelected }} Selected</span>
       </div>
     </div>
-
-    <div class="col-sm-3">
-      <span translate>Showing {{ table.rows.length }} of {{ table.resource.subtotal }} ({{ table.resource.total }} Total)</span>
-    </div>
-  </div>
-
-  <div class="fr">
-    <div class="fl">
-      <div data-block="list-actions"></div>
-    </div>
   </div>
 </div>
 
-<div class="row header-bar">
-  <div class="fr" ng-show="table.rowSelect">
-    <span translate>{{ table.numSelected }} Selected</span>
-  </div>
-  <div class="col-sm-10">
-    <span data-block="filters"></span>
-  </div>
-</div>
+<div bst-table="table" nutupane-table>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="loading-mask" ng-show="table.refreshing || table.working" >
+        <i class="fa fa-spinner fa-spin"></i>
+        <span>{{ "Loading..." | translate }}</span>
+      </div>
 
-<div class="row nutupane" bst-table="table" nutupane-table>
-  <div class="loading-mask" ng-show="table.refreshing || table.working" >
-    <i class="fa fa-spinner fa-spin"></i>
-    <span>{{ "Loading..." | translate }}</span>
-  </div>
+      <p bst-alert="info" ng-show="table.rows.length === 0 && !table.working && !table.searchTerm && !table.searchCompleted">
+        <span data-block="no-rows-message"></span>
+      </p>
+      <p bst-alert="info" ng-show="table.rows.length === 0 && !table.working && (table.searchTerm || table.searchCompleted)">
+        <span data-block="no-search-results-message"></span>
+      </p>
 
-  <p bst-alert="info" ng-show="table.rows.length === 0 && !table.working && !table.searchTerm && !table.searchCompleted">
-    <span data-block="no-rows-message"></span>
-  </p>
-  <p bst-alert="info" ng-show="table.rows.length === 0 && !table.working && (table.searchTerm || table.searchCompleted)">
-    <span data-block="no-search-results-message"></span>
-  </p>
-
-  <div ng-show="table.rows.length > 0" bst-container-scroll data="table.rows">
-    <div infinite-scroll="table.nextPage()" infinite-scroll-container="'.container-scroll-wrapper'"
-         infinite-scroll-listen-for-event="nutupane:loaded">
-      <div data-block="table"></div>
+      <div ng-show="table.rows.length > 0 && !(table.refreshing || table.working)" bst-container-scroll data="table.rows">
+        <div infinite-scroll="table.nextPage()" infinite-scroll-container="'.container-scroll-wrapper'"
+             infinite-scroll-listen-for-event="nutupane:loaded">
+          <div data-block="table"></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

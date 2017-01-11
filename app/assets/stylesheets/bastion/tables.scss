@@ -1,0 +1,46 @@
+.table {
+  table-layout: fixed;
+
+  .number-cell {
+    text-align: right;
+  }
+
+  .action-cell {
+    text-align: center;
+  }
+
+  tr.clickable-row,
+  th.sortable {
+    cursor: pointer;
+  }
+  
+  th.row-select,
+  td.row-select {
+    width: 30px;
+    max-width: 30px;
+  }
+
+  tr:hover td, tr:hover td > a,
+  tr.focus td, tr.focus td > a {
+    background-color: $listhover_color;
+    color: #FFF;
+
+    button, select {
+      color: #000;
+    }
+  }
+
+  tr.active, tbody tr:hover, tr.selected-row td {
+    background-color: $listhover_color;
+    color: #FFF;
+
+    > a {
+      color: #FFF;
+    }
+
+    .bst-edit:hover {
+      color: #000;
+    }
+  }
+}
+
