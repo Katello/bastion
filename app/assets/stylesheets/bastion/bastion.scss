@@ -2,17 +2,20 @@
   word-wrap: break-word;
 }
 
+@import "overrides";
+@import "path-selector";
+@import "tables";
+
 .bastion {
   // Bastion Components
+  @import "patternfly";
   @import "mixins";
   @import "variables";
   @import "nutupane";
   @import "components";
-  @import "overrides";
   @import "helpers";
   @import "./forms";
   @import "animations";
-  @import "path-selector";
   @import "typography";
 
   body {

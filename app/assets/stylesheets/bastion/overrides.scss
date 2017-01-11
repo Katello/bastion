@@ -1,5 +1,4 @@
-// Bootstrap overrides
-@import "patternfly";
+@import "patternfly/variables";
 
 .filter-option label {
   font-weight: normal;
@@ -14,7 +13,7 @@ $table-cell-padding-top: 5px;
 $table-cell-padding-bottom: 5px;
 
 // Foreman Core Overrides
-table {
+table.table {
   margin-bottom: 0 !important;
 }
 
@@ -44,11 +43,6 @@ ul {
   }
 }
 
-.dropdown-menu li .disabled {
-  @extend .text-muted;
-  padding: 1px 10px;
-}
-
 .breadcrumbs .breadcrumb {
   margin-bottom: 0;
 }
@@ -60,4 +54,24 @@ ul {
 .uib-datepicker-popup.dropdown-menu
 {
   display: block;
+}
+
+// Fix bad margin and border on patternfly dropdown buttons
+html .toolbar-pf .toolbar-pf-filter.form-group .input-group-btn .btn {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  margin-right: -1px;
+  margin-left: -1px;
+}
+
+// Add border to bottom of empty table
+.row.toolbar-pf.table-view-pf-toolbar.empty-table{
+  border-bottom: 1px solid #d1d1d1;
+  margin-bottom: 10px;
+}
+
+// Ensure scrolling on the modal body
+.modal-body {
+  overflow-x: hidden;
+  overflow-y: scroll;
 }

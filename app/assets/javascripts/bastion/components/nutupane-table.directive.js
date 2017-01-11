@@ -33,7 +33,6 @@ angular.module('Bastion.components').directive('nutupaneTable', ['$compile', '$w
                 clonedTable.removeAttr("nutupane-table");
                 clonedTable.addClass("cloned-nutupane-table");
                 clonedTable.find('tbody').remove();
-                clonedTable.find('thead tr').append('<th class="table-header-spacer"></th>');
 
                 originalTable.find('thead').hide();
 
@@ -45,12 +44,6 @@ angular.module('Bastion.components').directive('nutupaneTable', ['$compile', '$w
                 if (rowSelect) {
                     angular.element(rowSelect).remove();
                 }
-
-                windowElement.bind('resize', function () {
-                    if (element.find('[bst-container-scroll]').length > 0) {
-                        clonedTable.find('thead tr th:last-child').width(element.width() - element.find('[bst-container-scroll]')[0].scrollWidth);
-                    }
-                });
 
                 // Compile each cloned th individually with original th scope
                 // so sort will work.
