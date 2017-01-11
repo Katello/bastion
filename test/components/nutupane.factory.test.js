@@ -3,10 +3,24 @@ describe('Factory: Nutupane', function() {
         $location,
         $rootScope,
         Resource,
+        TableCache,
         expectedResult,
         Nutupane;
 
     beforeEach(module('Bastion.components'));
+
+    beforeEach(module(function ($provide) {
+        TableCache = {
+            getTable: function () {
+            },
+            setTable: function () {
+            },
+            removeTable: function () {
+            }
+        };
+
+        $provide.value('TableCache', TableCache);
+    }));
 
     beforeEach(module(function() {
         expectedResult = [{id: 2, value: "value2"}, {id:3, value: "value3"}];
@@ -66,10 +80,19 @@ describe('Factory: Nutupane', function() {
 
         it("providing a method to refresh the table", function() {
             spyOn(Resource, 'queryPaged').and.callThrough();
+            spyOn(TableCache, 'removeTable');
+
             nutupane.refresh();
 
+            expect(TableCache.removeTable).toHaveBeenCalled();
             expect(Resource.queryPaged).toHaveBeenCalled();
             expect(nutupane.table.rows).toBe(expectedResult);
+        });
+
+        it("provides a way to invalidate the table", function () {
+            spyOn(TableCache, 'removeTable');
+            nutupane.invalidate();
+            expect(TableCache.removeTable).toHaveBeenCalled();
         });
 
         it("providing a method to perform a search", function() {
