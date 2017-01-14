@@ -36,6 +36,10 @@ angular.module('Bastion.components').factory('Nutupane',
             var self = this,
                 orgSwitcherRegex = new RegExp("/(organizations|locations)/(.+/)*(select|clear)");
 
+            // TODO: remove me
+            // http://projects.theforeman.org/issues/18079
+            TableCache.setTable = function () {};
+
             function getTableName() {
                 return $location.path().split('/').join('-').slice(1);
             }
