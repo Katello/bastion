@@ -6,6 +6,7 @@ describe('Factory: Nutupane', function() {
         $q,
         Resource,
         TableCache,
+        Notification,
         entriesPerPage,
         expectedResult,
         Nutupane;
@@ -26,9 +27,15 @@ describe('Factory: Nutupane', function() {
             }
         };
 
+        Notification = {
+            setSuccessMessage: function () {},
+            setErrorMessage: function () {}
+        };
+
         $provide.value('$stateParams', $stateParams);
         $provide.value('entriesPerPage', entriesPerPage);
         $provide.value('TableCache', TableCache);
+        $provide.value('Notification', Notification);
     }));
 
     beforeEach(inject(function(_$location_, _$timeout_, _Nutupane_, _$rootScope_, _$q_) {

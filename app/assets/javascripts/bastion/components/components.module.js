@@ -14,5 +14,4 @@
         'ui.bootstrap.alert',
         'ui.bootstrap.tpls'
     ]);
-
 })();

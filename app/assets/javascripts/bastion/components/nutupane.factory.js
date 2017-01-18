@@ -6,7 +6,7 @@
  * @requires $q
  * @requires entriesPerPage
  * @requires TableCache
- * @requires GlobalNotification
+ * @requires Notification
  *
  * @description
  *   Defines the Nutupane factory for adding common functionality to the Nutupane master-detail
@@ -30,7 +30,7 @@
     </pre>
  */
 angular.module('Bastion.components').factory('Nutupane',
-    ['$location', '$q', '$stateParams', 'entriesPerPage', 'TableCache', 'GlobalNotification', function ($location, $q, $stateParams, entriesPerPage, TableCache, GlobalNotification) {
+    ['$location', '$q', '$stateParams', 'entriesPerPage', 'TableCache', 'Notification', function ($location, $q, $stateParams, entriesPerPage, TableCache, Notification) {
         var Nutupane = function (resource, params, action, nutupaneParams) {
             var self = this;
 
@@ -110,7 +110,7 @@ angular.module('Bastion.components').factory('Nutupane',
 
                 resourceCall = resource[table.action](params, function (response) {
                     if (response.error) {
-                        GlobalNotification.setErrorMessage(response.error);
+                        Notification.setErrorMessage(response.error);
                     }
 
                     angular.forEach(response.results, function (row) {
