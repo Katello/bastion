@@ -9,6 +9,10 @@
     text-align: center;
   }
 
+  td, th {
+    word-wrap: break-word;
+  }
+
   tr.clickable-row,
   th.sortable {
     cursor: pointer;
