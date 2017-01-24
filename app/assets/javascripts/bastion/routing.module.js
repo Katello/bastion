@@ -70,9 +70,11 @@ angular.module('Bastion.routing', ['ui.router']);
 
             if (rootPath) {
                 foundParentState = _.find($state.get(), function (state) {
-                    var found = false;
-                    if (state.url) {
-                        found = getRootPath(state.url) === rootPath;
+                    var found = false,
+                        stateUrl = $state.href(state);
+
+                    if (stateUrl) {
+                        found = getRootPath(stateUrl) === rootPath;
                     }
 
                     return found;
