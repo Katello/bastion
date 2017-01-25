@@ -53,7 +53,7 @@ angular.module('Bastion.components').factory('Nutupane',
                 params: params,
                 resource: resource,
                 rows: [],
-                searchTerm: $location.search()[self.searchKey],
+                searchTerm: $location.search()[self.searchKey] || "",
                 initialLoad: true
             };
 

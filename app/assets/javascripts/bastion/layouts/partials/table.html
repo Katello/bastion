@@ -15,7 +15,8 @@
                    ng-model="table.searchTerm"
                    ng-trim="false"
                    uib-typeahead="item.label for item in table.autocomplete($viewValue)"
-                   typeahead-template-url="components/views/autocomplete-scoped-search.html"/>
+                   typeahead-template-url="components/views/autocomplete-scoped-search.html"
+                   typeahead-min-length="0"/>
 
           <span class="input-group-btn">
             <button class="btn btn-default"
