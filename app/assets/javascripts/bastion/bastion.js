@@ -1,7 +1,6 @@
 //= require "bastion/angular/angular"
 //= require "bastion/angular-resource/angular-resource"
 //= require "bastion/angular-sanitize/angular-sanitize"
-//= require "bastion/angular-patternfly/angular-patternfly.js"
 //= require "bastion/angular-ui-router/angular-ui-router"
 //= require "bastion/angular-uuid4/angular-uuid4.js"
 //= require "bastion/ngUpload/ng-upload"
