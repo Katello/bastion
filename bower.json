@@ -3,33 +3,31 @@
   "version": "0.0.1",
   "main": [],
   "dependencies": {
+    "json3": "~3.2.4",
+    "es5-shim": "~2.0.8",
     "angular": "=1.5.5",
-    "angular-animate": "=1.5.5",
-    "angular-i18n": "1.5.5",
-    "angular-resource": "=1.5.5",
-    "angular-route": "=1.5.5",
-    "angular-sanitize": "=1.5.5",
-    "angular-blocks": "~>0.1.8",
     "angular-bootstrap": "2.3.1",
     "angular-breadcrumb": "=0.4.1",
+    "angular-sanitize": "=1.5.5",
+    "angular-resource": "=1.5.5",
+    "angular-route": "=1.5.5",
     "angular-gettext": "=1.0.0",
-    "angular-patternfly": "4.0.0-alpha.2",
     "angular-ui-router": "=0.3.1",
-    "angular-uuid4": "0.1.0",
-    "es5-shim": "~2.0.8",
-    "json3": "~3.2.4",
+    "angular-blocks": "~>0.1.8",
+    "angular-i18n": "1.5.5",
     "ngInfiniteScroll": "1.2.1",
-    "ngUpload": "0.5.18"
+    "ngUpload": "0.5.18",
+    "angular-animate": "=1.5.5",
+    "angular-uuid4": "0.1.0"
   },
   "devDependencies": {
+    "jquery": "=1.9.1",
     "angular-mocks": "=1.5.5",
     "angular-scenario": "=1.5.5",
-    "jquery": "=1.9.1",
     "lodash": "~4.15.0"
   },
   "resolutions": {
     "angular": "1.5.5",
-    "angular-bootstrap": "2.3.1",
     "jquery": "=1.9.1"
   },
   "exportsOverride": {
@@ -41,9 +39,6 @@
     },
     "angular": {
       "javascripts/bastion/angular": "angular.js"
-    },
-    "angular-patternfly": {
-      "javascripts/bastion/angular-patternfly": "dist/angular-patternfly.js"
     },
     "angular-sanitize": {
       "javascripts/bastion/angular-sanitize": "angular-sanitize.js"
