@@ -64,6 +64,11 @@ html .toolbar-pf .toolbar-pf-filter.form-group .input-group-btn .btn {
   margin-left: -1px;
 }
 
+// Increase size of .toolbar-pf-filter
+html .toolbar-pf.table-view-pf-toolbar-external .toolbar-pf-filter {
+  width: 35%;
+}
+
 // Add border to bottom of empty table
 .row.toolbar-pf.table-view-pf-toolbar.empty-table{
   border-bottom: 1px solid #d1d1d1;

@@ -48,3 +48,12 @@
   }
 }
 
+.table-view-pf-toolbar-external .toolbar-pf-actions .form-group.toolbar-pf-search-filter {
+  border-right: none;
+  padding-left: 0;
+
+  select {
+    display: inline;
+    width: 150px;
+  }
+}
