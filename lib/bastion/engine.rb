@@ -14,6 +14,10 @@ module Bastion
       app.routes_reloader.paths.unshift("#{Bastion::Engine.root}/config/routes.rb")
     end
 
+    initializer "bastion.assets", :group => :all do |app|
+      app.config.assets.paths << "#{Bastion::Engine.root}/vendor/assets/stylesheets/bastion"
+    end
+
     initializer "bastion.configure_assets", :group => :all do |app|
       SETTINGS[:bastion] = {:assets => {}} if SETTINGS[:bastion].nil?
 
