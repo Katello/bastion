@@ -16,6 +16,15 @@
      </pre>
  */
 angular.module('Bastion.components').directive('bstContainerScroll', ['$window', '$timeout', function ($window, $timeout) {
+    function getScrollBarWidth() {
+        var $outer = $('<div>').css({visibility: 'hidden', width: 100, overflow: 'scroll'}).appendTo('body'),
+            widthWithScroll = $('<div>').css({width: '100%'}).appendTo($outer).outerWidth();
+
+        $outer.remove();
+
+        return 100 - widthWithScroll;
+    }
+
     return {
         restrict: 'A',
         compile: function (tElement) {
@@ -24,11 +33,12 @@ angular.module('Bastion.components').directive('bstContainerScroll', ['$window',
             return function (scope, element) {
                 var windowElement = angular.element($window),
                     bottomPadding = parseInt(element.css('padding-bottom').replace('px', ''), 10),
-                    newElementHeight, addScroll;
+                    addScroll, newElementHeight;
 
                 addScroll = function () {
                     var windowHeight = windowElement.height(),
-                        offset = element.offset().top;
+                        offset = element.offset().top,
+                        hasScrollbar;
 
                     if (bottomPadding) {
                         offset = offset + bottomPadding;
@@ -42,6 +52,16 @@ angular.module('Bastion.components').directive('bstContainerScroll', ['$window',
 
                     element.outerHeight(newElementHeight);
                     element.height(newElementHeight);
+
+                    // Normalize to 100% width before adding the scrollbar width
+                    element.css('width', '100%');
+
+                    hasScrollbar = element.children().height() > element.height();
+
+                    // Set the container width based on the width of the scroll bar
+                    if (hasScrollbar) {
+                        element.width(element.width() + getScrollBarWidth());
+                    }
                 };
 
                 windowElement.bind('resize', addScroll);
