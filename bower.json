@@ -16,7 +16,6 @@
     "angular-patternfly": "4.0.0-alpha.2",
     "angular-ui-router": "=0.3.1",
     "angular-uuid4": "0.1.0",
-    "es5-shim": "~2.0.8",
     "json3": "~3.2.4",
     "ngInfiniteScroll": "1.2.1",
     "ngUpload": "0.5.18"
@@ -35,9 +34,6 @@
   "exportsOverride": {
     "json3": {
       "javascripts/bastion/json3": "lib/json3.js"
-    },
-    "es5-shim": {
-      "javascripts/bastion/es5-shim": "es5-shim.js"
     },
     "angular": {
       "javascripts/bastion/angular": "angular.js"
