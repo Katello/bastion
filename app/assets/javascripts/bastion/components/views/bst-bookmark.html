@@ -13,34 +13,20 @@
   <span>{{ bookmark.query }}</span>
   <div data-block="modal-header" translate>Add Bookmark</div>
   <div data-block="modal-body">
-    <form name="bookmarkForm" class="form-horizontal" novalidate role="form">
+    <div ng-form name="bookmarkForm" novalidate role="form">
       <div bst-form-group label="{{ 'Name' | translate }}">
-        <input id="name"
-               name="name"
-               ng-model="newBookmark.name"
-               type="text"
-               tabindex="1"
-               autofocus
-               required/>
+        <input id="name" name="name" type="text" ng-model="newBookmark.name" autofocus required/>
       </div>
       <div bst-form-group label="{{ 'Search query' | translate }}">
-        <input id="query"
-               name="query"
-               ng-model="newBookmark.query"
-               type="text"
-               tabindex="1"
-               autofocus
-               required/>
+        <input id="query" name="query" type="text" ng-model="newBookmark.query" required/>
       </div>
-      <div bst-form-group label="{{ 'Public' | translate }}">
-        <input id="public"
-               name="public"
-               ng-model="newBookmark.public"
-               type="checkbox"
-               tabindex="1"
-               autofocus/>
+      <div class="checkbox">
+        <label>
+          <input id="public" name="public" type="checkbox" ng-model="newBookmark.public"/>
+          <span translate>Public</span>
+        </label>
       </div>
-    </form>
+    </div>
   </div>
   <div data-block="modal-confirm-button" translate>Save</div>
 </div>
