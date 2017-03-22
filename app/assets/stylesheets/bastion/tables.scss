@@ -1,3 +1,5 @@
+@import "variables";
+
 .table {
   table-layout: fixed;
 
@@ -20,8 +22,8 @@
   
   th.row-select,
   td.row-select {
-    width: 30px;
-    max-width: 30px;
+    width: $row-select-width;
+    max-width: $row-select-width;
   }
 
   tr:hover td, tr:hover td > a,
