@@ -6,7 +6,6 @@ BASTION_MODULES = [
     'angular-blocks',
     'ngAnimate',
     'ngSanitize',
-    'infinite-scroll',
     'templates',
     'ui.bootstrap',
     'ui.bootstrap.tpls',

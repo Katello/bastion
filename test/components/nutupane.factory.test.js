@@ -4,12 +4,15 @@ describe('Factory: Nutupane', function() {
         $rootScope,
         Resource,
         TableCache,
+        entriesPerPage,
         expectedResult,
         Nutupane;
 
     beforeEach(module('Bastion.components'));
 
     beforeEach(module(function ($provide) {
+        entriesPerPage = 20;
+
         TableCache = {
             getTable: function () {
             },
@@ -19,20 +22,24 @@ describe('Factory: Nutupane', function() {
             }
         };
 
+        $provide.value('entriesPerPage', entriesPerPage);
         $provide.value('TableCache', TableCache);
     }));
 
     beforeEach(module(function() {
-        expectedResult = [{id: 2, value: "value2"}, {id:3, value: "value3"}];
+        expectedResult = [{id: 2, value: "value2"}, {id:3, value: "value3"},
+            {id: 4, value: "value4"}, {id:5, value: "value5"}];
         Resource = {
             queryPaged: function(params, callback) {
-                var result = {results: expectedResult};
+                var result = {page: 1, results: expectedResult, subtotal: 8, per_page: 2};
                 if (callback) {
                     callback(result);
                 }
                 return result;
             },
             customAction: function() {},
+            page: 1,
+            per_page: 2,
             total: 10,
             subtotal: 8,
             offset: 5,
@@ -66,15 +73,58 @@ describe('Factory: Nutupane', function() {
         });
 
         it("providing a method to fetch records for the table", function() {
-            var expected = nutupane.table.rows.concat(expectedResult);
-
             spyOn(Resource, 'queryPaged').and.callThrough();
             nutupane.query();
 
             expect(Resource.queryPaged).toHaveBeenCalled();
             expect(nutupane.table.rows.length).toBe(4);
             angular.forEach(nutupane.table.rows, function(value, index) {
-                expect(value).toBe(expected[index]);
+                expect(value).toBe(expectedResult[index]);
+            });
+        });
+
+        describe("sets query string params of the table's properties", function () {
+            beforeEach(function () {
+                spyOn($location, 'search').and.callThrough();
+            });
+
+            it("if paged", function () {
+                nutupane.table.params.paged = true;
+                nutupane.load();
+                expect($location.search).toHaveBeenCalledWith('page', 1);
+                expect($location.search).toHaveBeenCalledWith('per_page', 20);
+            });
+
+            it("but does not include page information if not paged", function () {
+                nutupane.table.params.paged = false;
+                nutupane.load();
+                expect($location.search).not.toHaveBeenCalledWith('page', jasmine.any);
+                expect($location.search).not.toHaveBeenCalledWith('per_page', jasmine.any);
+            });
+
+            it("by including a search if there is one", function () {
+                nutupane.table.searchTerm = 'hello!';
+                nutupane.load();
+                expect($location.search).toHaveBeenCalledWith('search', 'hello!');
+            });
+
+            it("by not including a search if there isn't one", function () {
+                nutupane.load();
+                expect($location.search).not.toHaveBeenCalledWith('search', jasmine.any);
+            });
+
+            it("by including the sort properties if provided", function () {
+                nutupane.table.params['sort_by'] = 'name';
+                nutupane.table.params['sort_order'] = 'asc';
+                nutupane.load();
+                expect($location.search).toHaveBeenCalledWith('sortBy', 'name');
+                expect($location.search).toHaveBeenCalledWith('sortOrder', 'asc');
+            });
+
+            it("by not including the sort properties if provided", function () {
+                nutupane.load();
+                expect($location.search).not.toHaveBeenCalledWith('sortBy', jasmine.any);
+                expect($location.search).not.toHaveBeenCalledWith('sortOrder', jasmine.any);
             });
         });
 
@@ -97,7 +147,6 @@ describe('Factory: Nutupane', function() {
 
         it("providing a method to perform a search", function() {
             spyOn(Resource, 'queryPaged');
-            nutupane.table.closeItem = function() {};
 
             nutupane.table.search();
 
@@ -106,7 +155,6 @@ describe('Factory: Nutupane', function() {
 
         it("refusing to perform a search if the table is currently fetching", function() {
             spyOn(Resource, 'queryPaged');
-            nutupane.table.closeItem = function() {};
             nutupane.table.working = true;
 
             nutupane.table.search();
@@ -116,7 +164,7 @@ describe('Factory: Nutupane', function() {
 
         it("setting the search parameter in the URL when performing a search", function() {
             spyOn(Resource, 'queryPaged');
-            nutupane.table.closeItem = function() {};
+
             nutupane.table.working = true;
 
             nutupane.table.search("Find Me");
@@ -133,13 +181,8 @@ describe('Factory: Nutupane', function() {
             expect(nutupane.table.searchCompleted).toBe(true);
         });
 
-        it("enforcing the user of this factory to define a closeItem function", function() {
-            expect(nutupane.table.closeItem).toThrow();
-        });
-
         it("updates a single occurrence of a row within the list of rows.", function() {
             var newRow = {id:0, value:"new value", anotherValue: "value"};
-            nutupane.query();
             nutupane.table.replaceRow(newRow);
             expect(nutupane.table.rows[0]).toBe(newRow);
         });
@@ -162,29 +205,70 @@ describe('Factory: Nutupane', function() {
                expect(nutupane.table.numSelected).toBe(0);
         });
 
-        it("providing a method that fetches more data", function() {
-            nutupane.table.rows = [];
-            spyOn(Resource, 'queryPaged');
-
-            nutupane.table.nextPage();
-
-            expect(Resource.queryPaged).toHaveBeenCalled();
+        it("provides a way to tell if on the first page", function () {
+            nutupane.table.firstPage();
+            expect(nutupane.table.onFirstPage()).toBe(true);
         });
 
-        it("refusing to fetch more data if the table is currently working", function() {
-            spyOn(Resource, 'queryPaged');
-            nutupane.table.working = true;
-            nutupane.table.nextPage();
-
-            expect(Resource.queryPaged).not.toHaveBeenCalled();
+        it("provides a way to tell if on the last page", function () {
+            spyOn(nutupane, 'load');
+            nutupane.table.lastPage();
+            expect(nutupane.table.onLastPage()).toBe(true);
+            expect(nutupane.load).toHaveBeenCalled();
         });
 
-        it("refusing to fetch more data if the subtotal of records equals the number of rows", function() {
-            spyOn(Resource, 'queryPaged');
-            nutupane.table.rows = new Array(8);
-            nutupane.table.nextPage();
+        it("provides a way to get the page end based on offset", function () {
+            expect(nutupane.table.getPageEnd()).toBe(6);
+        });
 
-            expect(Resource.queryPaged).not.toHaveBeenCalled();
+        describe("provides page navigation", function () {
+            beforeEach(function () {
+                spyOn(nutupane.table, 'changePage').and.callThrough();
+                spyOn(nutupane, 'load');
+            });
+
+            afterEach(function () {
+                expect(nutupane.load).toHaveBeenCalled();
+            });
+
+            it("to the first page", function () {
+                nutupane.table.firstPage();
+                expect(nutupane.table.changePage).toHaveBeenCalledWith(1);
+            });
+
+            it("to the previous page", function () {
+                nutupane.table.params.page = 3;
+                nutupane.table.previousPage();
+                expect(nutupane.table.changePage).toHaveBeenCalledWith(2);
+            });
+
+            it("to the next page", function () {
+                nutupane.table.params.page = 3;
+                nutupane.table.nextPage();
+                expect(nutupane.table.changePage).toHaveBeenCalledWith(4);
+            });
+
+            it("to the last page", function () {
+                nutupane.table.lastPage();
+                expect(nutupane.table.changePage).toHaveBeenCalledWith(4);
+            });
+
+            it("to an arbitrary page", function () {
+                nutupane.table.changePage(3);
+                expect(nutupane.table.resource.page).toBe(3);
+                expect(nutupane.table.params.page).toBe(3);
+            });
+        });
+
+        it("sets the array of page sizes that includes the default setting from rails", function () {
+            expect(nutupane.table.pageSizes).toBeDefined();
+            expect(nutupane.table.pageSizes).toContain(entriesPerPage);
+        });
+
+        it("provides a way to update the page size", function () {
+            spyOn(nutupane, "query");
+            nutupane.table.updatePageSize();
+            expect(nutupane.query).toHaveBeenCalled();
         });
 
         it("provides a way to add an individual row", function() {
@@ -294,7 +378,7 @@ describe('Factory: Nutupane', function() {
 
         describe("provides a way to sort the table", function() {
             it ("defaults the sort to ascending if the previous sort does not match the new sort.", function() {
-                var expectedParams = {sort_by: 'name', sort_order: 'ASC', search: '', page: 1};
+                var expectedParams = {sort_by: 'name', sort_order: 'ASC', search: '', paged: true, page: 1, per_page: entriesPerPage};
                 nutupane.table.resource.sort = {};
 
                 spyOn(Resource, 'queryPaged');
@@ -304,7 +388,7 @@ describe('Factory: Nutupane', function() {
             });
 
             it("toggles the sort order if already sorting by that column", function() {
-                var expectedParams = {sort_by: 'name', sort_order: 'DESC', search: '', page: 1};
+                var expectedParams = {sort_by: 'name', sort_order: 'DESC', search: '', paged: true, page: 1, per_page: entriesPerPage};
                 nutupane.table.resource.sort = {
                     by: 'name',
                     order: 'ASC'
@@ -329,23 +413,6 @@ describe('Factory: Nutupane', function() {
                 nutupane.table.sortBy({id: "name"});
                 expect(nutupane.query).toHaveBeenCalled();
             });
-
-            describe("watches $locationChangeStart", function () {
-                beforeEach(function () {
-                    nutupane.table.closeItem = function() {};
-                    spyOn(nutupane.table, 'closeItem');
-                });
-
-                it("and closes the item pane if the url matches the org switcher url", function () {
-                    $rootScope.$emit("$locationChangeStart", '/organizations/1-Default%20Organization/select');
-                    expect(nutupane.table.closeItem).toHaveBeenCalled();
-                });
-
-                it("and does nothing if the URL does not match the org switcher url", function () {
-                    $rootScope.$emit("$locationChangeStart", '/some-other-url/select');
-                    expect(nutupane.table.closeItem).not.toHaveBeenCalled();
-                });
-            });
         });
     });
 
@@ -353,7 +420,6 @@ describe('Factory: Nutupane', function() {
         beforeEach(function() {
             nutupane = new Nutupane(Resource, {}, 'customAction');
             nutupane.table.working = false;
-            nutupane.table.closeItem = function () {};
             nutupane.table.allSelected = function () {};
             nutupane.table.selectAll = function () {};
         });

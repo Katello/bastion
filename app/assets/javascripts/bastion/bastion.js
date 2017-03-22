@@ -5,7 +5,6 @@
 //= require "bastion/angular-ui-router/angular-ui-router"
 //= require "bastion/angular-uuid4/angular-uuid4.js"
 //= require "bastion/ngUpload/ng-upload"
-//= require "bastion/ngInfiniteScroll/ng-infinite-scroll.js"
 //= require "bastion/angular-gettext/angular-gettext"
 //= require "bastion/angular-blocks/angular-blocks"
 //= require "bastion/angular-breadcrumb/angular-breadcrumb"

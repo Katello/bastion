@@ -17,7 +17,6 @@
     "angular-ui-router": "=0.3.1",
     "angular-uuid4": "0.1.0",
     "json3": "~3.2.4",
-    "ngInfiniteScroll": "1.2.1",
     "ngUpload": "0.5.18"
   },
   "devDependencies": {
@@ -79,9 +78,6 @@
     },
     "ngUpload": {
       "javascripts/bastion/ngUpload": "ng-upload.js"
-    },
-    "ngInfiniteScroll": {
-      "javascripts/bastion/ngInfiniteScroll": "build/ng-infinite-scroll.js"
     }
   }
 }

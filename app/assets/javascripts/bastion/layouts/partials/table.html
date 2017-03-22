@@ -1,11 +1,11 @@
 <div class="row toolbar-pf table-view-pf-toolbar-external" ng-class="{'empty-table': table.rows.length === 0}">
   <div class="col-sm-12">
     <form class="toolbar-pf-actions">
-      <div class="form-group toolbar-pf-filter">
-        <div class="form-group toolbar-pf-search-filter">
-          <span data-block="search-filter"></span>
-        </div>
+      <div class="form-group toolbar-pf-search-filter">
+        <span data-block="search-filter"></span>
+      </div>
 
+      <div class="form-group toolbar-pf-filter">
         <div data-block="search">
           <div class="input-group">
             <input type="text"
@@ -23,7 +23,7 @@
             <button class="btn btn-default"
                     type="button"
                     ng-click='table.search("") && (table.searchCompleted = false)'
-                    ng-show="table.searchCompleted && table.searchTerm">
+                    ng-show="table.searchTerm">
               <i class="fa fa-times"></i>
             </button>
             <button ng-click="table.search(table.searchTerm)" class="btn btn-default" type="button">
@@ -48,25 +48,17 @@
     </form>
 
     <div class="row toolbar-pf-results" ng-show="table.rows.length > 0">
-      <div class="col-sm-9">
-        <span translate>Showing {{ table.rows.length }} of {{ table.resource.subtotal }} ({{ table.resource.total }} Total)</span>
-      </div>
-
+      <div class="col-sm-9"></div>
       <div class="col-sm-3 table-view-pf-select-results" ng-show="table.rowSelect">
-        <span translate>{{ table.numSelected }} Selected</span>
+        <span translate>{{ table.numSelected }} of {{ table.resource.total }} Selected</span>
       </div>
     </div>
   </div>
 </div>
 
-<div bst-table="table" nutupane-table>
+<div bst-table="table">
   <div class="row">
     <div class="col-sm-12">
-      <div class="loading-mask" ng-show="table.refreshing || table.working" >
-        <i class="fa fa-spinner fa-spin"></i>
-        <span>{{ "Loading..." | translate }}</span>
-      </div>
-
       <p bst-alert="info" ng-show="table.rows.length === 0 && !table.working && !table.searchTerm && !table.searchCompleted">
         <span data-block="no-rows-message"></span>
       </p>
@@ -74,11 +66,61 @@
         <span data-block="no-search-results-message"></span>
       </p>
 
-      <div ng-show="table.rows.length > 0 && !(table.refreshing || table.working)" bst-container-scroll data="table.rows">
-        <div infinite-scroll="table.nextPage()" infinite-scroll-container="'.container-scroll-wrapper'"
-             infinite-scroll-listen-for-event="nutupane:loaded">
-          <div data-block="table"></div>
-        </div>
+      <div ng-show="table.rows.length > 0" ng-class="{'table-mask': table.refreshing || table.working}">
+        <div data-block="table"></div>
+
+        <form class="content-view-pf-pagination table-view-pf-pagination clearfix">
+          <div class="form-group">
+            <div class="pagination-pf-pagesize">
+              <select class="form-control" ng-model="table.params.per_page" ng-change="table.updatePageSize()"
+                      ng-options="value for value in table.pageSizes">
+              </select>
+            </div>
+            <span translate>per page</span>
+          </div>
+          <div class="form-group">
+            <span>
+              <span class="pagination-pf-items-current">{{ table.resource.offset }} - {{ table.getPageEnd() }}</span>
+              <span translate>of </span>
+              <span class="pagination-pf-items-total">{{ table.resource.subtotal }}</span>
+            </span>
+            <ul class="pagination pagination-pf-back">
+              <li ng-class="{ disabled: table.onFirstPage() }">
+                <a ng-click="table.onFirstPage() || table.firstPage()" title="{{ 'First Page' | translate }}">
+                  <span class="i fa fa-angle-double-left"></span>
+                </a>
+              </li>
+              <li ng-class="{ disabled: table.onFirstPage() }">
+                <a ng-click="table.onFirstPage() || table.previousPage()" title="{{ 'Previous Page' | translate }}">
+                  <span class="i fa fa-angle-left"></span>
+                </a>
+              </li>
+            </ul>
+
+            <label for="currentPage" class="sr-only" translate>
+              Current Page
+            </label>
+            <input id="currentPage" class="pagination-pf-page" type="text" ng-model="table.params.page" ng-blur="table.changePage()" bst-on-enter="table.changePage()"/>
+
+            <span translate>of
+              <span class="pagination-pf-pages">{{ (table.resource.subtotal / table.resource.per_page) | roundUp }}</span>
+            </span>
+
+            <ul class="pagination pagination-pf-forward">
+              <li ng-class="{ disabled: table.onLastPage() }">
+                <a ng-click="table.onLastPage() || table.nextPage()" title=" {{ 'Next Page' | translate }}">
+                  <span class="i fa fa-angle-right"></span>
+                </a>
+              </li>
+
+              <li ng-class="{ disabled: table.onLastPage() }">
+                <a ng-click="table.onLastPage() || table.lastPage()" title="{{ 'Last Page' | translate }}">
+                  <span class="i fa fa-angle-double-right"></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </form>
       </div>
     </div>
   </div>
