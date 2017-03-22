@@ -4,8 +4,7 @@
  *
  * @requires $location
  * @requires $q
- * @requires $timeout
- * @requires $rootScope
+ * @requires entriesPerPage
  * @requires TableCache
  * @requires GlobalNotification
  *
@@ -31,10 +30,9 @@
     </pre>
  */
 angular.module('Bastion.components').factory('Nutupane',
-    ['$location', '$q', '$timeout', '$rootScope', 'TableCache', 'GlobalNotification', function ($location, $q, $timeout, $rootScope, TableCache, GlobalNotification) {
+    ['$location', '$q', 'entriesPerPage', 'TableCache', 'GlobalNotification', function ($location, $q, entriesPerPage, TableCache, GlobalNotification) {
         var Nutupane = function (resource, params, action) {
-            var self = this,
-                orgSwitcherRegex = new RegExp("/(organizations|locations)/(.+/)*(select|clear)");
+            var self = this;
 
             // TODO: remove me
             // http://projects.theforeman.org/issues/18079
@@ -44,7 +42,29 @@ angular.module('Bastion.components').factory('Nutupane',
                 return $location.path().split('/').join('-').slice(1);
             }
 
+            function setQueryStrings() {
+                if (params.paged) {
+                    $location.search("page", params.page).replace();
+                    $location.search("per_page", params['per_page']).replace();
+                }
+
+                if (params.search) {
+                    $location.search(self.searchKey, params.search).replace();
+                }
+
+                if (params.sort_by) {
+                    $location.search("sortBy", params['sort_by']).replace();
+                }
+
+                if (params['sort_order']) {
+                    $location.search("sortOrder", params['sort_order']).replace();
+                }
+            }
+
             params = params || {};
+            params.paged = true;
+            params.page = $location.search().page || 1;
+            params['per_page'] = $location.search().perPage || entriesPerPage;
 
             self.searchKey = action ? action + 'Search' : 'search';
 
@@ -57,17 +77,10 @@ angular.module('Bastion.components').factory('Nutupane',
                 initialLoad: true
             };
 
-            // Set default resource values
-            resource.page = 0;
-            resource.subtotal = "0";
-            resource.total = "0";
-            resource.results = [];
-
-            self.load = function (replace) {
+            self.load = function () {
                 var deferred = $q.defer(),
                     table = self.table;
 
-                replace = replace || false;
                 table.working = true;
 
                 if (table.initialLoad) {
@@ -76,7 +89,6 @@ angular.module('Bastion.components').factory('Nutupane',
                     table.searchCompleted = false;
                 }
 
-                params.page = table.resource.page + 1;
                 params.search = table.searchTerm || "";
                 params.search = self.searchTransform(params.search);
 
@@ -90,11 +102,7 @@ angular.module('Bastion.components').factory('Nutupane',
                         row.selected = table.allResultsSelected;
                     });
 
-                    if (replace) {
-                        table.rows = response.results;
-                    } else {
-                        table.rows = table.rows.concat(response.results);
-                    }
+                    table.rows = response.results;
                     table.resource.page = parseInt(response.page, 10);
 
                     if (table.initialSelectAll) {
@@ -102,21 +110,23 @@ angular.module('Bastion.components').factory('Nutupane',
                         table.initialSelectAll = false;
                     }
 
-                    // This $timeout is necessary to cause a digest cycle
-                    // in order to prevent loading two sets of results.
-                    $timeout(function () {
-                        deferred.resolve(response);
-                        table.resource = response;
-                        table.resource.page = parseInt(response.page, 10);
+                    deferred.resolve(response);
+                    table.resource = response;
+                    table.resource.page = parseInt(response.page, 10);
 
-                        if (self.selectAllMode) {
-                            table.selectAll(true);
-                        }
-                        table.resource.offset = table.rows.length;
+                    if (self.selectAllMode) {
+                        table.selectAll(true);
+                    }
 
-                        TableCache.setTable(getTableName(), table);
-                        $rootScope.$emit('nutupane:loaded');
-                    }, 0);
+                    if (table.resource.page > 1) {
+                        table.resource.offset = (table.resource.page - 1) * table.resource['per_page'] + 1;
+                    } else {
+                        table.resource.offset = 1;
+                    }
+
+                    TableCache.setTable(getTableName(), table);
+                    setQueryStrings();
+
                     table.working = false;
                     table.refreshing = false;
                 });
@@ -271,8 +281,8 @@ angular.module('Bastion.components').factory('Nutupane',
                 $location.search(self.searchKey, searchTerm);
                 self.table.searchTerm = searchTerm;
                 self.table.resource.page = 1;
+                self.table.params.page = 1;
                 self.table.rows = [];
-                self.table.closeItem();
                 self.table.selectAllResults(false);
 
                 if (!self.table.working) {
@@ -289,13 +299,6 @@ angular.module('Bastion.components').factory('Nutupane',
             self.table.clearSearch = function () {
                 self.table.search(null);
                 self.table.searchCompleted = true;
-            };
-
-            // Must be overridden
-            self.table.closeItem = function () {
-                if (!self.masterOnly) {
-                    throw "Nutupane closeItem not implemented. If you are using Nutupane functionality with master-detail please pass 'masterOnly' to your Nutupane declaration";
-                }
             };
 
             self.table.replaceRow = function (row) {
@@ -320,27 +323,60 @@ angular.module('Bastion.components').factory('Nutupane',
                 self.table.resource.total += 1;
             };
 
-            self.table.nextPage = function () {
-                var table = self.table;
-                if (table.working || !table.hasMore()) {
-                    return false;
-                }
-                return self.query();
+            self.table.onFirstPage = function () {
+                return self.table.resource.page === 1;
             };
 
-            self.table.hasMore = function () {
-                var length = self.table.rows.length,
-                    subtotal = self.table.resource.subtotal,
-                    hasMore = false,
-                    justBegun;
+            self.table.onLastPage = function () {
+                return self.table.resource.page >= self.table.resource.subtotal / self.table.resource.per_page;
+            };
 
-                if (!subtotal) {
-                    hasMore = false;
-                } else {
-                    justBegun = (length === 0 && subtotal !== 0);
-                    hasMore = (length < subtotal) || justBegun;
+            self.table.getPageEnd = function () {
+                var table = self.table, pageEnd;
+
+                pageEnd = table.resource.offset + table.rows.length - 1;
+
+                if (pageEnd > table.resource.subtotal) {
+                    pageEnd = table.resource.subtotal;
                 }
-                return hasMore;
+
+                return pageEnd;
+            };
+
+            self.table.firstPage = function () {
+                return self.table.changePage(1);
+            };
+
+            self.table.previousPage = function () {
+                var previousPage = parseInt(params.page, 10) - 1;
+                return self.table.changePage(previousPage);
+            };
+
+            self.table.nextPage = function () {
+                var nextPage = parseInt(params.page, 10) + 1;
+                return self.table.changePage(nextPage);
+            };
+
+            self.table.lastPage = function () {
+                var table = self.table,
+                    lastPage = Math.ceil(table.resource.subtotal / table.resource.per_page);
+                return table.changePage(lastPage);
+            };
+
+            self.table.changePage = function (pageNumber) {
+                if (pageNumber) {
+                    params.page = pageNumber;
+                    self.table.resource.page = pageNumber;
+                }
+
+                return self.load();
+            };
+
+            self.table.pageSizes = _.uniq(_([25, 50, 75, 100, entriesPerPage]).sortBy().value());
+
+            self.table.updatePageSize = function () {
+                params.page = 1;
+                self.query();
             };
 
             // Wraps the table.selectAll() function if selectAllResultsEnabled is not set
@@ -394,12 +430,10 @@ angular.module('Bastion.components').factory('Nutupane',
                 self.table.searchTerm = $location.search()[self.searchKey];
             };
 
-            $rootScope.$on('$locationChangeStart', function (event, newUrl) {
-                if (newUrl.match(orgSwitcherRegex)) {
-                    self.table.closeItem();
-                }
-            });
+            // Load initial set of results
+            self.load();
         };
+
         return Nutupane;
     }]
 );

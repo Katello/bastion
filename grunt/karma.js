@@ -29,7 +29,6 @@ module.exports = {
             basePath + 'vendor/assets/javascripts/bastion/angular-ui-router/angular-ui-router.js',
             basePath + 'vendor/assets/javascripts/bastion/angular-gettext/angular-gettext.js',
             basePath + 'vendor/assets/javascripts/bastion/ngUpload/ng-upload.js',
-            basePath + 'vendor/assets/javascripts/bastion/ngInfiniteScroll/ng-infinite-scroll.js',
             basePath + 'vendor/assets/javascripts/bastion/angular-breadcrumb/angular-breadcrumb.js',
             basePath + '.tmp/bower_components/angular-mocks/angular-mocks.js',
             basePath + '.tmp/bower_components/lodash/lodash.js',

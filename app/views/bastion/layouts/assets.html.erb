@@ -18,6 +18,7 @@
     angular.module('Bastion').value('CurrentOrganization', "<%= Organization.current.id if Organization.current %>");
     angular.module('Bastion').value('contentAccessMode', "<%= Organization.current.try(:content_access_mode) if Organization.current %>");
     angular.module('Bastion').value('markActiveMenu', mark_active_menu);
+    angular.module('Bastion').value('entriesPerPage', "<%= Setting[:entries_per_page] %>");
     angular.module('Bastion').constant('BastionConfig', angular.fromJson('<%= Bastion.config.to_json.html_safe %>'));
     angular.module('Bastion.auth').value('CurrentUser', {
         id: <%= User.current.id %>,

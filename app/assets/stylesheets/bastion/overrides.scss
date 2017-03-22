@@ -80,3 +80,8 @@ html .toolbar-pf.table-view-pf-toolbar-external .toolbar-pf-filter {
   overflow-x: hidden;
   overflow-y: scroll;
 }
+
+// Add some margin to the bottom of the table footer
+.content-view-pf-pagination {
+  margin-bottom: 20px;
+}
