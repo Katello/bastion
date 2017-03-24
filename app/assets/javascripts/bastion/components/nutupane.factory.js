@@ -34,41 +34,37 @@ angular.module('Bastion.components').factory('Nutupane',
         var Nutupane = function (resource, params, action) {
             var self = this;
 
-            // TODO: remove me
-            // http://projects.theforeman.org/issues/18079
-            TableCache.setTable = function () {};
-
             function getTableName() {
                 return $location.path().split('/').join('-').slice(1);
             }
 
             function setQueryStrings() {
-                if (params.paged) {
-                    $location.search("page", params.page).replace();
-                    $location.search("per_page", params['per_page']).replace();
+                if (self.table.params.paged) {
+                    $location.search("page", self.table.params.page).replace();
+                    $location.search("per_page", self.table.params['per_page']).replace();
                 }
 
-                if (params.search) {
-                    $location.search(self.searchKey, params.search).replace();
+                if (self.table.params.search) {
+                    $location.search(self.searchKey, self.table.params.search).replace();
                 }
 
-                if (params.sort_by) {
-                    $location.search("sortBy", params['sort_by']).replace();
+                if (self.table.params.sort_by) {
+                    $location.search("sortBy", self.table.params['sort_by']).replace();
                 }
 
-                if (params['sort_order']) {
-                    $location.search("sortOrder", params['sort_order']).replace();
+                if (self.table.params['sort_order']) {
+                    $location.search("sortOrder", self.table.params['sort_order']).replace();
                 }
             }
 
             params = params || {};
             params.paged = true;
             params.page = $location.search().page || 1;
-            params['per_page'] = $location.search().perPage || entriesPerPage;
+            params['per_page'] = $location.search()['per_page'] || entriesPerPage;
 
             self.searchKey = action ? action + 'Search' : 'search';
 
-            self.table = TableCache.getTable(getTableName()) || {
+            self.table = {
                 action: action || 'queryPaged',
                 params: params,
                 resource: resource,
@@ -77,16 +73,26 @@ angular.module('Bastion.components').factory('Nutupane',
                 initialLoad: true
             };
 
+            self.loadParamsFromExistingTable = function (existingTable) {
+                params = existingTable.params;
+                self.table.params = existingTable.params;
+                self.table.searchTerm = existingTable.searchTerm;
+            };
+
             self.load = function () {
                 var deferred = $q.defer(),
-                    table = self.table;
+                    table = self.table,
+                    existingTable = TableCache.getTable(getTableName());
 
                 table.working = true;
 
                 if (table.initialLoad) {
                     table.refreshing = true;
-                    table.initialLoad = false;
                     table.searchCompleted = false;
+                }
+
+                if (existingTable) {
+                    self.loadParamsFromExistingTable(existingTable);
                 }
 
                 params.search = table.searchTerm || "";
@@ -103,7 +109,9 @@ angular.module('Bastion.components').factory('Nutupane',
                     });
 
                     table.rows = response.results;
+
                     table.resource.page = parseInt(response.page, 10);
+                    table.params.page = parseInt(response.page, 10);
 
                     if (table.initialSelectAll) {
                         table.selectAll(true);
@@ -129,6 +137,7 @@ angular.module('Bastion.components').factory('Nutupane',
 
                     table.working = false;
                     table.refreshing = false;
+                    table.initialLoad = false;
                 });
 
                 return deferred.promise;
@@ -206,11 +215,15 @@ angular.module('Bastion.components').factory('Nutupane',
             };
 
             self.refresh = function () {
-                self.invalidate();
+                var existingTable = TableCache.getTable(getTableName());
+
+                if (existingTable) {
+                    self.loadParamsFromExistingTable(existingTable);
+                }
+
                 self.table.refreshing = true;
-                self.table.resource.page = 0;
                 self.table.numSelected = 0;
-                return self.load(true);
+                return self.load();
             };
 
             self.invalidate = function () {
