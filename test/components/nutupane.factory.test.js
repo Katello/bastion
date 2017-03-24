@@ -130,11 +130,9 @@ describe('Factory: Nutupane', function() {
 
         it("providing a method to refresh the table", function() {
             spyOn(Resource, 'queryPaged').and.callThrough();
-            spyOn(TableCache, 'removeTable');
 
             nutupane.refresh();
 
-            expect(TableCache.removeTable).toHaveBeenCalled();
             expect(Resource.queryPaged).toHaveBeenCalled();
             expect(nutupane.table.rows).toBe(expectedResult);
         });
