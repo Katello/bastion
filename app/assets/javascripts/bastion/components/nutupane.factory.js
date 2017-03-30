@@ -327,8 +327,16 @@ angular.module('Bastion.components').factory('Nutupane',
                 return self.table.resource.page === 1;
             };
 
+            self.table.getLastPage = function () {
+                return Math.ceil(self.table.resource.subtotal / self.table.resource.per_page);
+            };
+
             self.table.onLastPage = function () {
-                return self.table.resource.page >= self.table.resource.subtotal / self.table.resource.per_page;
+                return self.table.resource.page >= self.table.getLastPage();
+            };
+
+            self.table.pageExists = function (pageNumber) {
+                return (pageNumber >= 1) && (pageNumber <= self.table.getLastPage());
             };
 
             self.table.getPageEnd = function () {
@@ -358,18 +366,16 @@ angular.module('Bastion.components').factory('Nutupane',
             };
 
             self.table.lastPage = function () {
-                var table = self.table,
-                    lastPage = Math.ceil(table.resource.subtotal / table.resource.per_page);
-                return table.changePage(lastPage);
+                var table = self.table;
+                return table.changePage(self.table.getLastPage());
             };
 
             self.table.changePage = function (pageNumber) {
-                if (pageNumber) {
+                if (pageNumber && self.table.pageExists(pageNumber)) {
                     params.page = pageNumber;
                     self.table.resource.page = pageNumber;
+                    return self.load();
                 }
-
-                return self.load();
             };
 
             self.table.pageSizes = _.uniq(_([25, 50, 75, 100, entriesPerPage]).sortBy().value());

@@ -100,7 +100,7 @@
             <label for="currentPage" class="sr-only" translate>
               Current Page
             </label>
-            <input id="currentPage" class="pagination-pf-page" type="text" ng-model="table.params.page" ng-blur="table.changePage()" bst-on-enter="table.changePage()"/>
+            <input id="currentPage" class="pagination-pf-page" type="text" ng-model="table.params.page" ng-blur="table.changePage(table.params.page)" bst-on-enter="table.changePage()"/>
 
             <span translate>of
               <span class="pagination-pf-pages">{{ (table.resource.subtotal / table.resource.per_page) | roundUp }}</span>

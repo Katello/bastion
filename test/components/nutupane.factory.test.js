@@ -210,12 +210,23 @@ describe('Factory: Nutupane', function() {
             expect(nutupane.table.onFirstPage()).toBe(true);
         });
 
+        it("provides a way to get the last page", function () {
+            expect(nutupane.table.getLastPage()).toBe(4);
+        });
+
         it("provides a way to tell if on the last page", function () {
             spyOn(nutupane, 'load');
             nutupane.table.lastPage();
             expect(nutupane.table.onLastPage()).toBe(true);
             expect(nutupane.load).toHaveBeenCalled();
         });
+
+        it("provides a way to see if a page exists", function () {
+            expect(nutupane.table.pageExists(2)).toBe(true);
+            expect(nutupane.table.pageExists(4)).toBe(true);
+            expect(nutupane.table.pageExists(23524)).toBe(false);
+        });
+
 
         it("provides a way to get the page end based on offset", function () {
             expect(nutupane.table.getPageEnd()).toBe(6);
