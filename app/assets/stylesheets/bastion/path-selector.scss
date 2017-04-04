@@ -9,6 +9,13 @@ $path-active-color: #005870;
 .path-selector {
   margin-top: 20px;
 
+  ul {
+    -webkit-padding-start: 0;
+    -moz-padding-start: 0;
+    padding-start: 0;
+  }
+
+
   .path-list {
     list-style: none;
     overflow: hidden;
