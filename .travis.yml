@@ -1,0 +1,15 @@
+language: node_js
+before_install:
+  - git clone https://github.com/theforeman/foreman --branch develop
+install:
+  - npm cache clean
+  - npm install -g bower phantomjs grunt-cli
+  - npm install
+  - rvm install 2.2.4
+script:
+  - grunt ci
+  - ls -la
+  - cd foreman
+  - echo "gemspec :path => '../', :development_group => :bastion_dev" >> bundler.d/Gemfile.local.rb
+  - bundle install --without libvirt
+  - bundle exec rake plugin:assets:precompile[bastion] --trace
