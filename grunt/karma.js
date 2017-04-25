@@ -6,6 +6,7 @@ module.exports = {
     options: {
         frameworks: ['jasmine'],
         runnerPort: 9100,
+        browserNoActivityTimeout: 30000,
         colors: true,
         browsers: ['PhantomJS'],
         reporters: ['progress'],
