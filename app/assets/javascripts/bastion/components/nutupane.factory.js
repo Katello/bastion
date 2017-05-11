@@ -223,6 +223,7 @@ angular.module('Bastion.components').factory('Nutupane',
 
                 self.table.refreshing = true;
                 self.table.numSelected = 0;
+                self.table.selectAllResults(false);
                 return self.load();
             };
 
