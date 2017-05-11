@@ -45,8 +45,8 @@ td.row-select {
 
     tr:hover td, tr:hover td > a,
     tr.focus td, tr.focus td > a {
-      background-color: $listhover_color;
-      color: #FFF;
+      background-color: $hover-bg-color;
+      color: $hover-color;
 
       button, select {
         color: #000;
@@ -54,11 +54,11 @@ td.row-select {
     }
 
     tr.active, tbody tr:hover, tr.selected-row td {
-      background-color: $listhover_color;
-      color: #FFF;
+      background-color: $hover-bg-color;
+      color: $hover-color;
 
       > a {
-        color: #FFF;
+        color: $hover-color;
       }
 
       .bst-edit:hover {
@@ -103,11 +103,11 @@ td.row-select {
     }
 
     td.active-row {
-      background-color: lighten($listhover_color, 8%);
-      color: white;
+      background-color: lighten($hover-bg-color, 8%);
+      color: $hover-color;
 
       > a {
-        color: white;
+        color: $hover-color;
       }
     }
 
@@ -367,8 +367,8 @@ div.alch-dialog.open.info-value {
         color: black;
 
         &:hover {
-            color: $listhover_color;
-            border-bottom: 2px solid $listhover_color;
+            color: $hover-color;
+            border-bottom: 2px solid $hover-bg-color;
         }
 
         &:first-child {
@@ -379,8 +379,8 @@ div.alch-dialog.open.info-value {
     .active {
 
       a {
-        color: $listhover_color;
-        border-bottom: 2px solid $listhover_color;
+        color: $hover-bg-color;
+        border-bottom: 2px solid $hover-bg-color;
       }
     }
 
