@@ -26,22 +26,19 @@
     max-width: $row-select-width;
   }
 
-  tr:hover td, tr:hover td > a,
-  tr.focus td, tr.focus td > a {
-    background-color: $listhover_color;
-    color: #FFF;
+  tr.active td,
+  tr:hover td,
+  tr.focus td,
+  tr.selected-row td {
+    background-color: $hover-bg-color;
+    color: $hover-color;
+
+    > a {
+      color: $hover-color;
+    }
 
     button, select {
       color: #000;
-    }
-  }
-
-  tr.active, tbody tr:hover, tr.selected-row td {
-    background-color: $listhover_color;
-    color: #FFF;
-
-    > a {
-      color: #FFF;
     }
 
     .bst-edit:hover {

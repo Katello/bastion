@@ -1,3 +1,6 @@
+@import "bootstrap/variables";
+@import "variables";
+
 .nav.nav-tabs.details-nav {
   margin-bottom: 10px;
 }
@@ -18,5 +21,40 @@
   dd {
     margin-left: 200px;
     word-wrap: break-word;
+  }
+}
+
+.info-blocks {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  tr:hover td > a,
+  tr.focus td > a
+  {
+    color: $link-color;
+  }
+
+  tr:hover td:not(.info-block-head),
+  tr.focus td:not(.info-block-head)
+   {
+    background-color: $body-bg;
+    color: $text-color;
+  }
+
+  .info-block-head,
+  tr:hover td.info-block-head,
+  tr.focus td.info-block-head,
+  {
+    background: #F7F7F7;
+  }
+
+  .info-block-head {
+    font-size: 18px;
+    padding-left: 15px;
+    padding-top: 18px;
+  }
+
+  .info-block {
+    text-align: center;
   }
 }
