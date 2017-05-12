@@ -42,7 +42,7 @@ describe('Factory: Nutupane', function() {
             per_page: 2,
             total: 10,
             subtotal: 8,
-            offset: 5,
+            offset: 1,
             sort: {
                 by: "description",
                 order: "ASC"
@@ -225,9 +225,14 @@ describe('Factory: Nutupane', function() {
             expect(nutupane.table.pageExists(23524)).toBe(false);
         });
 
+        it("provides a way to get the page start based on offset", function () {
+            expect(nutupane.table.getPageStart()).toBe(1);
+            nutupane.table.rows = [];
+            expect(nutupane.table.getPageStart()).toBe(0);
+        });
 
         it("provides a way to get the page end based on offset", function () {
-            expect(nutupane.table.getPageEnd()).toBe(6);
+            expect(nutupane.table.getPageEnd()).toBe(2);
         });
 
         describe("provides page navigation", function () {

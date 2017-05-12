@@ -10,7 +10,7 @@
  * @example
  */
 angular.module('Bastion.components')
-    .directive('bstTable', ['$window', function ($window) {
+    .directive('bstTable', function () {
         return {
             restrict: 'A',
             replace: true,
@@ -20,23 +20,43 @@ angular.module('Bastion.components')
                 'rowChoice': '@'
             },
             controller: 'BstTableController',
-            link: function (scope) {
-                var resize = function () {
-                    angular.element($window).trigger('resize');
-                };
+            link: function (scope, element) {
+                function checkForResults(rows) {
+                    var table = scope.table,
+                        tableElement = element.find('table'),
+                        tableBody = tableElement.find('tbody'),
+                        existingTr, numberOfColumns, messageTd, message;
 
-                // Trigger resize after resource $promise is resolved
-                scope.$watch('table.resource', function (resource) {
-                    if (resource && resource.hasOwnProperty('$promise')) {
-                        resource.$promise.then(resize);
+                    tableBody.find('#noRowsTr').remove();
+
+                    if (rows.length === 0 && !table.working) {
+                        existingTr = tableBody.find('#noRowsTr');
+                        numberOfColumns = tableElement.find('th').length;
+
+                        if (table.searchTerm || table.searchCompleted) {
+                            message = element.find("#noSearchResultsMessage").html();
+                        } else {
+                            message = element.find("#noRowsMessage").html();
+                        }
+
+                        messageTd = $('<td>').attr('colspan', numberOfColumns);
+                        messageTd.html(message);
+
+                        if (existingTr.length > 0) {
+                            existingTr.html(messageTd);
+                        } else {
+                            tableBody.append($('<tr id="noRowsTr">'));
+                            tableBody.find('tr').html(messageTd);
+                        }
+
                     }
-                });
+                }
 
-                // Trigger resize when rows change
-                scope.$watch('table.rows', resize);
+                // Check for results and handle no rows message
+                scope.$watch('table.rows', checkForResults);
             }
         };
-    }])
+    })
     .controller('BstTableController', ['$scope', function ($scope) {
         var rows = $scope.rows = [],
             headers = $scope.headers = [],
