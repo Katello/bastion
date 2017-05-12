@@ -1,4 +1,4 @@
-<div class="row toolbar-pf table-view-pf-toolbar-external" ng-class="{'empty-table': table.rows.length === 0}">
+<div class="row toolbar-pf table-view-pf-toolbar-external">
   <div class="col-sm-12">
     <form class="toolbar-pf-actions">
       <div class="form-group toolbar-pf-search-filter">
@@ -47,10 +47,10 @@
       </div>
     </form>
 
-    <div class="row toolbar-pf-results" ng-show="table.rows.length > 0">
+    <div class="row toolbar-pf-results">
       <div class="col-sm-9"></div>
       <div class="col-sm-3 table-view-pf-select-results" ng-show="table.rowSelect">
-        <span translate>{{ table.numSelected }} of {{ table.resource.total }} Selected</span>
+        <span translate>{{ table.numSelected }} of {{ table.resource.subtotal }} Selected</span>
       </div>
     </div>
   </div>
@@ -59,14 +59,14 @@
 <div bst-table="table">
   <div class="row">
     <div class="col-sm-12">
-      <p bst-alert="info" ng-show="table.rows.length === 0 && !table.working && !table.searchTerm && !table.searchCompleted">
+      <p id="noRowsMessage" ng-show="false">
         <span data-block="no-rows-message"></span>
       </p>
-      <p bst-alert="info" ng-show="table.rows.length === 0 && !table.working && (table.searchTerm || table.searchCompleted)">
+      <p id="noSearchResultsMessage" ng-show="false">
         <span data-block="no-search-results-message"></span>
       </p>
 
-      <div ng-show="table.rows.length > 0" ng-class="{'table-mask': table.refreshing || table.working}">
+      <div ng-class="{'table-mask': table.refreshing || table.working}">
         <div data-block="table"></div>
 
         <form class="content-view-pf-pagination table-view-pf-pagination clearfix">
@@ -80,7 +80,7 @@
           </div>
           <div class="form-group">
             <span>
-              <span class="pagination-pf-items-current">{{ table.resource.offset }} - {{ table.getPageEnd() }}</span>
+              <span class="pagination-pf-items-current" translate>Showing {{ table.getPageStart() }} - {{ table.getPageEnd() }}</span>
               <span translate>of </span>
               <span class="pagination-pf-items-total">{{ table.resource.subtotal }}</span>
             </span>
@@ -100,7 +100,11 @@
             <label for="currentPage" class="sr-only" translate>
               Current Page
             </label>
-            <input id="currentPage" class="pagination-pf-page" type="text" ng-model="table.params.page" ng-blur="table.changePage(table.params.page)" bst-on-enter="table.changePage()"/>
+
+            <input id="currentPage" ng-show="table.resource.subtotal > 0" class="pagination-pf-page" type="text" ng-model="table.params.page"
+                   ng-blur="table.changePage(table.params.page)" bst-on-enter="table.changePage()"/>
+
+            <input ng-show="table.resource.subtotal === 0" class="pagination-pf-page" type="text" readonly="true" ng-value="table.resource.subtotal"/>
 
             <span translate>of
               <span class="pagination-pf-pages">{{ (table.resource.subtotal / table.resource.per_page) | roundUp }}</span>

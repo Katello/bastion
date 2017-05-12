@@ -353,6 +353,16 @@ angular.module('Bastion.components').factory('Nutupane',
                 return (pageNumber >= 1) && (pageNumber <= self.table.getLastPage());
             };
 
+            self.table.getPageStart = function () {
+                var table = self.table, pageStart = 0;
+
+                if (table.rows.length > 0) {
+                    pageStart = table.resource.offset;
+                }
+
+                return pageStart;
+            };
+
             self.table.getPageEnd = function () {
                 var table = self.table, pageEnd;
 
