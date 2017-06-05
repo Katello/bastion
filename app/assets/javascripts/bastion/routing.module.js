@@ -86,7 +86,7 @@ angular.module('Bastion.routing', ['ui.router']);
             } else {
                 $window.location.href = url;
             }
-            return $location.path();
+            return $location.url();
         });
 
         $locationProvider.html5Mode({enabled: true, requireBase: false});
