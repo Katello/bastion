@@ -215,7 +215,8 @@ angular.module('Bastion.components').factory('Nutupane',
             };
 
             self.refresh = function () {
-                var existingTable = TableCache.getTable(getTableName());
+                var promise, existingTable;
+                existingTable = TableCache.getTable(getTableName());
 
                 if (existingTable) {
                     self.loadParamsFromExistingTable(existingTable);
@@ -223,8 +224,11 @@ angular.module('Bastion.components').factory('Nutupane',
 
                 self.table.refreshing = true;
                 self.table.numSelected = 0;
-                self.table.selectAllResults(false);
-                return self.load();
+                promise = self.load();
+                promise.then(function () {
+                    self.table.selectAllResults(false);
+                });
+                return promise;
             };
 
             self.invalidate = function () {
