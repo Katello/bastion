@@ -31,7 +31,7 @@
  */
 angular.module('Bastion.components').factory('Nutupane',
     ['$location', '$q', 'entriesPerPage', 'TableCache', 'GlobalNotification', function ($location, $q, entriesPerPage, TableCache, GlobalNotification) {
-        var Nutupane = function (resource, params, action) {
+        var Nutupane = function (resource, params, action, nutupaneParams) {
             var self = this;
 
             function getTableName() {
@@ -62,6 +62,8 @@ angular.module('Bastion.components').factory('Nutupane',
             params.page = $location.search().page || 1;
             params['per_page'] = $location.search()['per_page'] || entriesPerPage;
 
+            nutupaneParams = nutupaneParams || {};
+            self.disableAutoLoad = nutupaneParams.disableAutoLoad || false;
             self.searchKey = action ? action + 'Search' : 'search';
 
             self.table = {
@@ -464,8 +466,9 @@ angular.module('Bastion.components').factory('Nutupane',
                 self.table.searchTerm = $location.search()[self.searchKey];
             };
 
-            // Load initial set of results
-            self.load();
+            if (!self.disableAutoLoad) {
+                self.load();
+            }
         };
 
         return Nutupane;
