@@ -459,5 +459,30 @@ describe('Factory: Nutupane', function() {
         });
     });
 
+    describe("Nutupane should", function() {
+
+        it("be able to disable auto-load", function() {
+            spyOn(Resource, 'customAction')
+            nutupane = new Nutupane(Resource, {}, 'customAction', {'disableAutoLoad': true});
+            expect(nutupane.disableAutoLoad).toBe(true);
+            expect(Resource.customAction).not.toHaveBeenCalled();
+        });
+
+        it("be able to load results after initialization", function() {
+            spyOn(Resource, 'customAction')
+            nutupane = new Nutupane(Resource, {}, 'customAction', {'disableAutoLoad': true});
+            expect(nutupane.disableAutoLoad).toBe(true);
+            nutupane.refresh();
+            expect(Resource.customAction).toHaveBeenCalled();
+        });
+
+        it("be able to enable autoload", function() {
+            spyOn(Resource, 'customAction')
+            nutupane = new Nutupane(Resource, {}, 'customAction', {'disableAutoLoad': false});
+            expect(nutupane.disableAutoLoad).toBe(false);
+            expect(Resource.customAction).toHaveBeenCalled();
+        });
+
+    });
 });
 
