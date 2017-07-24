@@ -211,6 +211,12 @@ describe('Factory: Nutupane', function() {
                expect(nutupane.table.numSelected).toBe(0);
         });
 
+        it("provides a way to check if the table supports pagination", function () {
+            expect(nutupane.table.hasPagination()).toBeTruthy();
+            nutupane.table.resource.subtotal = null;
+            expect(nutupane.table.hasPagination()).toBeFalsy();
+        });
+
         it("provides a way to tell if on the first page", function () {
             nutupane.table.firstPage();
             expect(nutupane.table.onFirstPage()).toBe(true);
