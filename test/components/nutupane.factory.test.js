@@ -205,14 +205,14 @@ describe('Factory: Nutupane', function() {
         });
 
         it("decrements num selected if removed row is selected.", function() {
-               var row = nutupane.table.rows[0];
-               row.selected = true;
-               nutupane.table.numSelected = 1;
+           var row = nutupane.table.rows[0];
+           row.selected = true;
+           nutupane.table.numSelected = 1;
 
-               nutupane.removeRow(row.id);
-               expect(nutupane.table.rows.length).toBe(1);
-               expect(nutupane.table.rows).not.toContain(row);
-               expect(nutupane.table.numSelected).toBe(0);
+           nutupane.removeRow(row.id);
+           expect(nutupane.table.rows.length).toBe(1);
+           expect(nutupane.table.rows).not.toContain(row);
+           expect(nutupane.table.numSelected).toBe(0);
         });
 
         it("provides a way to check if the table supports pagination", function () {

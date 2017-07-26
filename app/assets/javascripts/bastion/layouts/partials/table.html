@@ -102,7 +102,7 @@
             </label>
 
             <input id="currentPage" ng-show="table.resource.subtotal > 0" class="pagination-pf-page" type="text" ng-model="table.params.page"
-                   ng-blur="table.changePage(table.params.page)" bst-on-enter="table.changePage()"/>
+                   ng-blur="table.changePage(table.params.page)" bst-on-enter="table.changePage(table.params.page)"/>
 
             <input ng-show="table.resource.subtotal === 0" class="pagination-pf-page" type="text" readonly="true" ng-value="table.resource.subtotal"/>
 
