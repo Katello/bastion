@@ -27,14 +27,18 @@ table.table {
   padding: 0;
 }
 
-.breadcrumb > .active a {
-  color: $breadcrumb-active-color;
-}
-
 .wizard li {
   &:not(:first-child) span {
     padding-left: 15px;
   }
+}
+
+.breadcrumbs-inline .breadcrumb {
+  display: inline-block;
+}
+
+.breadcrumb > .active a {
+  color: $breadcrumb-active-color;
 }
 
 .breadcrumbs .breadcrumb {
@@ -78,4 +82,23 @@ html .toolbar-pf.table-view-pf-toolbar-external .toolbar-pf-filter {
 // Add some margin to the bottom of the table footer
 .content-view-pf-pagination {
   margin-bottom: 20px;
+}
+
+.dropdown-menu form {
+  padding: 5px;
+}
+
+html .dropdown-menu .content-view-pf-pagination {
+  background-color: #FFFFFF;
+  border: none;
+  margin-bottom: 0;
+  white-space: nowrap;
+
+  .pagination-pf-back {
+    margin-left: 0;
+  }
+
+  .form-group:last-child {
+    justify-content: center;
+  }
 }
