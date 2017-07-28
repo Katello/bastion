@@ -1,4 +1,9 @@
 @import "variables";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "bootstrap/alerts";
+@import "patternfly/variables";
+@import "patternfly/alerts";
 
 .table {
   table-layout: fixed;
