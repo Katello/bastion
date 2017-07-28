@@ -20,6 +20,7 @@ module Bastion
 
     initializer "bastion.configure_assets", :group => :all do |app|
       SETTINGS[:bastion] = {:assets => {}} if SETTINGS[:bastion].nil?
+      SETTINGS[:bastion][:assets] = {} if SETTINGS[:bastion][:assets].nil?
 
       SETTINGS[:bastion][:assets][:precompile] = [
         'bastion/bastion.css',
@@ -40,6 +41,12 @@ module Bastion
 
     initializer "angular_templates", :group => :all do |app|
       app.config.angular_templates.ignore_prefix = %w([bastion]*\/+)
+    end
+
+    initializer 'bastion.register_plugin', :before => :finisher_hook do
+      Foreman::Plugin.register :bastion do
+        requires_foreman '>= 1.16'
+      end
     end
 
     rake_tasks do
