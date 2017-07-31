@@ -2,6 +2,7 @@ describe('Factory: Nutupane', function() {
     var $timeout,
         $location,
         $rootScope,
+        $q,
         Resource,
         TableCache,
         entriesPerPage,
@@ -26,18 +27,32 @@ describe('Factory: Nutupane', function() {
         $provide.value('TableCache', TableCache);
     }));
 
-    beforeEach(module(function() {
+    beforeEach(inject(function(_$location_, _$timeout_, _Nutupane_, _$rootScope_, _$q_) {
+        $location = _$location_;
+        $timeout = _$timeout_;
+        Nutupane = _Nutupane_;
+        $rootScope = _$rootScope_;
+        $q = _$q_;
+
         expectedResult = [{id: 2, value: "value2"}, {id:3, value: "value3"},
             {id: 4, value: "value4"}, {id:5, value: "value5"}];
         Resource = {
             queryPaged: function(params, callback) {
-                var result = {page: 1, results: expectedResult, subtotal: 8, per_page: 2};
+                var result = {
+                  page: 1,
+                  results: expectedResult,
+                  subtotal: 8,
+                  per_page: 2,
+                  $promise: $q.resolve()
+                };
                 if (callback) {
                     callback(result);
                 }
                 return result;
             },
-            customAction: function() {},
+            customAction: function(params, callback) {
+                return {$promise: $q.resolve()};
+            },
             page: 1,
             per_page: 2,
             total: 10,
@@ -48,13 +63,6 @@ describe('Factory: Nutupane', function() {
                 order: "ASC"
             }
         };
-    }));
-
-    beforeEach(inject(function(_$location_, _$timeout_, _Nutupane_, _$rootScope_) {
-        $location = _$location_;
-        $timeout = _$timeout_;
-        Nutupane = _Nutupane_;
-        $rootScope = _$rootScope_;
     }));
 
     describe("adds additional functionality to the Nutupane table by", function() {
@@ -144,7 +152,7 @@ describe('Factory: Nutupane', function() {
         });
 
         it("providing a method to perform a search", function() {
-            spyOn(Resource, 'queryPaged');
+            spyOn(Resource, 'queryPaged').and.callThrough();
 
             nutupane.table.search();
 
@@ -391,11 +399,11 @@ describe('Factory: Nutupane', function() {
         });
 
         describe("provides a way to sort the table", function() {
-            it ("defaults the sort to ascending if the previous sort does not match the new sort.", function() {
+            it("defaults the sort to ascending if the previous sort does not match the new sort.", function() {
                 var expectedParams = {sort_by: 'name', sort_order: 'ASC', search: '', paged: true, page: 1, per_page: entriesPerPage};
                 nutupane.table.resource.sort = {};
 
-                spyOn(Resource, 'queryPaged');
+                spyOn(Resource, 'queryPaged').and.callThrough();
                 nutupane.table.sortBy({id: "name"});
 
                 expect(Resource.queryPaged).toHaveBeenCalledWith(expectedParams, jasmine.any(Function));
@@ -408,7 +416,7 @@ describe('Factory: Nutupane', function() {
                     order: 'ASC'
                 };
 
-                spyOn(Resource, 'queryPaged');
+                spyOn(Resource, 'queryPaged').and.callThrough();
                 nutupane.table.sortBy({id: "name"});
 
                 expect(Resource.queryPaged).toHaveBeenCalledWith(expectedParams, jasmine.any(Function));
@@ -439,14 +447,13 @@ describe('Factory: Nutupane', function() {
         });
 
         it("provide a method to fetch records for the table via a custom action", function() {
-            spyOn(Resource, 'customAction');
+            spyOn(Resource, 'customAction').and.callThrough();
             nutupane.query();
 
             expect(Resource.customAction).toHaveBeenCalled();
         });
 
         it("naming the URL search field based off the action", function() {
-            spyOn(Resource, 'customAction');
             nutupane.table.search('*');
 
             expect($location.search()['customActionSearch']).toBe('*');
@@ -457,9 +464,6 @@ describe('Factory: Nutupane', function() {
 
             expect(nutupane.getParams()['test']).toBe('ABC');
         });
-    });
-
-    describe("Nutupane should", function() {
 
         it("be able to disable auto-load", function() {
             spyOn(Resource, 'customAction')
@@ -469,7 +473,7 @@ describe('Factory: Nutupane', function() {
         });
 
         it("be able to load results after initialization", function() {
-            spyOn(Resource, 'customAction')
+            spyOn(Resource, 'customAction').and.callThrough();
             nutupane = new Nutupane(Resource, {}, 'customAction', {'disableAutoLoad': true});
             expect(nutupane.disableAutoLoad).toBe(true);
             nutupane.refresh();
@@ -477,12 +481,31 @@ describe('Factory: Nutupane', function() {
         });
 
         it("be able to enable autoload", function() {
-            spyOn(Resource, 'customAction')
+            spyOn(Resource, 'customAction').and.callThrough();
             nutupane = new Nutupane(Resource, {}, 'customAction', {'disableAutoLoad': false});
             expect(nutupane.disableAutoLoad).toBe(false);
             expect(Resource.customAction).toHaveBeenCalled();
         });
 
+        describe("when there was an error loading the resource", function() {
+            beforeEach(function() {
+                spyOn(Resource, 'customAction').and.callFake(function() {
+                      return {
+                        $promise: $q.reject('internal server error')
+                      };
+                });
+                nutupane.load();
+                $rootScope.$apply();
+            });
+
+            it("ensures the table is not in 'refreshing' state", function() {
+                expect(nutupane.table.refreshing).toBe(false);
+            });
+
+            it("ensures the table is not in 'working' state", function() {
+                expect(nutupane.table.working).toBe(false);
+            });
+        });
     });
 });
 
