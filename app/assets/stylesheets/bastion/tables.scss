@@ -31,11 +31,6 @@
   tr.focus td,
   tr.selected-row td {
     background-color: $hover-bg-color;
-    color: $hover-color;
-
-    > a {
-      color: $hover-color;
-    }
 
     button, select {
       color: #000;
