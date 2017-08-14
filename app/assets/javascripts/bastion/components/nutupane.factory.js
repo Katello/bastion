@@ -30,7 +30,7 @@
     </pre>
  */
 angular.module('Bastion.components').factory('Nutupane',
-    ['$location', '$q', 'entriesPerPage', 'TableCache', 'GlobalNotification', function ($location, $q, entriesPerPage, TableCache, GlobalNotification) {
+    ['$location', '$q', '$stateParams', 'entriesPerPage', 'TableCache', 'GlobalNotification', function ($location, $q, $stateParams, entriesPerPage, TableCache, GlobalNotification) {
         var Nutupane = function (resource, params, action, nutupaneParams) {
             var self = this;
 
@@ -71,14 +71,16 @@ angular.module('Bastion.components').factory('Nutupane',
                 params: params,
                 resource: resource,
                 rows: [],
-                searchTerm: $location.search()[self.searchKey] || "",
+                searchTerm: $stateParams[self.searchKey] || $location.search()[self.searchKey] || "",
                 initialLoad: true
             };
 
             self.loadParamsFromExistingTable = function (existingTable) {
                 params = existingTable.params;
                 self.table.params = existingTable.params;
-                self.table.searchTerm = existingTable.searchTerm;
+                if (!self.table.searchTerm) {
+                    self.table.searchTerm = existingTable.searchTerm;
+                }
             };
 
             self.load = function () {

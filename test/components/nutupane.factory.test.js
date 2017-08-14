@@ -1,6 +1,7 @@
 describe('Factory: Nutupane', function() {
     var $timeout,
         $location,
+        $stateParams,
         $rootScope,
         $q,
         Resource,
@@ -12,6 +13,8 @@ describe('Factory: Nutupane', function() {
     beforeEach(module('Bastion.components'));
 
     beforeEach(module(function ($provide) {
+        $stateParams = {};
+
         entriesPerPage = 20;
 
         TableCache = {
@@ -23,6 +26,7 @@ describe('Factory: Nutupane', function() {
             }
         };
 
+        $provide.value('$stateParams', $stateParams);
         $provide.value('entriesPerPage', entriesPerPage);
         $provide.value('TableCache', TableCache);
     }));
