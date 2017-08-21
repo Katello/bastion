@@ -45,7 +45,7 @@ module Bastion
 
     initializer 'bastion.register_plugin', :before => :finisher_hook do
       Foreman::Plugin.register :bastion do
-        requires_foreman '>= 1.16'
+        requires_foreman '>= 1.15'
       end
     end
 
