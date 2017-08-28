@@ -39,6 +39,11 @@ angular.module('Bastion.components').factory('Nutupane',
             }
 
             function setQueryStrings() {
+                // Don't manipulate the query string for params of a modal view
+                if (document.body.className.indexOf("modal-open") >= 0) {
+                    return;
+                }
+
                 if (self.table.params.paged) {
                     $location.search("page", self.table.params.page).replace();
                     $location.search("per_page", self.table.params['per_page']).replace();
