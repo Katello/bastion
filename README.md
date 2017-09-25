@@ -151,7 +151,7 @@ A resource serves as a representation of an API endpoint for an entity and provi
      *   Defines the API endpoint for Content Host
      */
     function ContentHost(BastionResource) {
-          return BastionResource('/api/v2/content-hosts/:id/:action',
+          return BastionResource('api/v2/content-hosts/:id/:action',
               {id: '@uuid'},
               {
                   update: {method: 'PUT'},
@@ -170,7 +170,7 @@ A resource serves as a representation of an API endpoint for an entity and provi
 })();
 ```
 
-Here we have created an angular factory named `content-host` and attached it to the `Bastion.content-hosts` namespace. You can read more about the $resource service here - http://code.angularjs.org/1.0.7/docs/api/ngResource.$resource
+Here we have created an angular factory named `content-host` and attached it to the `Bastion.content-hosts` namespace. It's important that the resource URL does not begin with a '/' so that the application can live in a subdirectory without errors. You can read more about the $resource service here - http://code.angularjs.org/1.0.7/docs/api/ngResource.$resource
 
 #### Asset Pipeline
 

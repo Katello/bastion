@@ -10,7 +10,7 @@
 angular.module('Bastion.components').factory('BstBookmark',
     ['BastionResource', function (BastionResource) {
 
-        return BastionResource('/api/v2/bookmarks', {id: '@id'},
+        return BastionResource('api/v2/bookmarks', {id: '@id'},
             {
                 create: { method: 'POST' }
             }
