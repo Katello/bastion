@@ -31,10 +31,13 @@ angular.module('Bastion').config(
         $provide.factory('PrefixInterceptor', ['$q', '$templateCache', function ($q, $templateCache) {
             return {
                 request: function (config) {
+                    var relativeUrl = BastionConfig.relativeUrlRoot;
                     if (config.url.indexOf('.html') !== -1) {
                         if (angular.isUndefined($templateCache.get(config.url))) {
-                            config.url = '/' + config.url;
+                            config.url = relativeUrl + config.url;
                         }
+                    } else {
+                        config.url = relativeUrl + config.url;
                     }
 
                     return config || $q.when(config);
@@ -73,12 +76,13 @@ angular.module('Bastion').config(
  * @requires $breadcrumb
  * @requires PageTitle
  * @requires markActiveMenu
+ * @requires BastionConfig
  *
  * @description
  *   Set up some common state related functionality and set the current language.
  */
-angular.module('Bastion').run(['$rootScope', '$state', '$stateParams', 'gettextCatalog', 'currentLocale', '$location', '$window', '$breadcrumb', 'PageTitle', 'markActiveMenu',
-    function ($rootScope, $state, $stateParams, gettextCatalog, currentLocale, $location, $window, $breadcrumb, PageTitle, markActiveMenu) {
+angular.module('Bastion').run(['$rootScope', '$state', '$stateParams', 'gettextCatalog', 'currentLocale', '$location', '$window', '$breadcrumb', 'PageTitle', 'markActiveMenu', 'BastionConfig',
+    function ($rootScope, $state, $stateParams, gettextCatalog, currentLocale, $location, $window, $breadcrumb, PageTitle, markActiveMenu, BastionConfig) {
         var fromState, fromParams, orgSwitcherRegex;
 
         $rootScope.$state = $state;
@@ -107,7 +111,7 @@ angular.module('Bastion').run(['$rootScope', '$state', '$stateParams', 'gettextC
         };
 
         $rootScope.taskUrl = function (taskId) {
-            return "/foreman_tasks/tasks/" + taskId;
+            return BastionConfig.relativeUrlRoot + "/foreman_tasks/tasks/" + taskId;
         };
 
         // Set the current language

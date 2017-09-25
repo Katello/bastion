@@ -58,14 +58,14 @@ angular.module('Bastion.auth').config(['$httpProvider', '$provide',
  * @name Bastion.auth.run
  *
  * @requires $rootScope
- * @requires $window
+ * @requires $location
  * @requires Authorization
  *
  * @description
  *   Check current user permissions and redirect to the 403 page if appropriate
  */
-angular.module('Bastion.auth').run(['$rootScope', '$window', 'Authorization',
-    function ($rootScope, $window, Authorization) {
+angular.module('Bastion.auth').run(['$rootScope', '$location', 'Authorization',
+    function ($rootScope, $location, Authorization) {
 
         function isAuthorized(permission) {
             return !(permission !== false && (angular.isUndefined(permission) || Authorization.denied(permission)));
@@ -83,7 +83,7 @@ angular.module('Bastion.auth').run(['$rootScope', '$window', 'Authorization',
             });
 
             if (angular.isUndefined(permitted)) {
-                $window.location.href = '/katello/403';
+                $location.path('/katello/403');
             }
         });
 
