@@ -30,6 +30,18 @@
                     scope.table = TableCache.getTable(getTableName(listUrl));
                 }
 
+                scope.showSwitcher = function () {
+                    var tableHasRows, isNewPage;
+
+                    // Must have at least two items to switch between them
+                    tableHasRows = scope.table && scope.table.rows.length > 1;
+
+                    // Don't show the switcher when creating a new product
+                    isNewPage = /new$/.test($location.path());
+
+                    return tableHasRows && !isNewPage;
+                };
+
                 scope.changeResource = function (id) {
                     var currentUrl, nextUrl;
                     currentUrl = $location.path();
