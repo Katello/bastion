@@ -75,14 +75,13 @@ angular.module('Bastion').config(
  * @requires $window
  * @requires $breadcrumb
  * @requires PageTitle
- * @requires markActiveMenu
  * @requires BastionConfig
  *
  * @description
  *   Set up some common state related functionality and set the current language.
  */
-angular.module('Bastion').run(['$rootScope', '$state', '$stateParams', 'gettextCatalog', 'currentLocale', '$location', '$window', '$breadcrumb', 'PageTitle', 'markActiveMenu', 'BastionConfig',
-    function ($rootScope, $state, $stateParams, gettextCatalog, currentLocale, $location, $window, $breadcrumb, PageTitle, markActiveMenu, BastionConfig) {
+angular.module('Bastion').run(['$rootScope', '$state', '$stateParams', 'gettextCatalog', 'currentLocale', '$location', '$window', '$breadcrumb', 'PageTitle', 'BastionConfig',
+    function ($rootScope, $state, $stateParams, gettextCatalog, currentLocale, $location, $window, $breadcrumb, PageTitle, BastionConfig) {
         var fromState, fromParams, orgSwitcherRegex;
 
         $rootScope.$state = $state;
@@ -129,9 +128,6 @@ angular.module('Bastion').run(['$rootScope', '$state', '$stateParams', 'gettextC
                 if (PageTitle.titles.length > 1) {
                     PageTitle.resetToFirst();
                 }
-
-                //Set the active menu item in Foreman
-                markActiveMenu();
             }
         );
 
