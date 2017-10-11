@@ -1,5 +1,6 @@
 module Bastion
   class BastionController < ::ApplicationController
+    helper 'bastion/layout'
     skip_before_filter :authorize
 
     # prevent Foreman routes from being incorrectly generated (don't use the Bastion url_helpers)

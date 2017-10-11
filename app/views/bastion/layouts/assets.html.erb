@@ -5,9 +5,7 @@
 <% content_for(:stylesheets) do %>
   <%= stylesheet_link_tag "bastion/bastion" %>
   <% Bastion.plugins.each do |name, plugin| %>
-    <% if plugin[:stylesheet] %>
-      <%= stylesheet_link_tag(plugin[:stylesheet]) %>
-    <% end %>
+    <%= include_plugin_styles(plugin) %>
   <% end %>
 <% end %>
 
@@ -31,7 +29,7 @@
     angular.module('Bastion.auth').value('Permissions', angular.fromJson('<%= User.current.cached_roles.collect { |role| role.permissions }.flatten.to_json.html_safe %>'));
   </script>
   <% Bastion.plugins.each do |name, plugin| %>
-    <%= javascript_include_tag(plugin[:javascript]) %>
+    <%= include_plugin_js(plugin) %>
   <% end %>
 <% end %>
 
