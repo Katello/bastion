@@ -428,10 +428,8 @@ describe('Factory: Nutupane', function() {
 
             it("toggles the sort order if already sorting by that column", function() {
                 var expectedParams = {sort_by: 'name', sort_order: 'DESC', search: '', paged: true, page: 1, per_page: entriesPerPage};
-                nutupane.table.resource.sort = {
-                    by: 'name',
-                    order: 'ASC'
-                };
+                nutupane.table.params["sort_by"] = 'name';
+                nutupane.table.params["sort_order"] = 'ASC';
 
                 spyOn(Resource, 'queryPaged').and.callThrough();
                 nutupane.table.sortBy({id: "name"});
