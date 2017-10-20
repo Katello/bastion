@@ -461,15 +461,14 @@ angular.module('Bastion.components').factory('Nutupane',
             };
 
             self.table.sortBy = function (column) {
-                var sort = self.table.resource.sort;
                 if (!column) {
                     return;
                 }
                 if (column.id) {
                     params["sort_by"] = column.id;
                 }
-                if (column.id === sort.by || column.id) {
-                    params["sort_order"] = (sort.order === 'ASC') ? 'DESC' : 'ASC';
+                if (column.id === params["sort_by"] || column.id) {
+                    params["sort_order"] = (params["sort_order"] === 'ASC') ? 'DESC' : 'ASC';
                 } else {
                     params["sort_order"] = 'ASC';
                 }
