@@ -22,7 +22,7 @@
         return {
             templateUrl: 'components/views/bst-resource-switcher.html',
             link: function (scope) {
-                var breadcrumbs = $breadcrumb.getStatesChain(), listUrl;
+                var breadcrumbs = $breadcrumb.getStatesChain(), listUrl, unregisterWatcher;
                 scope.table = {rows: []};
 
                 if (breadcrumbs.length > 0) {
@@ -48,6 +48,20 @@
                     nextUrl = currentUrl.replace(/\d+([^\d+]*)$/, id + '$1');
                     $location.path(nextUrl);
                 };
+
+                unregisterWatcher = scope.$watch('table.rows', function (rows) {
+                    var currentId = parseInt($location.path().match(/\d+/)[0], 10);
+
+                    angular.forEach(rows, function (row) {
+                        if (row.id === currentId) {
+                            row.selected = true;
+                        } else {
+                            row.selected = false;
+                        }
+                    });
+
+                    unregisterWatcher();
+                });
             }
         };
     }
