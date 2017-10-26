@@ -18,7 +18,9 @@ describe('Directive: bstResourceSwitcher', function() {
         };
 
         $location = {
-            path: function () {}
+            path: function () {
+                return "/products/3";
+            }
         };
 
         $state = {

@@ -21,7 +21,8 @@
         </button>
       </div>
     </form>
-    <li ng-class="{'table-mask': table.refreshing || table.working}" ng-repeat="item in table.rows | filter:resourceFilter">
+    <li ng-class="{'table-mask': table.refreshing || table.working, 'active': item.selected}"
+        ng-repeat="item in table.rows | filter:resourceFilter">
       <a ng-click="changeResource(item.id)">{{ item.name }}</a>
     </li>
 
