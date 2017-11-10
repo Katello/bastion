@@ -24,6 +24,9 @@
   "engines": {
     "node": ">=0.8.0"
   },
+  "eslintConfig": {
+    "root": true
+  },
   "main": "./bastion.js",
   "directories": {
     "lib": "./grunt"
