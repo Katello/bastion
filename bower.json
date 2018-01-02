@@ -76,6 +76,9 @@
     "angular-uuid4": {
       "javascripts/bastion/angular-uuid4": "angular-uuid4.js"
     },
+    "lodash": {
+      "javascripts/bastion/lodash": "lodash.js"
+    },
     "ngUpload": {
       "javascripts/bastion/ngUpload": "ng-upload.js"
     }
