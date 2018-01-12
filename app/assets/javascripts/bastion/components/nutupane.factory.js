@@ -421,6 +421,7 @@ angular.module('Bastion.components').factory('Nutupane',
 
             self.table.changePage = function (pageNumber) {
                 if (pageNumber && self.table.pageExists(pageNumber)) {
+                    self.invalidate();
                     params.page = pageNumber;
                     self.table.resource.page = pageNumber;
                     return self.load();
