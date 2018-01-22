@@ -120,7 +120,7 @@ angular.module('Bastion.components').factory('Nutupane',
                     table.rows = response.results;
 
                     table.resource.page = parseInt(response.page, 10);
-                    table.params.page = parseInt(response.page, 10);
+                    params.page = table.params.page = parseInt(response.page, 10);
 
                     if (table.initialSelectAll) {
                         table.selectAll(true);
