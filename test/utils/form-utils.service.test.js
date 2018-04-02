@@ -15,7 +15,7 @@ describe('Service:formUtils', function() {
 
             FormUtils.labelize(model);
 
-            expect(model.label).toBe('a_label_____123');
+            expect(model.label).toBe('a_label_123');
         });
 
         it("that will generate a UUID if a non-ascii name is used", function() {

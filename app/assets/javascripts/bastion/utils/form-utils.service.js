@@ -8,7 +8,7 @@
  *   A set of utilities that are useful when using forms.
  */
 angular.module('Bastion.utils').service('FormUtils', ['uuid4', function (uuid4) {
-    var regex = new RegExp("[^a-z0-9\\-_]", 'gi'),
+    var regex = new RegExp("[^a-z0-9\\-_]+", 'gi'),
         replacement = "_",
         isASCII;
 
