@@ -35,7 +35,7 @@ describe('Directive: bstResourceSwitcher', function() {
         TableCache = {
             getTable: function () {}
         };
-
+        hideSwitcher = true;
         $provide.value('translateFilter',  function(a) { return a; });
         $provide.value('$breadcrumb', $breadcrumb);
         $provide.value('$location', $location);
@@ -82,6 +82,28 @@ describe('Directive: bstResourceSwitcher', function() {
             scope.changeResource(2);
 
             expect($location.path).toHaveBeenCalledWith('/fake/2');
+        });
+
+        it("be able to show the resource switcher", function () {
+            createDirective();
+            scope.table = {
+                rows : {
+                    length : 5
+                }
+            };
+            scope.hideSwitcher = false;
+            expect(scope.showSwitcher()).toBe(true);
+        });
+
+        it("be able to hide the resource switcher", function () {
+            createDirective();
+            scope.table = {
+                rows : {
+                    length : 5
+                }
+            };
+            scope.hideSwitcher = true;
+            expect(scope.showSwitcher()).toBe(false);
         });
     });
 });

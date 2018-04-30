@@ -31,15 +31,14 @@
                 }
 
                 scope.showSwitcher = function () {
-                    var tableHasRows, isNewPage;
-
+                    var tableHasRows, isNewPage, hideSwitcher;
                     // Must have at least two items to switch between them
                     tableHasRows = scope.table && scope.table.rows.length > 1;
-
+                    hideSwitcher = scope.hideSwitcher;
                     // Don't show the switcher when creating a new product
                     isNewPage = /new$/.test($location.path());
 
-                    return tableHasRows && !isNewPage;
+                    return tableHasRows && !isNewPage && !hideSwitcher;
                 };
 
                 scope.changeResource = function (id) {
@@ -50,7 +49,7 @@
                 };
 
                 unregisterWatcher = scope.$watch('table.rows', function (rows) {
-                    var currentId = parseInt($location.path().match(/\d+/)[0], 10);
+                    var currentId = $location.path().match(/\d+/) ? parseInt($location.path().match(/\d+/)[0], 10) : null;
 
                     angular.forEach(rows, function (row) {
                         if (row.id === currentId) {
