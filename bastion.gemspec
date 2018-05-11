@@ -9,13 +9,14 @@ Gem::Specification.new do |s|
   s.version     = Bastion::VERSION
   s.authors     = ["Eric D Helms", "Walden Raines"]
   s.email       = ["ericdhelms@gmail.com", "walden@redhat.com"]
-  s.homepage    = "http://www.github.com/Katello/bastion"
+  s.homepage    = "https://github.com/Katello/bastion"
+  s.license     = "GPL-2.0-or-later"
   s.summary     = "UI library of AngularJS based components for Foreman"
   s.description = "Bastion provides a UI library of AngularJS based components designed " \
                   "to integrate and work with Foreman."
 
-  s.files = Dir["{app,config,lib,vendor,grunt}/**/*"] + 
-               ["Rakefile", "README.md", "Gruntfile.js", "package.json", 
+  s.files = Dir["{app,config,lib,vendor,grunt}/**/*"] +
+               ["Rakefile", "README.md", "Gruntfile.js", "package.json",
                 "bower.json", "bastion.js", "eslint.yaml", ".eslintignore",
                 "LICENSE", ".jshintrc"]
 
