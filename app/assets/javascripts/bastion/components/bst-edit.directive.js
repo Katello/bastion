@@ -138,6 +138,8 @@ angular.module('Bastion.components')
         $scope.$watch('editTrigger', function (edit) {
             if (edit) {
                 $scope.edit();
+            } else {
+                $scope.editMode = false;
             }
         });
 
@@ -174,7 +176,9 @@ angular.module('Bastion.components')
                 handleSave: '&onSave',
                 handleCancel: '&onCancel',
                 deletable: '@deletable',
-                handleDelete: '&onDelete'
+                handleDelete: '&onDelete',
+                editTrigger: '=',
+                forcedWorkingMode: '='
             },
             templateUrl: 'components/views/bst-edit-text.html'
         };
@@ -247,7 +251,8 @@ angular.module('Bastion.components')
                 handleCancel: '&onCancel',
                 deletable: '=deletable',
                 handleDelete: '&onDelete',
-                editTrigger: '='
+                editTrigger: '=',
+                forcedWorkingMode: '='
             },
             templateUrl: 'components/views/bst-edit-select.html',
             compile: function (element, attrs) {
