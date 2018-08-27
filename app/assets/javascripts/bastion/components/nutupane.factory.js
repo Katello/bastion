@@ -82,7 +82,7 @@ angular.module('Bastion.components').factory('Nutupane',
 
             self.loadParamsFromExistingTable = function (existingTable) {
                 _.extend(existingTable.params, params);
-                self.table.params = existingTable.params;
+                self.params = existingTable.params;
                 if (!self.table.searchTerm) {
                     self.table.searchTerm = existingTable.searchTerm;
                 }
