@@ -9,9 +9,8 @@
  *
  */
 angular.module('Bastion.components.formatters').filter('arrayToString', [function () {
-    return function (toFormat, stringToPluck, separator) {
-        stringToPluck = stringToPluck || 'name';
+    return function (toFormat, separator) {
         separator = separator || ', ';
-        return _.map(toFormat, stringToPluck).join(separator);
+        return toFormat.join(separator);
     };
 }]);
