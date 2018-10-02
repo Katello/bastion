@@ -38,10 +38,17 @@ describe('Factory: Nofification', function() {
 
     it("allows message context to be specified for interpolation", function () {
         var message = "Everything ran correctly {{ ending }}!",
-            $scope = {ending: 'yay'},
+            options = {link: "", context: {ending: 'yay'}},
             expectedMessage = 'Everything ran correctly yay!';
 
-        Notification.setSuccessMessage(message, $scope);
-        expect(foreman.toastNotifications.notify).toHaveBeenCalledWith({message: expectedMessage, type: 'success'});
+        Notification.setSuccessMessage(message, options);
+        expect(foreman.toastNotifications.notify).toHaveBeenCalledWith({message: expectedMessage, type: 'success', link: options.link});
+    });
+
+    it("provides link to success task", function () {
+        var message = "Everything ran correctly!";
+        options = {link: "www.redhat.com"};
+        Notification.setSuccessMessage(message, options);
+        expect(foreman.toastNotifications.notify).toHaveBeenCalledWith({message: message, type: 'success', link: options.link});
     });
 });
