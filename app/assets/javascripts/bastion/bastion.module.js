@@ -76,27 +76,18 @@ angular.module('Bastion').config(
  * @requires $breadcrumb
  * @requires PageTitle
  * @requires BastionConfig
- * @requires repositoryTypes
  *
  * @description
  *   Set up some common state related functionality and set the current language.
  */
-angular.module('Bastion').run(['$rootScope', '$state', '$stateParams', 'gettextCatalog', 'currentLocale', '$location', '$window', '$breadcrumb', 'PageTitle', 'BastionConfig', 'repositoryTypes',
-    function ($rootScope, $state, $stateParams, gettextCatalog, currentLocale, $location, $window, $breadcrumb, PageTitle, BastionConfig, repositoryTypes) {
+angular.module('Bastion').run(['$rootScope', '$state', '$stateParams', 'gettextCatalog', 'currentLocale', '$location', '$window', '$breadcrumb', 'PageTitle', 'BastionConfig',
+    function ($rootScope, $state, $stateParams, gettextCatalog, currentLocale, $location, $window, $breadcrumb, PageTitle, BastionConfig) {
         var fromState, fromParams, orgSwitcherRegex;
 
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
         $rootScope.transitionTo = $state.transitionTo;
         $rootScope.$location = $location;
-        $rootScope.$repositoryTypes = repositoryTypes;
-        $rootScope.repositoryTypeEnabled = function(desiredType) {
-            var found = _.find(repositoryTypes, function(type) {
-               return type['id'] === desiredType;
-            });
-            return angular.isDefined(found);
-        }
-
 
         $rootScope.isState = function (stateName) {
             return $state.is(stateName);
