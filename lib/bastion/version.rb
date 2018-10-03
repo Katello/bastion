@@ -1,3 +1,3 @@
 module Bastion
-  VERSION = "6.1.14"
+  VERSION = "6.1.15"
 end
