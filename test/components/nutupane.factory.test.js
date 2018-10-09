@@ -114,6 +114,13 @@ describe('Factory: Nutupane', function() {
                 expect($location.search).toHaveBeenCalledWith('per_page', 20);
             });
 
+            it("from existing table", function () {
+                table = {params: {per_page: 30}};
+                expect(nutupane.table.params.per_page).toBe(20);
+                nutupane.loadParamsFromExistingTable(table);
+                expect(nutupane.table.params.per_page).toBe(30);
+            });
+
             it("but does not include page information if not paged", function () {
                 nutupane.table.params.paged = false;
                 nutupane.load();
