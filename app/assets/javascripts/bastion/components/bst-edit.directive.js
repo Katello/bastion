@@ -244,6 +244,8 @@ angular.module('Bastion.components')
                 model: '=bstEditSelect',
                 displayValueDefault: '=displayValueDefault',
                 formatter: '@formatter',
+                iconClass: '=iconClass',
+                iconShow: '=iconShow',
                 readonly: '=',
                 selector: '=',
                 handleOptions: '&options',
@@ -268,6 +270,8 @@ angular.module('Bastion.components')
             templateUrl: 'components/views/bst-edit-multiselect.html',
             scope: {
                 model: '=bstEditMultiselect',
+                iconClass: '=iconClass',
+                iconShow: '=iconShow',
                 formatter: '@formatter',
                 formatterOptions: '@formatterOptions',
                 handleOptions: '&options',
