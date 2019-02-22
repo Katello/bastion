@@ -281,7 +281,8 @@ angular.module('Bastion.components')
                 handleCancel: '&onCancel',
                 buttonConfig: '@buttonConfig',
                 forcedWorkingMode: '=',
-                displayValueDefault: '@displayValueDefault'
+                displayValueDefault: '@displayValueDefault',
+                readonly: '='
             },
             controller: 'BstEditMultiselectController'
         };
