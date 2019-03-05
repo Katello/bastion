@@ -254,7 +254,8 @@ angular.module('Bastion.components')
                 deletable: '=deletable',
                 handleDelete: '&onDelete',
                 editTrigger: '=',
-                forcedWorkingMode: '='
+                forcedWorkingMode: '=',
+                forcedWorkingText: '='
             },
             templateUrl: 'components/views/bst-edit-select.html',
             compile: function (element, attrs) {

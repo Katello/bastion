@@ -1,6 +1,7 @@
 <div ng-show="workingMode">
   <i class="fa fa-spinner inline-icon fa-spin"></i>
-  <span translate>Working</span>
+  <span ng-if='forcedWorkingText'>{{ forcedWorkingText }}</span>
+  <span ng-if='!forcedWorkingText' translate>Working</span>
 </div>
 
 <button class="btn btn-primary"
