@@ -1,3 +1,5 @@
+# Bastion is now abandoned, and all Bastion code has been moved to an Engine as part of https://github.com/Katello/katello/
+
 # Bastion: AngularJS based Foreman UI Engine #
 
 Bastion is a single page AngularJS based web client for the Foreman server. This means that all Bastion "pages" are served from a single static page without the need for a round trip to the server.
