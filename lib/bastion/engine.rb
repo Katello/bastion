@@ -46,6 +46,8 @@ module Bastion
     initializer 'bastion.register_plugin', :before => :finisher_hook do
       Foreman::Plugin.register :bastion do
         requires_foreman '>= 1.15'
+
+        precompile_assets(SETTINGS[:bastion][:assets][:precompile])
       end
     end
 
