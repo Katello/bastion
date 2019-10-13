@@ -1,0 +1,63 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.7.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:hawk:20160119':
+    - generator-bastion > yeoman-generator > request > hawk:
+        patched: '2017-06-07T13:29:27.096Z'
+    - grunt-bower-task > bower > bower-registry-client > request > hawk:
+        patched: '2017-06-07T13:29:27.096Z'
+    - grunt-bower-task > bower > request > hawk:
+        patched: '2017-06-07T13:29:27.096Z'
+  'npm:minimatch:20160620':
+    - generator-bastion > yeoman-generator > file-utils > minimatch:
+        patched: '2017-06-07T13:29:27.096Z'
+    - generator-bastion > yeoman-generator > glob > minimatch:
+        patched: '2017-06-07T13:29:27.096Z'
+    - generator-bastion > yeoman-generator > file-utils > glob > minimatch:
+        patched: '2017-06-07T13:29:27.096Z'
+    - generator-bastion > yeoman-generator > findup-sync > glob > minimatch:
+        patched: '2017-06-07T13:29:27.096Z'
+    - generator-bastion > yeoman-generator > file-utils > findup-sync > glob > minimatch:
+        patched: '2017-06-07T13:29:27.096Z'
+    - grunt-bower-task > bower > glob > minimatch:
+        patched: '2017-06-07T13:29:27.096Z'
+    - grunt-htmlhint > htmlhint > jshint > minimatch:
+        patched: '2017-06-07T13:29:27.096Z'
+  'npm:ms:20170412':
+    - karma > socket.io > debug > ms:
+        patched: '2017-06-07T13:29:27.096Z'
+    - karma > socket.io > engine.io > debug > ms:
+        patched: '2017-06-07T13:29:27.096Z'
+    - karma > socket.io > socket.io-adapter > debug > ms:
+        patched: '2017-06-07T13:29:27.096Z'
+    - karma > socket.io > socket.io-client > debug > ms:
+        patched: '2017-06-07T13:29:27.096Z'
+    - karma > socket.io > socket.io-client > engine.io-client > debug > ms:
+        patched: '2017-06-07T13:29:27.096Z'
+    - karma > socket.io > socket.io-parser > debug > ms:
+        patched: '2017-06-07T13:29:27.096Z'
+    - karma > socket.io > socket.io-adapter > socket.io-parser > debug > ms:
+        patched: '2017-06-07T13:29:27.096Z'
+    - karma > socket.io > socket.io-client > socket.io-parser > debug > ms:
+        patched: '2017-06-07T13:29:27.096Z'
+  'npm:qs:20140806-1':
+    - generator-bastion > yeoman-generator > request > qs:
+        patched: '2017-06-07T13:29:27.096Z'
+  'npm:request:20160119':
+    - generator-bastion > yeoman-generator > request:
+        patched: '2017-06-07T13:29:27.096Z'
+    - grunt-bower-task > bower > request:
+        patched: '2017-06-07T13:29:27.096Z'
+    - grunt-bower-task > bower > bower-registry-client > request:
+        patched: '2017-06-07T13:29:27.096Z'
+  'npm:semver:20150403':
+    - grunt-bower-task > bower > semver:
+        patched: '2017-06-07T13:29:27.096Z'
+  'npm:tar:20151103':
+    - generator-bastion > yeoman-generator > download > decompress > tar:
+        patched: '2017-06-07T13:29:27.096Z'
+  'npm:uglify-js:20151024':
+    - grunt-bower-task > bower > handlebars > uglify-js:
+        patched: '2017-06-07T13:29:27.096Z'
